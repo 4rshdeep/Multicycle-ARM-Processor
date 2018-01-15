@@ -95,6 +95,20 @@ cont_th: ldr r5, [r1, #12]
 		str r2, [r0, #12]
 		b check_gt_1
 
+; main:	ldr r0,=X
+; 		mov r1, #9
+; 		str r1, [r0]
+; 		str r1, [r0, #4]
+; 		str r1, [r0, #8]
+; 		str r1, [r0, #12]
+; 		ldr r0,=One
+; 		mov r1, #1
+; 		str r1, [r0]
+; 		mov r1, #0
+; 		str r1, [r0, #4]
+; 		str r1, [r0, #8]
+; 		str r1, [r0, #12]
+		
 
 increment_x:
 		add r9, r9, #1
@@ -122,10 +136,18 @@ ahead:	str r6, [r1]
 		cmp r2, r1
 		bgt inc
 
-		cmp r6, #10
-		beq end
+		ldr r0,=X
+		ldr r1, [r0]
+		ldr r2, [r0, #4]
+		ldr r3, [r0, #8]
+		ldr r4, [r0, #12]
 
-		add r4, r4, #1
+		orr r5, r1, r2
+		orr r5, r5, r4
+		orr r5, r5, r3
+		cmp r5, #0
+		beq end
+		
 		b loop
 
 print: 		mov r0, #Stdout @specify mode stdout to print
@@ -176,8 +198,7 @@ check_happy:ldr r0,=Y
 		beq print
 		b increment_x
 
-main: 	mov r11, #0
-		ldr r0,=One
+main: 	ldr r0,=One
 		ldr r2,=X
 		ldr r3,=Zero
 
@@ -216,7 +237,7 @@ loop:	cmp r9, r10
 		str r2, [r1, #4]
 		ldr r2, [r0, #8]
 		str r2, [r1, #8]
-		str r2, [r0, #12]
+		ldr r2, [r0, #12]
 		str r2, [r1, #12]
 		b check_gt_1
 
