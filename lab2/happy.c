@@ -57,7 +57,6 @@ int main ()
 	int s[4];
 	int y[4];
 	copy_BCD (x, one);
-	printf("number[%i] = %i%i%i%i\n", j, x[3], x[2], x[1], x[0]);
 			
 	for (int i = 1; i < 9999; i++)
 	{

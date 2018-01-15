@@ -148,80 +148,6 @@ continue:	str r3, [r11]
 			
 			b check
 
-; 			ldr r1,=Space
-; 			ldr r2,=DD
-; 			add r9, r1, #16
-; 			ldr r10,=Temp
-; 			mov r6, #0
-; 			ldr r3, [r1]
-; 			ldr r4, [r2]
-; 			add r5, r3, r4
-; 			add r5, r5, r6
-; 			mov r6, #0 @ carry register
-			
-; 			cmp r5, #10
-; 			blt ahead1
-; 			sub r5, r5, #10
-; 			mov r6, #1
-
-; ahead1:		str r5, [r10]
-			
-; 			add r1, r1, #4
-; 			add r2, r2, #4
-; 			add r10, r10, #4
-
-; 			cmp r4, r9
-; 			blt add_space_d
-			
-
-
-
-
-			; ldr r1,=Temp
-
-			; bgt carry1
-			; ldr r1,=DD
-			; str r3, [r1]
-			; str r3, [r1, #4]
-			; str r3, [r1, #8]
-			; str r3, [r1, #12]
-			
-			; bl square_digit
-
-			; bl add_space_d 
-			; @ r1 -> Space r2 -> DD address r10 -> Temp
-			
-			; ldr r2, [r1, #4]
-			; bl square_digit
-
-			; ldr r1,=Space
-			; ldr r2,=DD
-			; add r9, r1, #16
-			; ldr r10,=Temp
-			; mov r6, #0
-			; bl add_space_d 
-			
-			; ldr r2, [r1, #8]
-			; bl square_digit
-
-			; ldr r1,=Space
-			; ldr r2,=DD
-			; add r9, r1, #16
-			; ldr r10,=Temp
-			; mov r6, #0
-			; bl add_space_d 
-			
-			; ldr r2, [r1, #12]
-			; bl square_digit
-
-			; ldr r1,=Space
-			; ldr r2,=DD
-			; add r9, r1, #16
-			; ldr r10,=Temp
-			; mov r6, #0
-			; bl add_space_d 
-; continue:	b check
-
 			; add space and DD BCD format
 check: 		ldr r0,=Temp
 			ldr r1, [r0, #4]
@@ -249,29 +175,29 @@ check_for_1:ldr r2,=One       @ setup for increment
 print: 		mov r0, #Stdout @specify mode stdout to print
 			ldr r2,=Current
 			ldr r1, [r2, #12] @r1 should contain data to be printed
-			mov r3, r1   @r3 -> thousand
-			cmp r1, #0
-			beq skip_th
+			; mov r3, r1   @r3 -> thousand
+			; cmp r1, #0
+			; beq skip_th
 			swi SWI_PrInt
 
 skip_th:	ldr r1, [r2, #8]
-			orr r4, r3, r1 
-			cmp r4, #0
-			mov r4, r1  @r4 -> hundred
-			beq skip_h
+			; orr r4, r3, r1 
+			; cmp r4, #0
+			; mov r4, r1  @r4 -> hundred
+			; beq skip_h
 			swi SWI_PrInt
 
 skip_h:		ldr r1, [r2, #4]
-			orr r5, r4, r3
-			orr r5, r5, r1
-			cmp r5, #0
-			beq skip_t
+			; orr r5, r4, r3
+			; orr r5, r5, r1
+			; cmp r5, #0
+			; beq skip_t
 			swi SWI_PrInt
 
 skip_t:		ldr r1, [r2]
 			swi SWI_PrInt
 			@ print a new line as a string to Stdout
-			mov r0, #Stdout       @ mode is Stdout
+			; mov r0, #Stdout       @ mode is Stdout
 			ldr r1, =Blank         @ end of line
 			swi SWI_PrStr
 		
@@ -342,12 +268,12 @@ init_one:	ldr r1,=One
 			str r2, [r3, #8]
 			str r2, [r3, #12] 	@initialising current 
 
-			mov r9,#100
-			mov r2, #9
-			mul r8,r9, r2
+			; mov r9,#100
+			; mov r2, #9
+			; mul r8,r9, r2
 			; sub r8,r8,#1
 
-			; mov r8, #99
+			mov r8, #102
 			; mov r0, #0x270F 
 
 loop: 		cmp r7, r8
