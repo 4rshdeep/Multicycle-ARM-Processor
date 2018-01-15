@@ -26,7 +26,7 @@ for_2:		cmp r4, r3
 		b for_2
 
 @ display sorted values and return control to simulator
-end:		mov r0, r1
+end:	mov r0, r1
 		ldr r1, [r0]
 		ldr r2, [r0, #4]
 		ldr r3, [r0, #8]
@@ -44,5 +44,5 @@ swap:		str r8, [r0]  		@ change value in address
 
 .data
 	@P: .word 4, 10, 6, 1, 3, 23, 67, 35
-	P: .word 67, 35, 23, 10, 6, 4, 3, 1
+	P: .word 67, 3588, 23, 2, 2, 4, 3, 1
 .end
