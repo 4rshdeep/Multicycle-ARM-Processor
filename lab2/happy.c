@@ -69,8 +69,7 @@ int main ()
 		if (check_happy (y[0]))
 		{
 			j++;
-			printf("%i%i%i%i \n", x[3], x[2], x[1], x[0]);
-			// return 0;
+			printf("number[%i] = %i%i%i%i \n", j, x[3], x[2], x[1], x[0]);// return 0;
 		};
 		add_BCD (x, x, one);
 	}

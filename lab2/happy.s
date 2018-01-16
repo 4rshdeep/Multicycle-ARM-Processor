@@ -3,7 +3,10 @@
 @ r0-3 and r12 can be modified in a branch and result should be in r0
 @ other important conventions followed 
 	;r4 contains current index
-
+.equ SWI_Exit, 0x11
+.equ SWI_PrStr, 0x69
+.equ SWI_Open, 0x66
+.equ SWI_Close, 0x68
 .equ SWI_Exit, 0x11
 .equ SWI_PrInt,0x6b   @ Write an Integer
 .equ Stdout, 1
@@ -95,21 +98,6 @@ cont_th: ldr r5, [r1, #12]
 		str r2, [r0, #12]
 		b check_gt_1
 
-; main:	ldr r0,=X
-; 		mov r1, #9
-; 		str r1, [r0]
-; 		str r1, [r0, #4]
-; 		str r1, [r0, #8]
-; 		str r1, [r0, #12]
-; 		ldr r0,=One
-; 		mov r1, #1
-; 		str r1, [r0]
-; 		mov r1, #0
-; 		str r1, [r0, #4]
-; 		str r1, [r0, #8]
-; 		str r1, [r0, #12]
-		
-
 increment_x:
 		add r9, r9, #1
 		ldr r0,=One
@@ -150,7 +138,18 @@ ahead:	str r6, [r1]
 		
 		b loop
 
-print: 		mov r0, #Stdout @specify mode stdout to print
+print: 		ldr r0,=OutFileHandle
+			ldr r0, [r0]
+			ldr r1,=TextString
+			swi SWI_PrStr
+
+			mov r1, r11
+			swi SWI_PrInt
+			add r11, r11, #1
+
+			ldr r1,=EndBrace
+			swi SWI_PrStr
+			; mov r0, #Stdout @specify mode stdout to print
 			ldr r2,=X
 			ldr r1, [r2, #12] @r1 should contain data to be printed
 			; mov r3, r1   @r3 -> thousand
@@ -198,7 +197,14 @@ check_happy:ldr r0,=Y
 		beq print
 		b increment_x
 
-main: 	ldr r0,=One
+main:	mov r11, #1 @to track happy number count
+		ldr r0,=OutFileName
+		mov r1, #1
+		swi SWI_Open
+		bcs OutFileError
+		ldr r1,=OutFileHandle  @ Address where we want to 
+		str r0, [r1]		   @ save the OutFileHandle
+		ldr r0,=One
 		ldr r2,=X
 		ldr r3,=Zero
 
@@ -223,7 +229,7 @@ main: 	ldr r0,=One
 		mov r1, #100
 		mul r10, r1, r1
 		sub r10, r10, #1
-		; mov r10, #99 @last index 
+		; mov r10, #99 @testing index
 		
 loop:	cmp r9, r10
 		bgt end
@@ -241,7 +247,11 @@ loop:	cmp r9, r10
 		str r2, [r1, #12]
 		b check_gt_1
 
-end:    swi SWI_Exit
+end:    ldr r0,=OutFileHandle
+		ldr r0, [r0]
+		swi SWI_Close
+		swi SWI_Exit
+	OutFileError: .asciz "Unable to open output file \n"
 .data
 	One: .space 16 @space for one in BCD
 	X: .space 16 @for current number being checked
@@ -249,5 +259,12 @@ end:    swi SWI_Exit
 	D: .space 16 @ extra variables
 	S: .space 16
 	Zero: .space 16
-	Blank:   .ascii   " "
+	
+	OutFileName: .asciz "output.txt"
+		.align
+	OutFileHandle: .word 0
+
+	Blank:   .asciz   " \n"
+	TextString: .asciz "number["
+	EndBrace: .asciz "] = "
 .end
