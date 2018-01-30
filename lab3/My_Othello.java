@@ -9,8 +9,8 @@ public class My_Othello{
         {'_','_','_','_','_','_','_','_',},
         {'_','_','_','_','_','_','_','_',},
         {'_','_','_','_','_','_','_','_',},
-        {'_','_','_','B','W','_','_','_',},
         {'_','_','_','W','B','_','_','_',},
+        {'_','_','_','B','W','_','_','_',},
         {'_','_','_','_','_','_','_','_',},
         {'_','_','_','_','_','_','_','_',},
         {'_','_','_','_','_','_','_','_',},
@@ -65,6 +65,22 @@ public class My_Othello{
                 System.out.println("X:" + p.x + " Y:" + p.y);
             }   
         }
+    }
+
+    static void find_score(){
+        int w = 0;
+        int b = 0;
+        for(int i=0; i<8; i++){
+            for(int j=0; j<8; j++){
+                if(board[i][j]=='W') w++;
+                else if(board[i][j]=='B') b++;
+            }
+        }
+        String str;
+        if(w>b) str = "Winner is Player W.\n";
+        else if(b>w) str = "Winner is Player B.\n"; 
+        else str = "It's a tie.\n" ;
+        System.out.println("Score for Player W: " + w + "\n" + "Score for Player B: " + b +"\n"  + str); 
     }
 
 	static class check{
@@ -231,7 +247,11 @@ public class My_Othello{
 
 
 
-            if(!(moves.B_avail) && !(moves.W_avail)) {System.out.println("Game Ended"); break; }  
+            if(!(moves.B_avail) && !(moves.W_avail)) {
+                System.out.println("Game Ended"); 
+                find_score();
+                break; 
+            }  
             if(B_turn) {
                 if(moves.B_avail) {
                     System.out.println("Player Black choose your move :");
