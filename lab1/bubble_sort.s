@@ -3,19 +3,19 @@
 .text 
 .global main
 							
-main:		ldr r1,=P			@ r1 <- start address do not update!
+main:	ldr r1,=P			@ r1 <- start address do not update!
 		add r3, r1, #28		@ r3 <- prefinal address
 		add r9, r1, #24		@ r9 <- prefinal address
 		mov r10, #-1  		@ r10 stores numswaps
 		mov r5, r1          @ store starting address in r5
 
-for:		sub r3, r3, #4
+for:	sub r3, r3, #4
 		cmp r5, r9			@ have we reached prefinal position?
 		bgt end				@ exit if address equal to last word
 		add r5, r5, #4
 		mov r4, r1          @ store first address in second pointer
 		
-for_2:		cmp r4, r3
+for_2:	cmp r4, r3
 		bgt for
 		ldr r7, [r4]		
 		mov r0, r4			@ save address of previous (r7)
@@ -38,7 +38,7 @@ end:	mov r0, r1
 
 		swi SWI_Exit
 
-swap:		str r8, [r0]  		@ change value in address
+swap:	str r8, [r0]  		@ change value in address
 		str r7, [r4]		@ str goes like Ri -> [Rj]
 		b for_2
 
