@@ -1,16 +1,16 @@
 .equ SWI_Exit, 0x11
+.equ SWI_Open, 0x66
 
 .global main
 
-main:	mov r0,#0x02
-		swi 0x201        @ left LED on
-		mov r0,#0x01
-		swi 0x201        @ right LED on
-		mov r0,#0x03
-		swi 0x201    
+main:   ldr r0,=Filename
+        mov r1, #0
+        swi SWI_Open
+        bcs main
 
-
-end:	swi SWI_Exit
+end:    swi SWI_Exit
 
 .data
-	Hello: .asciz "hello world!"
+    Filename: .asciz "in.txt"
+    AA: .word 0
+    BB: .word 0xFFFFFFFF

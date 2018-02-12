@@ -21,16 +21,11 @@
 .text
 .global main
 
-main:
-	ldr r10, =Board
-	mov r9, #1
-	bl print_board
-			; mov r7, #1	@testing start
-			; mov r8, #6
-			; bl check_one 	@testing null-ending
-			; b end 	@remove later if needed
-	mov r7, #0
-	mov r8, #0 	
+main:	ldr r10, =Board
+		mov r9, #1
+		bl print_board
+		mov r7, #0
+		mov r8, #0 	
 		mov r0, #14
 		mov r1, #0
 		ldr r2, =othello
@@ -43,7 +38,7 @@ main:
 		mov r1, #2
 		ldr r2, =B
 		swi 0x204	
-	b loop
+		b loop
 
 main_loop:
 	str lr, [sp, #-4]!	@push
@@ -87,34 +82,25 @@ loop:
 	ldr r12, =B_check
 	strb  r4, [r12]
 	bl main_loop
-											; mov r11, #1
-											; cmp r9, #1
-											; bl check_one
-											; 			@turn skip CONDITION
-											; 			@turn skip + game end
-											; mov r11, #1
-											; bl check_zero
-																									mov r0, #12
-																									swi 0x208
-																									cmp r9, #1
-																									bleq turn_one
-																									cmp r9, #1
-																									blne turn_zero
-							bl print_board 																		
-		@check moves   (put 1 in r11 if but initially 0)
-		@ in check_one see if r11 contains 1 or 0 then decide if move is to be done or is it just needed to check if move is available
-		@ mem to check if moves are present
-																									bl read
-																									cmp r9, #1
-																									mov r11, #0
-																									bleq check_one
-																									cmp r9, #1
-																									mov r11, #0
-																									blne check_zero
-																									cmp r4, #1												
-																									rsbeq r9, r9, #1		@check reverse sub
-
-
+	mov r0, #12
+	swi 0x208
+	cmp r9, #1
+	bleq turn_one
+	cmp r9, #1
+	blne turn_zero
+	bl print_board 																		
+	@check moves   (put 1 in r11 if but initially 0)
+	@ in check_one see if r11 contains 1 or 0 then decide if move is to be done or is it just needed to check if move is available
+	@ mem to check if moves are present
+	bl read
+	cmp r9, #1
+	mov r11, #0
+	bleq check_one
+	cmp r9, #1
+	mov r11, #0
+	blne check_zero
+	cmp r4, #1												
+	rsbeq r9, r9, #1		@check reverse sub
 	b loop
 
 turn_one:
@@ -240,56 +226,6 @@ L2:  swi 0x203
 	mov pc, lr
 
 
-
-; game:
-
-
-@ r7 - outer loop counter  (its temp in r5)
-@ r8 -> inner loop counter  (its temp in r6)
-@ r5, r6 (see above)
-; one_avail:
-	; str lr, [sp, #-4]!	@push 
-	; mov r7, #0
-	; mov r8, #0
-; 	bl my_outer
-; 	ldr lr, [sp], #4	@pop
-; 	mov pc, lr
-
-; my_outer:
-; 	str lr, [sp, #-4]!	@push 
-; 	cmp r7, #9
-; 	ldreq lr, [sp], #4	@pop
-; 	moveq pc, lr
-	
-
-; my_inner:
-; 	cmp r8, #9
-; 	moveq r8, #0
-; 	addeq r7, r7, #1
-; 	beq my_outer
-; 		mov r5, r7		@LEFT DIRECTION
-; 		mov r6, r8
-; 		cmp r6, #0
-; 		blgt left
-
-; sdhajbsjahb
-; 	add r8, r8, #1
-; 	b my_inner
-
-
-; left:
-; 	str lr, [sp, #-4]!	@push 
-; 	sub r6, r6, #1
-; 	add r1, r6, r5, LSL #3
-; 	ldrb r2, [r10, r1]
-; 	cmp r2, #1
-; 	ldrlt lr, [sp], #4	@pop
-; 	movlt pc, lr
-
-
-
-; zero_avail:
-; 	mov pc, lr
 
 
 @ r7, r8  (coordinates which are requested as next move)
@@ -652,22 +588,6 @@ set_zero_left:
 	bllt set_zero_left 
 cc:	ldr lr, [sp], #4	@pop
 	mov pc, lr
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @ r7, r8  (coordinates which are requested as next move)
 @ r5, r6 (copy of r7, r8)
@@ -1057,9 +977,6 @@ print_inner_loop:
 	movge r0, #0
 	addge r1, r1, #1
 	bge print_outer_loop
-	; moveq r0, #0
-	; addeq r1, r1, #1
-	; beq print_outer_loop
 	add r7, r0, r1, LSL #3	@offset for accesing board
 	sub r7, r7, r0, LSR #1
 	ldrb r8, [r10, r7] 
@@ -1118,14 +1035,6 @@ end:
 
 .data
 	Board: .byte 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,0,2,2,2,2,2,2,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-@	Board: .byte 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,1,1,2,2,2,2,2,0,2,2,2,2,2,2,0,2,2,2,2,2,2,0,2,2,2,2,2,2,2
-@	Board: .byte 0,1,1,1,1,1,1,0,0,1,1,1,0,0,1,0,0,0,1,1,0,1,1,1,1,0,0,1,1,0,1,0,1,1,0,1,1,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,0,0,0,2,1,1,1,1,0,2,0
-@	Board: .byte 0,1,1,1,1,1,1,0,0,1,1,1,0,0,1,0,0,0,1,1,0,1,1,1,1,0,0,1,1,0,1,0,1,1,0,1,1,1,1,0,1,1,1,1,0,1,1,0,1,0,1,1,1,0,0,0,1,1,1,1,1,0,2,0
-@	Board: .byte 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,2,2,2,2,2,2,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-@	Board: .byte 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,2,2,2,0,2,2,2,2,0,1,0,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-
-@	Board: .byte 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,2,1,0,2,2,2,2,2,2,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2
-@	Board: .byte 64	@space for the 8X8 board
 	W: .asciz "W"   @0
 	B: .asciz "B"	@1
 	U: .asciz "-"	@2
