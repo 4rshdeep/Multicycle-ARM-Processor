@@ -26,12 +26,16 @@ begin
 			when "0100" => result <= a + b;
 			when "0101" => result <= a + b + carry;
 			when "0110" => result <= a + not(b) + carry;
-			when "0111" => result <= not(a) + b + c;
+			when "0111" => result <= not(a) + b + carry;
 			when "1000" => result <= a and b;
 			when "1001" => result <= a xor b;
 			when "1010" => result <= a + not(b) + 1;
-			when "1011" => r
-			when others =>
+			when "1011" => result <= a + b;
+			when "1100" => result <= a or b;
+			when "1101" => result <= b;
+			when "1110" => result <= a and not(b);
+			when "1111" => result <= not(b);
+			when others => result <= "00000000000000000000000000000000";
 
 		end case ;
 
