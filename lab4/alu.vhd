@@ -24,22 +24,22 @@ begin
 
 	begin
 		case(opcode) is
-			when "0000" => rslt := a and b;
-			when "0001" => rslt := a xor b;
-			when "0010" => rslt := a + not(b) + 1;
-			when "0011" => rslt := b + not(a) + 1;
-			when "0100" => rslt := a + b;
-			when "0101" => rslt := a + b + carry;
-			when "0110" => rslt := a + not(b) + carry;
-			when "0111" => rslt := not(a) + b + carry;
-			when "1000" => rslt := a and b;
-			when "1001" => rslt := a xor b;
-			when "1010" => rslt := a + not(b) + 1;
-			when "1011" => rslt := a + b;
-			when "1100" => rslt := a or b;
-			when "1101" => rslt := b;
-			when "1110" => rslt := a and not(b);
-			when "1111" => rslt := not(b);
+			when "0000" => rslt := a and b;		   		-- and
+			when "0001" => rslt := a xor b;				-- xor
+			when "0010" => rslt := a + not(b) + 1;		-- sub
+			when "0011" => rslt := b + not(a) + 1;		-- rsb
+			when "0100" => rslt := a + b;				-- add
+			when "0101" => rslt := a + b + carry;		-- adc
+			when "0110" => rslt := a + not(b) + carry;	-- sbc
+			when "0111" => rslt := not(a) + b + carry;	-- rsc
+			when "1000" => rslt := a and b;				-- tst
+			when "1001" => rslt := a xor b;				-- teq
+			when "1010" => rslt := a + not(b) + 1;		-- cmp
+			when "1011" => rslt := a + b;				-- cmn
+			when "1100" => rslt := a or b;				-- orr
+			when "1101" => rslt := b;					-- mov
+			when "1110" => rslt := a and not(b);		-- bic 
+			when "1111" => rslt := not(b);				-- mvn
 			when others => rslt := "00000000000000000000000000000000";
 		end case;
 
@@ -68,6 +68,18 @@ begin
 			when "1011" => c31 := a(31) xor b(31) xor rslt(31);
 			when others => c31 := '0';
 		end case ;
+
+		case(opcode) is
+			when "0010" => c32 := (not(a(31)) and b(31)) or (not(a(31)) and c31) or (b(31) and c31);
+			when "0011" => c32 := (a(31) and (not(b(31)))) or (a(31) and c31) or (not(b(31)) and c31);
+			when "0100" => c32 := (a(31) and b(31)) or (a(31) and c31) or (b(31) and c31);
+			-- write for adc, sbc and rsc
+			when "1010" => c32 := (not(a(31)) and b(31)) or (not(a(31)) and c31) or (b(31) and c31);
+			when "1011" => c32 := (a(31) and b(31)) or (a(31) and c31) or (b(31) and c31);
+			when others => c32 := 0;
+
+
+		end case;
 
 	end process ; -- p1
 
