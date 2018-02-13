@@ -18,10 +18,10 @@ architecture behaviour_alu of ALU is
 begin
 	p1 : process( a, b, carry, opcode )
 	begin
-		case( operation ) is
-
-			when "0000" => result(31 downto 0) <= a and b;
-
+		case(opcode) is
+			when "0000" => result <= a and b;
+			when "0001" => result <= a xor b;
+			when
 			when others =>
 
 		end case ;
