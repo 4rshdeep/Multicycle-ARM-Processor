@@ -17,7 +17,7 @@ architecture behaviour_shifter of shifter is
 signal shift_int : integer;
 
 begin
-shift_int <= to_unsigned(unsigned(shamt));
+shift_int <= to_integer(unsigned(shamt));
 
 shifter_process : process( op, opcode, shamt, carry )
 begin
