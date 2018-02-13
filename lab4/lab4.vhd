@@ -21,7 +21,16 @@ begin
 		case(opcode) is
 			when "0000" => result <= a and b;
 			when "0001" => result <= a xor b;
-			when
+			when "0010" => result <= a + not(b) + 1;
+			when "0011" => result <= b + not(a) + 1;
+			when "0100" => result <= a + b;
+			when "0101" => result <= a + b + carry;
+			when "0110" => result <= a + not(b) + carry;
+			when "0111" => result <= not(a) + b + c;
+			when "1000" => result <= a and b;
+			when "1001" => result <= a xor b;
+			when "1010" => result <= a + not(b) + 1;
+			when "1011" => r
 			when others =>
 
 		end case ;
