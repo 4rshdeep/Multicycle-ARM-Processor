@@ -26,12 +26,16 @@ architecture behaviour_reg of reg is
 	signal wr_add : integer;
 
 begin
+	-- make address to index
 	rd_add1 <= to_integer(unsigned(read_add1));
 	rd_add2 <= to_integer(unsigned(read_add2));
 	wr_add <= to_integer(unsigned(write_add));
+
+	-- async read
 	data_out1 <= register_files(rd_add1);
 	data_out2 <= register_files(rd_add2);
 
+	-- reset pc and show r15 otherwise
 	reset_pc : process( reset )
 	begin
 		if reset = '1' then
@@ -41,6 +45,7 @@ begin
 		end if ;
 	end process ; -- reset_pc
 
+	-- sync write
 	clocked_process : process( clk, write_data, write_add, reset, write_enable )
 	begin
 		if clk='1' and clk'event then
@@ -51,3 +56,5 @@ begin
 	end process ; -- clocked_process
 
 end architecture ; -- behaviour_register
+
+-- with a&b select c <= '0' when "11"
