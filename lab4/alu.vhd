@@ -21,8 +21,7 @@ begin
 	variable c31   : std_logic;
  	variable c32   : std_logic;
  	variable tmp   : std_logic_vector(31 downto 0);
- 	variable tmp2   : std_logic;
-
+ 	variable tmp2  : std_logic;
 	begin
 		case(opcode) is
 			when "0000" => rslt := a and b;		   		-- and
@@ -71,12 +70,14 @@ begin
 		end case ;
 
 		case(opcode) is
-			when "0010" => c32 := (not(a(31)) and b(31)) or (not(a(31)) and c31) or (b(31) and c31);  	-- sub
-			when "0011" => c32 := (a(31) and (not(b(31)))) or (a(31) and c31) or (not(b(31)) and c31);  -- rsb
-			when "0100" => c32 := (a(31) and b(31)) or (a(31) and c31) or (b(31) and c31);				-- add
-			-- write for adc, sbc and rsc
-			when "1010" => c32 := (not(a(31)) and b(31)) or (not(a(31)) and c31) or (b(31) and c31);	-- cmp
-			when "1011" => c32 := (a(31) and b(31)) or (a(31) and c31) or (b(31) and c31);				-- cmn
+			when "0010" => c32 := (not(a(31)) and b(31)) or (not(a(31)) and c31) or (b(31) and c31);
+			when "0011" => c32 := (a(31) and (not(b(31)))) or (a(31) and c31) or (not(b(31)) and c31);
+			when "0100" => c32 := (a(31) and b(31)) or (a(31) and c31) or (b(31) and c31);
+			when "0101" => c32 := ( (a(31) and b(31)) or (a(31) and tmp2) or (b(31) and tmp2) )   or   ( (tmp(31) and c31) );
+			when "0110" => c32 := ( (a(31) and not(b(31))) or (a(31) and tmp2) or (not(b(31)) and tmp2) ) or   ( tmp(31) and c31 ) ;
+			when "0111" => c32 := ( (not(a(31)) and b(31)) or (not(a(31)) and tmp2) or (b(31) and tmp2) ) or   ( tmp(31) and c31 ) ;
+			when "1010" => c32 := (not(a(31)) and b(31)) or (not(a(31)) and c31) or (b(31) and c31);
+			when "1011" => c32 := (a(31) and b(31)) or (a(31) and c31) or (b(31) and c31);
 			when others => c32 := '0';
 
 
