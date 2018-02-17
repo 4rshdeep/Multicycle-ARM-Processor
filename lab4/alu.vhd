@@ -79,6 +79,7 @@ begin
 			when "1010" => c32 := (not(a(31)) and b(31)) or (not(a(31)) and c31) or (b(31) and c31);
 			when "1011" => c32 := (a(31) and b(31)) or (a(31) and c31) or (b(31) and c31);
 			when others => c32 := '0';
+		end case;
 
 
 			nzvc(3) <= rslt(31); 								--n
@@ -92,8 +93,7 @@ begin
 
 			result 	<= rslt;
 
-		end case;
-
+		
 	end process ; -- p1
 
 
