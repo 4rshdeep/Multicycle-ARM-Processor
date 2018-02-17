@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all; -- for addition & counting
 USE ieee.numeric_std.all;
 
-entity register is
+entity reg is
   port (
 	data_in : in std_logic_vector(31 downto 0);
 	read_add1 : in std_logic_vector(3 downto 0);
@@ -16,9 +16,9 @@ entity register is
 	data_out2 : out std_logic_vector(31 downto 0);
 	pc : out std_logic_vector(31 downto 0)
   ) ;
-end register ;
+end reg ;
 
-architecture behaviour_register of register is
+architecture behaviour_reg of reg is
 type register_arr is array (15 downto 0) of std_logic_vector(31 downto 0);
 signal register_files : register_arr;
 signal radd1 : integer;

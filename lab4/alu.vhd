@@ -21,6 +21,7 @@ begin
 	variable c31   : std_logic;
  	variable c32   : std_logic;
  	variable tmp   : std_logic_vector(31 downto 0);
+ 	variable tmp2   : std_logic;
 
 	begin
 		case(opcode) is
@@ -54,7 +55,7 @@ begin
 			when "0101" => tmp2 := a(31) xor b(31) xor tmp(31);         -- adc
 			when "0110" => tmp2 := a(31) xor not( b(31) ) xor tmp(31);	-- sbc
 			when "0111" => tmp2 := not( a(31) ) xor b(31) xor tmp(31);	-- rsc
-			when others => tmp2 := '0'
+			when others => tmp2 := '0';
 		end case;
 
 		case(opcode) is
@@ -76,17 +77,17 @@ begin
 			-- write for adc, sbc and rsc
 			when "1010" => c32 := (not(a(31)) and b(31)) or (not(a(31)) and c31) or (b(31) and c31);	-- cmp
 			when "1011" => c32 := (a(31) and b(31)) or (a(31) and c31) or (b(31) and c31);				-- cmn
-			when others => c32 := 0;
+			when others => c32 := '0';
 
 
-			nzvf(3) <= rslt(31);
-			if rslt = "00000000000000000000000000000000" then
-				nzvf(2) <= '1';
+			nzvc(3) <= rslt(31); 								--n
+			if rslt = "00000000000000000000000000000000" then 	--z
+				nzvc(2) <= '1';
 			else
-				nzvf(2) <= '0';
+				nzvc(2) <= '0';
 			end if ;
-			nzvf(1) <= cs31 xor c32;
-			nzvf(0) <= c32;
+			nzvc(1) <= c31 xor c32;							    --v
+			nzvc(0) <= c32;										--c
 
 			result 	<= rslt;
 
