@@ -21,6 +21,7 @@ begin
 	variable c31   : std_logic;
  	variable c32   : std_logic;
  	variable tmp   : std_logic_vector(31 downto 0);
+ 	varaible tmp2  : std_logic;
 
 	begin
 		case(opcode) is
