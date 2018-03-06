@@ -32,10 +32,6 @@ entity data_path is
 end entity ;
 architecture arch1 of data_path is
 
---component memory
---port();
---end component; --memory
-
 -- size of mem_out = ir_out = dr_out
 signal alu_in1 : std_logic_vector(3 downto 0);
 signal alu_in2 : std_logic_vector(3 downto 0);
@@ -52,7 +48,7 @@ signal aw_out : std_logic_vector(31 downto 0);
 signal bw_out : std_logic_vector(31 downto 0);
 signal rf_out1 : std_logic_vector(31 downto 0);
 signal rf_out2 : std_logic_vector(31 downto 0);
-signal mem_ad : std_logic_vector(31 downto 0);
+signal mem_ad : std_logic_vector(31 downto 0); --sad
 
 
 begin
