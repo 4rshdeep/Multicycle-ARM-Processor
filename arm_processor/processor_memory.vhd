@@ -1,3 +1,9 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all; -- for addition & counting
+USE ieee.numeric_std.all;
+library work;
+use work.all;
 entity processor_memory is
   port (
 	pr_data : in std_logic_vector(31 downto 0) ; --input from processor
@@ -19,11 +25,11 @@ end processor_memory ;
 -- memory enable signals decides which bytes to write
 
 architecture arch of processor_memory is
-variable to_mem  : std_logic_vector(31 downto 0); -- variables used and assigned later
-variable to_proc  : std_logic_vector(31 downto 0);
 begin
 
 	main : process( pr_data, mem_data, proc_to_mem, load, optype, s, byte_offset)
+	variable to_mem  : std_logic_vector(31 downto 0); -- variables used and assigned later
+	variable to_proc  : std_logic_vector(31 downto 0);
 	begin
 		if load = '1' then --load instruction -- memory -> processor
 			if optype = "11" then
@@ -89,7 +95,7 @@ begin
 				to_mem(15 downto 0) := pr_data(15 downto 0);
 
 				if byte_offset(0) = '0' then -- document this that need to look at lower byte.
-					memory_enable <= "0011"
+					memory_enable <= "0011";
 				else
 					memory_enable <= "1100";
 				end if ;

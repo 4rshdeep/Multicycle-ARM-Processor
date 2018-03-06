@@ -29,7 +29,10 @@ entity data_path is
 	mul_w	: in std_logic;
 	shift_w	: in std_logic;
 	Rsrc1 	: in std_logic;
+	shifter_opcode : in std_logic_vector(1 downto 0);
 
+
+-------------------------------------------------------------
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
   ) ;
@@ -45,6 +48,7 @@ signal mem_out : std_logic_vector(31 downto 0);
 signal ir_out  : std_logic_vector(31 downto 0);
 signal pc_final: std_logic_vector(31 downto 0); --check size
 signal dr_out  : std_logic_vector(31 downto 0);
+signal rf_rad1 : std_logic_vector(3 downto 0);
 signal rf_rad2 : std_logic_vector(3 downto 0);
 signal rf_wd   : std_logic_vector(31 downto 0);
 signal res_out : std_logic_vector(31 downto 0);
@@ -52,11 +56,11 @@ signal aw_out  : std_logic_vector(31 downto 0);
 signal bw_out  : std_logic_vector(31 downto 0);
 signal rf_out1 : std_logic_vector(31 downto 0);
 signal rf_out2 : std_logic_vector(31 downto 0);
-signal mem_ad  : std_logic_vector(31 downto 0); 
-signal mul_out : std_logic_vector(31 downto 0); 
-signal mul_reg_out   : std_logic_vector(31 downto 0); 
-signal shift_reg_out : std_logic_vector(31 downto 0); 
-signal shift_reg_out : std_logic_vector(31 downto 0); 
+signal mem_ad  : std_logic_vector(31 downto 0);
+signal mul_out : std_logic_vector(31 downto 0);
+signal mul_reg_out   : std_logic_vector(31 downto 0);
+signal shift_reg_out : std_logic_vector(31 downto 0);
+signal shift_out : std_logic_vector(31 downto 0);
 signal shift_carry   : std_logic;
 
 begin
@@ -100,14 +104,14 @@ begin
 			op2 	=> bw_out,
 			result 	=> mul_out
 		  ) ;
-		
+
 
 	Shifter:
 		ENTITY WORK.shifter (behaviour_shifter)
 		  PORT MAP (
 			op 		=> bw_out,
 			opcode 	=> shifter_opcode,	--input from controller
-			shamt 	=> aw_out,			--shift amt comes from a_out (First read port of register) 
+			shamt 	=> aw_out,			--shift amt comes from a_out (First read port of register)
 			carry	=> shift_carry,
 			result	=> shift_out
 		  ) ;
@@ -135,8 +139,8 @@ begin
 --- REGISTER MODULE SIGNALS ---
 -------------------------------
 	rf_rad2 <= ir_out(3 downto 0) when Rsrc='0' else ir_out(15 downto 12);
-	
-	with Rsrc1 select 
+
+	with Rsrc1 select
 		rf_rad1 <= ir_out(19 downto 16) when '0',
 			       ir_out(11 downto 8) when others;
 
@@ -145,7 +149,7 @@ begin
 		rf_wd <= dr_out when "01",
 				 res_out when "00",
 				 mul_reg_out when "10",  -- check if mul_reg_out OR mul_out
-				 pc when others;
+				 pc_final when others;
 	--rf_wd <= dr_out when M2R='1' else res_out;
 
 
