@@ -15,9 +15,11 @@ end test ;
 
 architecture arch of test is
 -- signal sig_int : integer;
+signal t : std_logic_vector(3 downto 0);
 begin
+	t <= (1 downto 0 => '0')& "11";
 	-- sig_int = to_integer(unsigned(sig));
-	o <= ( 3 => sig(3), 2 => sig(2), 1 => sig(1), 0 => sig(0), others => '0');
+	--o <= ( 3 => sig(3), 2 => sig(2), 1 => sig(1), 0 => sig(0), others => '0');
 
 
 end architecture ; -- arch
