@@ -25,6 +25,8 @@ entity data_path is
 	ReW		: in std_logic;
 
 	clk 	: in std_logic;
+	mul_w	: in std_logic;
+	shift_w	: in std_logic;
 
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
@@ -44,12 +46,16 @@ signal dr_out  : std_logic_vector(31 downto 0);
 signal rf_rad2 : std_logic_vector(3 downto 0);
 signal rf_wd   : std_logic_vector(31 downto 0);
 signal res_out : std_logic_vector(31 downto 0);
-signal aw_out : std_logic_vector(31 downto 0);
-signal bw_out : std_logic_vector(31 downto 0);
+signal aw_out  : std_logic_vector(31 downto 0);
+signal bw_out  : std_logic_vector(31 downto 0);
 signal rf_out1 : std_logic_vector(31 downto 0);
 signal rf_out2 : std_logic_vector(31 downto 0);
-signal mem_ad : std_logic_vector(31 downto 0); --sad
-
+signal mem_ad  : std_logic_vector(31 downto 0); 
+signal mul_out : std_logic_vector(31 downto 0); 
+signal mul_reg_out   : std_logic_vector(31 downto 0); 
+signal shift_reg_out : std_logic_vector(31 downto 0); 
+signal shift_reg_out : std_logic_vector(31 downto 0); 
+signal shift_carry   : std_logic;
 
 begin
 
@@ -84,6 +90,27 @@ begin
 			pc 				=> rf_wd
 		  ) ;
 
+
+	Multiplier:
+		ENTITY WORK.multiplier (behaviour_multiplier)
+		  PORT MAP (
+			op1 	=> aw_out,
+			op2 	=> bw_out,
+			result 	=> mul_out
+		  ) ;
+		
+
+	Shifter:
+		ENTITY WORK.shifter (behaviour_shifter)
+		  PORT MAP (
+			op 		=> bw_out,
+			opcode 	=> shifter_opcode,	--input from controller
+			shamt 	=> aw_out,			--shift amt comes from a_out (First read port of register) 
+			carry	=> shift_carry,
+			result	=> shift_out
+		  ) ;
+
+
 --------------------------
 --- ALU MODULE SIGNALS ---
 --------------------------
@@ -96,11 +123,19 @@ begin
 				   ((5 downto 0 => ir_out(23) ) & ir_out(23 downto 0) & "00") when others;
 
 
+
 -------------------------------
 --- REGISTER MODULE SIGNALS ---
 -------------------------------
 	rf_rad2 <= ir_out(3 downto 0) when Rsrc='0' else ir_out(15 downto 12);
-	rf_wd <= dr_out when M2R='1' else res_out;
+	
+	with M2R select
+		rf_wd <= dr_out when "01",
+				 res_out when "00",
+				 mul_reg_out when others;  -- check if mul_reg_out OR mul_out
+
+	--rf_wd <= dr_out when M2R='1' else res_out;
+
 
 
 --------------------------
@@ -115,6 +150,10 @@ begin
 
 	dr_out <= mem_out when DW='1';
 
+	mul_reg_out <= mul_out when mul_w='1';
+
+	shift_reg_out <= shift_out when shift_w='1';
+
 
 --------------------------
 -- MEMORY MODULE SIGNALS--
@@ -125,6 +164,7 @@ begin
 --------------------------
 -------- OUTPUT ----------
 --------------------------
+	--Setting flags when only N and Z are to be set
 	Flags <= flag_out when Fset='1';
 
 	IR <= ir_out;  -- check this
