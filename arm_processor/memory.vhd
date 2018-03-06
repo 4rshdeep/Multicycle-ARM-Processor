@@ -8,7 +8,7 @@ entity memory is
 	data_in : in std_logic_vector(31 downto 0) ;
 	rd_enable : in std_logic;
 	data_out : out std_logic_vector(31 downto 0) ;
-	byte_offset : in std_logic_vector(3 downto 0) ; -- processor memory datapath gives a 4 bit signal which one to activate
+	byte_offset : in std_logic_vector(3 downto 0) ; -- processor memory datapath gives a 4 bit signal which one to activate (memory enable)
 	clk : in std_logic_vector(31 downto 0)
   ) ;
 end memory ;

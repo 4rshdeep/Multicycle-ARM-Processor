@@ -25,10 +25,6 @@ entity data_path is
 end entity ; 
 architecture arch1 of data_path is
 
---component memory
---port();
---end component; --memory
-
 -- size of mem_out = ir_out = dr_out
 signal alu_in1 : std_logic_vector(3 downto 0);
 signal alu_in2 : std_logic_vector(3 downto 0);

@@ -4,7 +4,7 @@ entity processor_memory is
 	mem_data : in std_logic_vector(31 downto 0) ; -- input from memory
 	proc_to_mem : in std_logic; -- whether it is processor to memory or vice-versa. '1' for proc to mem
 	load : in std_logic ; -- '1' for load instruction '0' for store
-	optype : in std_logic_vector(1 downto 0) ; -- "11" -> word "01"/"10" -> half word "00" -> byte transfer
+	optype : in std_logic_vector(1 downto 0) ; -- "11" -> word  |   "01"/"10" -> half word   |   "00" -> byte transfer
 	s : in std_logic; -- ldrsh/ldrsb sign extended or not?
 	load_addr : in std_logic_vector(1 downto 0) ;  -- 0th bit decides in half word whether lower(15-0) word is loaded or higher word
 	byte_offset : in std_logic_vector(1 downto 0) ;  -- address where to write in case half word see only 0th bit.
