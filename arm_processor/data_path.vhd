@@ -52,12 +52,20 @@ signal aw_out  : std_logic_vector(31 downto 0);
 signal bw_out  : std_logic_vector(31 downto 0);
 signal rf_out1 : std_logic_vector(31 downto 0);
 signal rf_out2 : std_logic_vector(31 downto 0);
-signal mem_ad  : std_logic_vector(31 downto 0); 
+signal mem_ad  : std_logic_vector(9 downto 0); 
 signal mul_out : std_logic_vector(31 downto 0); 
 signal mul_reg_out   : std_logic_vector(31 downto 0); 
 signal shift_reg_out : std_logic_vector(31 downto 0); 
 signal shift_reg_out : std_logic_vector(31 downto 0); 
 signal shift_carry   : std_logic;
+signal mem_data		 : std_logic_vector(31 downto 0);
+signal mem_enable	 : std_logic_vector(3 downto 0);
+
+signal p2m_in		: std_logic_vector(31 downto 0);
+signal p2m_out		: std_logic_vector(31 downto 0);
+signal p2m_enable	: std_logic_vector(3 downto 0);
+--signal 
+
 
 begin
 
@@ -65,6 +73,36 @@ begin
 		--memory entity to be mapped here
 		--inputs are mem_ad (signal) and res_out
 		--output is mem_out
+
+	P2M:
+		ENTITY WORK.processor_memory (arch)
+		-- change pr_data and mem_data to data_in only
+		-- change byte_offset and load_addr to single offset only
+		-- Isn't proc_to_mem same as load
+			PORT MAP(
+				pr_data 	=> p2m_in,
+				mem_data 	=> p2m_in,
+				proc_to_mem => L, 		--input from controller (load/store)
+				load 		=> L,
+				optype 		=> p2m_opcode,	--input from controller	
+				s 			=> sign_opcode, --input from controller
+				load_addr 	=> p2m_offset,	--input from controller
+				byte_offset => p2m_offset,	--input from controller
+				out_to_pr	=> p2m_out,		--define signal
+				out_to_mem	=> p2m_out,
+				memory_enable => p2m_enable
+			);
+
+	MEMORY:
+		ENTITY WORK.memory (arch)
+			PORT MAP (
+				address 	=> mem_ad,
+				data_in 	=> mem_data,
+				rd_enable 	=> MR,
+				data_out 	=> mem_out,
+				byte_offset => mem_enable		 -- processor memory datapath gives a 4 bit signal which one to activate (memory enable)
+				clk			=> clk
+			);	
 
 	ALU:
 		ENTITY WORK.ALU (behaviour_alu)
@@ -150,6 +188,12 @@ begin
 
 
 
+------------------------------
+----- P2M MODULE SIGNALS -----
+------------------------------
+	p2m_in <= mem_out when L='1' else bw_out;
+
+
 --------------------------
 ---- REGISTERS OUTPUT ----
 --------------------------
@@ -172,6 +216,9 @@ begin
 --------------------------
 	mem_ad <= pc_final when IorD='0' else res_out;
 
+	mem_data <= p2m_out when L='0' else (others => '0');
+
+	mem_enable <= p2m_enable when L='0' else (others => '0');
 
 --------------------------
 -------- OUTPUT ----------

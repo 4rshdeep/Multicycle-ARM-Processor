@@ -6,8 +6,8 @@ entity processor_memory is
 	load : in std_logic ; -- '1' for load instruction '0' for store
 	optype : in std_logic_vector(1 downto 0) ; -- "11" -> word  |   "01"/"10" -> half word   |   "00" -> byte transfer
 	s : in std_logic; -- ldrsh/ldrsb sign extended or not?
-	load_addr : in std_logic_vector(1 downto 0) ;  -- 0th bit decides in half word whether lower(15-0) word is loaded or higher word
-	byte_offset : in std_logic_vector(1 downto 0) ;  -- address where to write in case half word see only 0th bit.
+	load_addr : in std_logic_vector(1 downto 0) ;  -- 0th bit decides in half word whether lower(15-0) word is loaded or higher word    (memory to processor)(decides which half or quarter of the word goes to the register after extension)
+	byte_offset : in std_logic_vector(1 downto 0) ;  -- address where to write in case half word see only 0th bit.	
 	out_to_pr : out std_logic_vector(31 downto 0) ; -- data out to processor
 	out_to_mem : out std_logic_vector(31 downto 0);  -- data out to memory
 	memory_enable : out std_logic_vector(3 downto 0) -- memory enable signals to be given while storing
