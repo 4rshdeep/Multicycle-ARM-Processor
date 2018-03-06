@@ -14,19 +14,21 @@ entity data_path is
 	IW 		: in std_logic;
 	DW		: in std_logic;
 	Rsrc 	: in std_logic;
-	M2R		: in std_logic;
+	M2R		: in std_logic_vector(1 downto 0);	--changed
 	RW 		: in std_logic;
 	AW 		: in std_logic;
 	BW 		: in std_logic;
-	Asrc1	: in std_logic;
+	Asrc1	: in std_logic_vector(1 downto 0);	--changed
 	Asrc2	: in std_logic_vector(1 downto 0);
 	op		: in std_logic_vector(3 downto 0);
 	Fset	: in std_logic;
 	ReW		: in std_logic;
 
+	--NOT IN SLIDES
 	clk 	: in std_logic;
 	mul_w	: in std_logic;
 	shift_w	: in std_logic;
+	Rsrc1 	: in std_logic;
 
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
@@ -114,13 +116,18 @@ begin
 --------------------------
 --- ALU MODULE SIGNALS ---
 --------------------------
-	alu_in1 <= pc_final when Asrc1='1' else aw_out;
+	--alu_in1 <= pc_final when Asrc1='1' else aw_out;
+	with Asrc1 select
+		alu_in1 <= pc_final when "00",
+				   aw_out when "01",
+				   mul_reg_out when others;
 
 	with Asrc2 select
 		alu_in2 <= bw_out when "00",
 				   (2 => '1', others => '0') when "01",
 				   (( 19 downto 0 => '0') & ir_out(11 downto 0)) when "10",
-				   ((5 downto 0 => ir_out(23) ) & ir_out(23 downto 0) & "00") when others;
+				   ((5 downto 0 => ir_out(23) ) & ir_out(23 downto 0) & "00") when "11",
+				   shift_reg_out when others;
 
 
 
@@ -129,11 +136,16 @@ begin
 -------------------------------
 	rf_rad2 <= ir_out(3 downto 0) when Rsrc='0' else ir_out(15 downto 12);
 	
+	with Rsrc1 select 
+		rf_rad1 <= ir_out(19 downto 16) when '0',
+			       ir_out(11 downto 8) when others;
+
+
 	with M2R select
 		rf_wd <= dr_out when "01",
 				 res_out when "00",
-				 mul_reg_out when others;  -- check if mul_reg_out OR mul_out
-
+				 mul_reg_out when "10",  -- check if mul_reg_out OR mul_out
+				 pc when others;
 	--rf_wd <= dr_out when M2R='1' else res_out;
 
 
