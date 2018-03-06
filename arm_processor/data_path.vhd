@@ -48,7 +48,7 @@ signal aw_out : std_logic_vector(31 downto 0);
 signal bw_out : std_logic_vector(31 downto 0);
 signal rf_out1 : std_logic_vector(31 downto 0);
 signal rf_out2 : std_logic_vector(31 downto 0);
-signal mem_ad : std_logic_vector(31 downto 0);
+signal mem_ad : std_logic_vector(31 downto 0); --sad
 
 
 begin
