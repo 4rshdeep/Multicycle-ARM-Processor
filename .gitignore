@@ -2,3 +2,4 @@
 lab4_vivado/
 
 *.out
+arm_processor/.fuse_hidden000001cf00000001
