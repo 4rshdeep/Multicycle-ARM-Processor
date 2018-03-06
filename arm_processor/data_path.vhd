@@ -1,3 +1,10 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all; -- for addition & counting
+USE ieee.numeric_std.all;
+library work;
+use work.all;
+
 entity data_path is
   port (
 	PW 		: in std_logic;
@@ -22,7 +29,7 @@ entity data_path is
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
   ) ;
-end entity ; 
+end entity ;
 architecture arch1 of data_path is
 
 --component memory
@@ -34,17 +41,23 @@ signal alu_in1 : std_logic_vector(3 downto 0);
 signal alu_in2 : std_logic_vector(3 downto 0);
 signal alu_out : std_logic_vector(3 downto 0);
 signal flag_out: std_logic_vector(3 downto 0);
-signal mem_out : std_logic_vector(31 downto 0); 
-signal ir_out  : std_logic_vector(31 downto 0); 
+signal mem_out : std_logic_vector(31 downto 0);
+signal ir_out  : std_logic_vector(31 downto 0);
 signal pc_final: std_logic_vector(31 downto 0); --check size
-signal alu_in2 : std_logic_vector(3 downto 0);
 signal dr_out  : std_logic_vector(31 downto 0);
 signal rf_rad2 : std_logic_vector(3 downto 0);
 signal rf_wd   : std_logic_vector(31 downto 0);
-	
+signal res_out : std_logic_vector(31 downto 0);
+signal aw_out : std_logic_vector(31 downto 0);
+signal bw_out : std_logic_vector(31 downto 0);
+signal rf_out1 : std_logic_vector(31 downto 0);
+signal rf_out2 : std_logic_vector(31 downto 0);
+signal mem_ad : std_logic_vector(31 downto 0);
+
+
 begin
 
-	MEMORY:
+--	MEMORY:
 		--memory entity to be mapped here
 		--inputs are mem_ad (signal) and res_out
 		--output is mem_out
@@ -63,7 +76,7 @@ begin
 	RF:
 		ENTITY WORK.reg (behaviour_reg)
 		  PORT MAP (
-			write_data 		=> rf_wd
+			write_data 		=> rf_wd,
 			read_add1 		=> ir_out(3 downto 0),
 			read_add2 		=> rf_rad2,
 			write_add 		=> ir_out(15 downto 12),
@@ -72,7 +85,7 @@ begin
 			write_enable 	=> RW,
 			data_out1 		=> rf_out1,
 			data_out2 		=> rf_out2,
-			pc 				=> rf_wd,
+			pc 				=> rf_wd
 		  ) ;
 
 --------------------------
@@ -80,11 +93,11 @@ begin
 --------------------------
 	alu_in1 <= pc_final when Asrc1='1' else aw_out;
 
-	with Asrc2 select 
+	with Asrc2 select
 		alu_in2 <= bw_out when "00",
 				   (2 => '1', others => '0') when "01",
-				   ((others => '0') & ir_out(11 downto 0)) when "10",
-				   ((others => ir_out(23) ) & ir_out(23 downto 0) & "00") when others;
+				   (( 19 downto 0 => '0') & ir_out(11 downto 0)) when "10",
+				   ((5 downto 0 => ir_out(23) ) & ir_out(23 downto 0) & "00") when others;
 
 
 -------------------------------
@@ -120,4 +133,4 @@ begin
 
 	IR <= ir_out;  -- check this
 
-end architecture ;	
+end architecture ;
