@@ -19,7 +19,7 @@ signal shift_int : integer;
 begin
 shift_int <= to_integer(unsigned(shamt));
 
-shifter_process : process( op, opcode, shamt, carry )
+shifter_process : process( op, opcode, shamt)
 begin
 	-- 00 -> lsl
 	-- 01 -> lsr
@@ -28,22 +28,23 @@ begin
 	case( opcode ) is
 
 		when "00" =>
-				result <= shift_left(unsigned(op), shift_int);
+				result <= std_logic_vector(shift_left(unsigned(op), shift_int));
 				if shift_int /= 0 then
 					carry <= op(32-shift_int);
 				end if ;
 		when "01" =>
-				result <= shift_right(unsigned(op), shift_int);
+				result <= std_logic_vector(shift_right(unsigned(op), shift_int));
 				if shift_int /= 0 then
 					carry <= op(shift_int-1);
 				end if ;
 		when "11" =>
-				result <= shift_right(signed(op), shift_int);
+				result <= std_logic_vector(shift_right(signed(op), shift_int));
 				if shift_int /= 0 then
 					carry <= op(shift_int-1);
 				end if ;
 		when "10" =>
-				result <= op(shift_int-1 downto 0) & op(31 downto shift_int);
+--				result <= op(shift_int-1 downto 0) & op(31 downto shift_int);
+                result <= std_logic_vector( unsigned(op) ror shift_int);
 				if shift_int /= 0 then
 					carry <= op(shift_int-1);
 				end if ;
