@@ -35,6 +35,9 @@ entity data_path is
     p2m_offset : in std_logic_vector(1 downto 0);
     shifter_opcode: in std_logic_vector(1 downto 0);
     
+
+
+-------------------------------------------------------------
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
   ) ;
@@ -58,12 +61,20 @@ signal aw_out  : std_logic_vector(31 downto 0);
 signal bw_out  : std_logic_vector(31 downto 0);
 signal rf_out1 : std_logic_vector(31 downto 0);
 signal rf_out2 : std_logic_vector(31 downto 0);
+<<<<<<< HEAD
 signal mem_ad  : std_logic_vector(9 downto 0); 
 signal mul_out : std_logic_vector(31 downto 0); 
 signal mul_reg_out   : std_logic_vector(31 downto 0); 
 signal shift_reg_out : std_logic_vector(31 downto 0); 
 signal shift_out : std_logic_vector(31 downto 0); 
 --signal rf_rad2      : std_logic_vector(3 downto 0);
+=======
+signal mem_ad  : std_logic_vector(9 downto 0);
+signal mul_out : std_logic_vector(31 downto 0);
+signal mul_reg_out   : std_logic_vector(31 downto 0);
+signal shift_reg_out : std_logic_vector(31 downto 0);
+signal shift_reg_out : std_logic_vector(31 downto 0);
+>>>>>>> 263187956c55f5d6be30aad57b4256a304fa4999
 signal shift_carry   : std_logic;
 signal mem_data		 : std_logic_vector(31 downto 0);
 signal mem_enable	 : std_logic_vector(3 downto 0);
@@ -71,7 +82,7 @@ signal mem_enable	 : std_logic_vector(3 downto 0);
 signal p2m_in		: std_logic_vector(31 downto 0);
 signal p2m_out		: std_logic_vector(31 downto 0);
 signal p2m_enable	: std_logic_vector(3 downto 0);
---signal 
+--signal
 
 
 begin
@@ -91,7 +102,7 @@ begin
 				mem_data 	=> p2m_in,
 				proc_to_mem => L, 		--input from controller (load/store)
 				load 		=> L,
-				optype 		=> p2m_opcode,	--input from controller	
+				optype 		=> p2m_opcode,	--input from controller
 				s 			=> sign_opcode, --input from controller
 				load_addr 	=> p2m_offset,	--input from controller
 				byte_offset => p2m_offset,	--input from controller
@@ -109,7 +120,7 @@ begin
 				data_out 	=> mem_out,
 				byte_offset => mem_enable,		 -- processor memory datapath gives a 4 bit signal which one to activate (memory enable)
 				clk			=> clk
-			);	
+			);
 
 	ALU:
 		ENTITY WORK.ALU (behaviour_alu)
@@ -145,14 +156,18 @@ begin
 			op2 	=> bw_out,
 			result 	=> mul_out
 		  ) ;
-		
+
 
 	Shifter:
 		ENTITY WORK.shifter (behaviour_shifter)
 		  PORT MAP (
 			op 		=> bw_out,
 			opcode 	=> shifter_opcode,	--input from controller
+<<<<<<< HEAD
 			shamt 	=> aw_out(4 downto 0),			--shift amt comes from a_out (First read port of register) 
+=======
+			shamt 	=> aw_out,			--shift amt comes from a_out (First read port of register)
+>>>>>>> 263187956c55f5d6be30aad57b4256a304fa4999
 			carry	=> shift_carry,
 			result	=> shift_out
 		  ) ;
@@ -180,8 +195,8 @@ begin
 --- REGISTER MODULE SIGNALS ---
 -------------------------------
 	rf_rad2 <= ir_out(3 downto 0) when Rsrc='0' else ir_out(15 downto 12);
-	
-	with Rsrc1 select 
+
+	with Rsrc1 select
 		rf_rad1 <= ir_out(19 downto 16) when '0',
 			       ir_out(11 downto 8) when others;
 

@@ -4,7 +4,6 @@ use ieee.std_logic_unsigned.all; -- for addition & counting
 USE ieee.numeric_std.all;
 library work;
 use work.all;
-
 entity processor_memory is
   port (
 	pr_data : in std_logic_vector(31 downto 0) ; --input from processor
