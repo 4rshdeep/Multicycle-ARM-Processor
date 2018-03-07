@@ -76,6 +76,7 @@ signal p2m_out		: std_logic_vector(31 downto 0);
 signal p2m_enable	: std_logic_vector(3 downto 0);
 --signal
 
+signal rf_pc    : std_logic_vector(31 downto 0);
 
 begin
 
@@ -85,20 +86,20 @@ begin
 		--output is mem_out
 
 	P2M:
-		ENTITY WORK.processor_memory (arch)
+		ENTITY WORK.processor_memory_2 (arch)
 		-- change pr_data and mem_data to data_in only
 		-- change byte_offset and load_addr to single offset only
 		-- Isn't proc_to_mem same as load
 			PORT MAP(
 				pr_data 	=> p2m_in,
-				mem_data 	=> p2m_in,
+--				mem_data 	=> p2m_in,
 				proc_to_mem => L, 		--input from controller (load/store)
 				load 		=> L,
 				optype 		=> p2m_opcode,	--input from controller
 				s 			=> sign_opcode, --input from controller
 				load_addr 	=> p2m_offset,	--input from controller
-				byte_offset => p2m_offset,	--input from controller
-				out_to_pr	=> p2m_out,		--define signal
+--				byte_offset => p2m_offset,	--input from controller
+--				out_to_pr	=> p2m_out,		--define signal
 				out_to_mem	=> p2m_out,
 				memory_enable => p2m_enable
 			);
@@ -137,7 +138,7 @@ begin
 			write_enable 	=> RW,
 			data_out1 		=> rf_out1,
 			data_out2 		=> rf_out2,
-			pc 				=> rf_wd
+			pc 				=> rf_pc      --changed rf_wd to rf_pc due to multiple driver error (CHECK)
 		  ) ;
 
 
