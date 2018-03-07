@@ -155,11 +155,7 @@ begin
 		  PORT MAP (
 			op 		=> bw_out,
 			opcode 	=> shifter_opcode,	--input from controller
-<<<<<<< HEAD
 			shamt 	=> aw_out(4 downto 0),			--shift amt comes from a_out (First read port of register) 
-=======
-			shamt 	=> aw_out,			--shift amt comes from a_out (First read port of register)
->>>>>>> 263187956c55f5d6be30aad57b4256a304fa4999
 			carry	=> shift_carry,
 			result	=> shift_out
 		  ) ;
