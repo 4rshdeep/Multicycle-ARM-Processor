@@ -25,11 +25,12 @@ end processor_memory ;
 -- memory enable signals decides which bytes to write
 
 architecture arch of processor_memory is
+
 begin
 
-	main : process( pr_data, mem_data, proc_to_mem, load, optype, s, byte_offset)
-	variable to_mem  : std_logic_vector(31 downto 0); -- variables used and assigned later
-	variable to_proc  : std_logic_vector(31 downto 0);
+	main : process( pr_data,load_addr, mem_data, proc_to_mem, load, optype, s, byte_offset)
+    	variable to_mem  : std_logic_vector(31 downto 0); -- variables used and assigned later
+        variable to_proc  : std_logic_vector(31 downto 0);
 	begin
 		if load = '1' then --load instruction -- memory -> processor
 			if optype = "11" then

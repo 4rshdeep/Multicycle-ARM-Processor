@@ -1,7 +1,15 @@
+--library ieee;
+--use ieee.std_logic_1164.all;
+--use ieee.std_logic_unsigned.all; -- for addition & counting
+--USE ieee.numeric_std.all;
+--use ieee.numeric_bit;
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all; -- for addition & counting
 USE ieee.numeric_std.all;
+library work;
+use work.all;
 
 entity shifter is
   port (

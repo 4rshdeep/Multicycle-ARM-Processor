@@ -1,6 +1,12 @@
+--library ieee;
+--use ieee.std_logic_1164.all;
+--use ieee.std_logic_unsigned.all; -- for addition & counting
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all; -- for addition & counting
+USE ieee.numeric_std.all;
+library work;
+use work.all;
 
 entity memory is
   port (
@@ -9,7 +15,7 @@ entity memory is
 	rd_enable : in std_logic;
 	data_out : out std_logic_vector(31 downto 0) ;
 	byte_offset : in std_logic_vector(3 downto 0) ; -- processor memory datapath gives a 4 bit signal which one to activate (memory enable)
-	clk : in std_logic_vector(31 downto 0)
+	clk : in std_logic
   ) ;
 end memory ;
 
