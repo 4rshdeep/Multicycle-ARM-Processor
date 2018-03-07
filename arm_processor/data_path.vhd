@@ -61,20 +61,12 @@ signal aw_out  : std_logic_vector(31 downto 0);
 signal bw_out  : std_logic_vector(31 downto 0);
 signal rf_out1 : std_logic_vector(31 downto 0);
 signal rf_out2 : std_logic_vector(31 downto 0);
-<<<<<<< HEAD
 signal mem_ad  : std_logic_vector(9 downto 0); 
 signal mul_out : std_logic_vector(31 downto 0); 
 signal mul_reg_out   : std_logic_vector(31 downto 0); 
 signal shift_reg_out : std_logic_vector(31 downto 0); 
 signal shift_out : std_logic_vector(31 downto 0); 
 --signal rf_rad2      : std_logic_vector(3 downto 0);
-=======
-signal mem_ad  : std_logic_vector(9 downto 0);
-signal mul_out : std_logic_vector(31 downto 0);
-signal mul_reg_out   : std_logic_vector(31 downto 0);
-signal shift_reg_out : std_logic_vector(31 downto 0);
-signal shift_reg_out : std_logic_vector(31 downto 0);
->>>>>>> 263187956c55f5d6be30aad57b4256a304fa4999
 signal shift_carry   : std_logic;
 signal mem_data		 : std_logic_vector(31 downto 0);
 signal mem_enable	 : std_logic_vector(3 downto 0);
