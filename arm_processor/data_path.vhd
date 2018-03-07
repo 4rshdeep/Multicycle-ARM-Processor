@@ -34,7 +34,7 @@ entity data_path is
     sign_opcode: in std_logic;
     p2m_offset : in std_logic_vector(1 downto 0);
     shifter_opcode: in std_logic_vector(1 downto 0);
-
+    RWAD 	: in std_logic;
 
 
 -------------------------------------------------------------
@@ -70,6 +70,8 @@ signal shift_out : std_logic_vector(31 downto 0);
 signal shift_carry   : std_logic;
 signal mem_data		 : std_logic_vector(31 downto 0);
 signal mem_enable	 : std_logic_vector(3 downto 0);
+
+signal rf_wad		: std_logic_vector(3 downto 0);
 
 signal p2m_in		: std_logic_vector(31 downto 0);
 signal p2m_out		: std_logic_vector(31 downto 0);
@@ -132,7 +134,8 @@ begin
 			write_data 		=> rf_wd,
 			read_add1 		=> ir_out(3 downto 0),
 			read_add2 		=> rf_rad2,
-			write_add 		=> ir_out(15 downto 12),
+			write_add 		=> rf_wad, 
+			--write_add 		=> ir_out(15 downto 12), 
 			clk 			=> clk,
 			reset 			=> '0',
 			write_enable 	=> RW,
@@ -196,6 +199,8 @@ begin
 				 mul_reg_out when "10",  -- check if mul_reg_out OR mul_out
 				 pc_final when others;
 	--rf_wd <= dr_out when M2R='1' else res_out;
+
+	rf_wad <= "1110" when RWAD='0' else ir_out(15 downto 12);
 
 
 
