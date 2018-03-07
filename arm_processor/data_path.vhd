@@ -29,7 +29,12 @@ entity data_path is
 	mul_w	: in std_logic;
 	shift_w	: in std_logic;
 	Rsrc1 	: in std_logic;
-
+	L       : in std_logic;
+	p2m_opcode: in std_logic_vector(1 downto 0);
+    sign_opcode: in std_logic;
+    p2m_offset : in std_logic_vector(1 downto 0);
+    shifter_opcode: in std_logic_vector(1 downto 0);
+    
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
   ) ;
@@ -37,14 +42,15 @@ end entity ;
 architecture arch1 of data_path is
 
 -- size of mem_out = ir_out = dr_out
-signal alu_in1 : std_logic_vector(3 downto 0);
-signal alu_in2 : std_logic_vector(3 downto 0);
-signal alu_out : std_logic_vector(3 downto 0);
+signal alu_in1 : std_logic_vector(31 downto 0);
+signal alu_in2 : std_logic_vector(31 downto 0);
+signal alu_out : std_logic_vector(31 downto 0);
 signal flag_out: std_logic_vector(3 downto 0);
 signal mem_out : std_logic_vector(31 downto 0);
 signal ir_out  : std_logic_vector(31 downto 0);
 signal pc_final: std_logic_vector(31 downto 0); --check size
 signal dr_out  : std_logic_vector(31 downto 0);
+signal rf_rad1 : std_logic_vector(3 downto 0);
 signal rf_rad2 : std_logic_vector(3 downto 0);
 signal rf_wd   : std_logic_vector(31 downto 0);
 signal res_out : std_logic_vector(31 downto 0);
@@ -56,7 +62,8 @@ signal mem_ad  : std_logic_vector(9 downto 0);
 signal mul_out : std_logic_vector(31 downto 0); 
 signal mul_reg_out   : std_logic_vector(31 downto 0); 
 signal shift_reg_out : std_logic_vector(31 downto 0); 
-signal shift_reg_out : std_logic_vector(31 downto 0); 
+signal shift_out : std_logic_vector(31 downto 0); 
+--signal rf_rad2      : std_logic_vector(3 downto 0);
 signal shift_carry   : std_logic;
 signal mem_data		 : std_logic_vector(31 downto 0);
 signal mem_enable	 : std_logic_vector(3 downto 0);
@@ -100,7 +107,7 @@ begin
 				data_in 	=> mem_data,
 				rd_enable 	=> MR,
 				data_out 	=> mem_out,
-				byte_offset => mem_enable		 -- processor memory datapath gives a 4 bit signal which one to activate (memory enable)
+				byte_offset => mem_enable,		 -- processor memory datapath gives a 4 bit signal which one to activate (memory enable)
 				clk			=> clk
 			);	
 
@@ -145,7 +152,7 @@ begin
 		  PORT MAP (
 			op 		=> bw_out,
 			opcode 	=> shifter_opcode,	--input from controller
-			shamt 	=> aw_out,			--shift amt comes from a_out (First read port of register) 
+			shamt 	=> aw_out(4 downto 0),			--shift amt comes from a_out (First read port of register) 
 			carry	=> shift_carry,
 			result	=> shift_out
 		  ) ;
@@ -180,10 +187,10 @@ begin
 
 
 	with M2R select
-		rf_wd <= dr_out when "01",
+		rf_wd <= p2m_out when "01",
 				 res_out when "00",
 				 mul_reg_out when "10",  -- check if mul_reg_out OR mul_out
-				 pc when others;
+				 pc_final when others;
 	--rf_wd <= dr_out when M2R='1' else res_out;
 
 
@@ -191,7 +198,7 @@ begin
 ------------------------------
 ----- P2M MODULE SIGNALS -----
 ------------------------------
-	p2m_in <= mem_out when L='1' else bw_out;
+	p2m_in <= dr_out when L='1' else bw_out;
 
 
 --------------------------
@@ -214,8 +221,9 @@ begin
 --------------------------
 -- MEMORY MODULE SIGNALS--
 --------------------------
-	mem_ad <= pc_final when IorD='0' else res_out;
-
+	mem_ad <= pc_final(9 downto 0) when IorD='0' else res_out(9 downto 0);
+--    WHY PC AND RESULT ??? IT SHOULD BE ADDRESS
+    
 	mem_data <= p2m_out when L='0' else (others => '0');
 
 	mem_enable <= p2m_enable when L='0' else (others => '0');

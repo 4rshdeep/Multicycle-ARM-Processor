@@ -1,8 +1,15 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all; -- for addition & counting
+USE ieee.numeric_std.all;
+library work;
+use work.all;
+
 entity multiplier is
   port (
-	op1 : std_logic_vector(31 downto 0);
-	op2 : std_logic_vector(31 downto 0);
-	result : std_logic_vector(31 downto 0)
+	op1 : in std_logic_vector(31 downto 0);
+	op2 : in std_logic_vector(31 downto 0);
+	result : out std_logic_vector(31 downto 0)
   ) ;
 end multiplier ;
 
