@@ -14,59 +14,29 @@ entity Bctrl is
 end Bctrl ;
 
 architecture arch of Bctrl is
+	signal instr : std_logic_vector(3 downto 0) ;
 begin
-	main : process( IR, nzvc )
+	instr <= IR(31 downto 28);
+	main : process( instr, nzvc )
 	begin
-		p <= '0';
-			-- z set
-		if IR(31 downto 28) = "0000" and nzvc(2) = '1' then
-			p <= '1';
-			-- z clear
-		elsif IR(31 downto 28) = "0001" and nzvc(2) = '0' then
-			p <= '1';
-			-- c set
-		elsif IR(31 downto 28) = "0010" and nzvc(0) = '1' then
-			p <= '1';
-			-- c clear
-		elsif IR(31 downto 28) = "0011" and nzvc(0) = '0' then
-			p <= '1';
-			-- n set
-		elsif IR(31 downto 28) = "0100" and nzvc(3) = '1' then
-			p <= '1';
-			-- n clear
-		elsif IR(31 downto 28) = "0101" and nzvc(3) = '0' then
-			p <= '1';
-			-- v set
-		elsif IR(31 downto 28) = "0110" and nzvc(1) = '1' then
-			p <= '1';
-			-- v clear
-		elsif IR(31 downto 28) = "0111" and nzvc(1) = '0' then
-			p <= '1';
-			-- c set and z clear
-		elsif IR(31 downto 28) = "1000" and nzvc(0) = '1'  and nzvc(2) = '0' then
-			p <= '1';
-			-- c clear or z set
-		elsif IR(31 downto 28) = "1001"  then
-			if nzvc(0) = '0' or nzvc(2) = '1' then
-				p <= '1'
-			end if ;
-			-- N == V
-		elsif IR(31 downto 28) = "1010" and nzvc(2) = '0' then
-			p <= nzvc(3) nor nzvc(1);
-			-- N != V
-		elsif IR(31 downto 28) = "1011" and nzvc(2) = '0' then
-			p <= not(nzvc(3) nor nzvc(1));
-			-- Z clear and N=V
-		elsif IR(31 downto 28) = "1100" and nzvc(2) = '0' then
-			p <= (nzvc(3) nor nzvc(1)) and not(nzvc(2));
-			-- Z set or N!=V
-		elsif IR(31 downto 28) = "1101" and nzvc(2) = '0' then
-			p <= not((nzvc(3) nor nzvc(1)) and not(nzvc(2)));
-			-- ignore
-		elsif IR(31 downto 28) = "1110" and nzvc(2) = '0' then
-			p <= '1';
-		end if ;
+		case( instr ) is
+
+			when "0000" =>	p <= nzvc(2);						--eq
+			when "0001" =>	p <= not(nzvc(2));					--ne
+			when "0010" =>	p <= nzvc(0);						--cs|hs
+			when "0011" =>	p <= not(nzvc(0));					--cc|lo
+			when "0100" =>	p <= nzvc(3);						--mi
+			when "0101" =>	p <= not(nzvc(3));					--pl
+			when "0110" =>	p <= nzvc(1);						--vs
+			when "0111" =>	p <= not(nzvc(1));					--vc
+			when "1000" =>	p <= (nzvc(0) and not(nzvc(2)));	--hi
+			when "1001" =>	p <= not(nzvc(0) and not(nzvc(2)));	--ls
+			when "1010" =>	p <= nzvc(3) xnor nzvc(1);			--ge
+			when "1011" =>	p <= not(nzvc(3) xnor nzvc(1));		--lt
+			when "1100" =>	p <= not(nzvc(2)) and (nzvc(3) xnor nzvc(1))		--gt
+			when "1101" =>	p <= not(not(nzvc(2)) and (nzvc(3) xnor nzvc(1)))	--le
+			when "1110" =>	p <= '1';											--al
+			when others =>	p <= '0';							-- ow
+		end case ;
 	end process ; -- main
-
-
 end architecture ; -- arch
