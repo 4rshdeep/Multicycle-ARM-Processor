@@ -1,5 +1,0 @@
-# compile vhdl design source files
-vhdl xil_defaultlib  "../../../../shifter.vhd"
-
-# Do not sort compile order
-nosort

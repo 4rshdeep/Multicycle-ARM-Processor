@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1520400719">
-  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
-  <File Type="BG-DRC" Name="shifter.drc"/>
-  <File Type="BG-BGN" Name="shifter.bgn"/>
-  <File Type="BITSTR-SYSDEF" Name="shifter.sysdef"/>
-  <File Type="BITSTR-MMI" Name="shifter.mmi"/>
-  <File Type="BITSTR-BMM" Name="shifter_bd.bmm"/>
-  <File Type="BITSTR-NKY" Name="shifter.nky"/>
-  <File Type="BITSTR-RBT" Name="shifter.rbt"/>
-  <File Type="BITSTR-MSK" Name="shifter.msk"/>
-  <File Type="BG-BIN" Name="shifter.bin"/>
-  <File Type="BG-BIT" Name="shifter.bit"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="shifter_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="shifter_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="shifter_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="shifter_postroute_physopt_bb.dcp"/>
+  <File Type="PA-TCL" Name="shifter.tcl"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="shifter_postplace_pwropt.dcp"/>
+  <File Type="INIT-TIMING" Name="shifter_timing_summary_init.rpt"/>
+  <File Type="OPT-DCP" Name="shifter_opt.dcp"/>
+  <File Type="OPT-DRC" Name="shifter_drc_opted.rpt"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="shifter_methodology_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="shifter.hwdef"/>
+  <File Type="OPT-TIMING" Name="shifter_timing_summary_opted.rpt"/>
+  <File Type="PWROPT-DCP" Name="shifter_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="shifter_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="shifter_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="shifter_placed.dcp"/>
+  <File Type="PLACE-IO" Name="shifter_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="shifter_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="shifter_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="shifter_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="shifter_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="shifter_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="shifter_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="shifter_timing_summary_placed.rpt"/>
+  <File Type="RDI-RDI" Name="shifter.vdi"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="shifter_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="shifter_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="shifter_drc_physopted.rpt"/>
   <File Type="POSTROUTE-PHYSOPT-DCP" Name="shifter_postroute_physopt.dcp"/>
-  <File Type="ROUTE-CLK" Name="shifter_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-SIMILARITY" Name="shifter_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-TIMING-RPX" Name="shifter_timing_summary_routed.rpx"/>
+  <File Type="BG-BIT" Name="shifter.bit"/>
+  <File Type="ROUTE-DCP" Name="shifter_routed.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="shifter_timing_summary_postroute_physopted.pb"/>
+  <File Type="BG-BIN" Name="shifter.bin"/>
   <File Type="ROUTE-TIMING-PB" Name="shifter_timing_summary_routed.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="shifter_timing_summary_postroute_physopted.rpx"/>
+  <File Type="BITSTR-MSK" Name="shifter.msk"/>
+  <File Type="ROUTE-TIMING-RPX" Name="shifter_timing_summary_routed.rpx"/>
+  <File Type="BITSTR-RBT" Name="shifter.rbt"/>
+  <File Type="ROUTE-SIMILARITY" Name="shifter_incremental_reuse_routed.rpt"/>
+  <File Type="BITSTR-NKY" Name="shifter.nky"/>
+  <File Type="ROUTE-CLK" Name="shifter_clock_utilization_routed.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="shifter_postroute_physopt_bb.dcp"/>
+  <File Type="BG-DRC" Name="shifter.drc"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="shifter_routed_bb.dcp"/>
+  <File Type="BITSTR-MMI" Name="shifter.mmi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="shifter_timing_summary_postroute_physopted.rpt"/>
+  <File Type="BG-BGN" Name="shifter.bgn"/>
   <File Type="ROUTE-TIMINGSUMMARY" Name="shifter_timing_summary_routed.rpt"/>
+  <File Type="BITSTR-SYSDEF" Name="shifter.sysdef"/>
+  <File Type="BITSTR-BMM" Name="shifter_bd.bmm"/>
   <File Type="ROUTE-STATUS-PB" Name="shifter_route_status.pb"/>
   <File Type="ROUTE-STATUS" Name="shifter_route_status.rpt"/>
   <File Type="ROUTE-PWR-RPX" Name="shifter_power_routed.rpx"/>
   <File Type="ROUTE-PWR-SUM" Name="shifter_power_summary_routed.pb"/>
-  <File Type="ROUTE-PWR" Name="shifter_power_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="shifter_methodology_drc_routed.pb"/>
   <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="shifter_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="shifter_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-PWR" Name="shifter_power_routed.rpt"/>
   <File Type="ROUTE-DRC-RPX" Name="shifter_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="shifter_methodology_drc_routed.pb"/>
   <File Type="ROUTE-DRC-PB" Name="shifter_drc_routed.pb"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="shifter_methodology_drc_routed.rpt"/>
   <File Type="ROUTE-DRC" Name="shifter_drc_routed.rpt"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="shifter_routed_bb.dcp"/>
-  <File Type="ROUTE-DCP" Name="shifter_routed.dcp"/>
   <File Type="ROUTE-ERROR-DCP" Name="shifter_routed_error.dcp"/>
   <File Type="PHYSOPT-TIMING" Name="shifter_timing_summary_physopted.rpt"/>
-  <File Type="PHYSOPT-DRC" Name="shifter_drc_physopted.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="shifter_physopt.dcp"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="shifter_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="RDI-RDI" Name="shifter.vdi"/>
-  <File Type="PLACE-TIMING" Name="shifter_timing_summary_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="shifter_incremental_reuse_pre_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="shifter_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-CTRL" Name="shifter_control_sets_placed.rpt"/>
-  <File Type="PLACE-UTIL-PB" Name="shifter_utilization_placed.pb"/>
-  <File Type="PLACE-UTIL" Name="shifter_utilization_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="shifter_clock_utilization_placed.rpt"/>
-  <File Type="PLACE-IO" Name="shifter_io_placed.rpt"/>
-  <File Type="PLACE-DCP" Name="shifter_placed.dcp"/>
-  <File Type="PWROPT-TIMING" Name="shifter_timing_summary_pwropted.rpt"/>
-  <File Type="PWROPT-DRC" Name="shifter_drc_pwropted.rpt"/>
-  <File Type="PWROPT-DCP" Name="shifter_pwropt.dcp"/>
-  <File Type="OPT-TIMING" Name="shifter_timing_summary_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="shifter.hwdef"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="shifter_methodology_drc_opted.rpt"/>
-  <File Type="OPT-DRC" Name="shifter_drc_opted.rpt"/>
-  <File Type="OPT-DCP" Name="shifter_opt.dcp"/>
-  <File Type="INIT-TIMING" Name="shifter_timing_summary_init.rpt"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="shifter_postplace_pwropt.dcp"/>
-  <File Type="PA-TCL" Name="shifter.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../shifter.vhd">

@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all; -- for addition & counting
-USE ieee.numeric_std.all;
+use ieee.numeric_std.all;
 library work;
 use work.all;
 
@@ -35,7 +35,6 @@ entity data_path is
     p2m_offset : in std_logic_vector(1 downto 0);
     shifter_opcode: in std_logic_vector(1 downto 0);
     RWAD 	: in std_logic;
-
 
 -------------------------------------------------------------
 	Flags	: out std_logic_vector(3 downto 0);
@@ -76,7 +75,6 @@ signal rf_wad		: std_logic_vector(3 downto 0);
 signal p2m_in		: std_logic_vector(31 downto 0);
 signal p2m_out		: std_logic_vector(31 downto 0);
 signal p2m_enable	: std_logic_vector(3 downto 0);
---signal
 
 signal rf_pc    : std_logic_vector(31 downto 0);
 
@@ -88,7 +86,7 @@ begin
 		--output is mem_out
 
 	P2M:
-		ENTITY WORK.processor_memory_2 (arch)
+		ENTITY WORK.processor_memory (arch)
 		-- change pr_data and mem_data to data_in only
 		-- change byte_offset and load_addr to single offset only
 		-- Isn't proc_to_mem same as load
@@ -134,8 +132,8 @@ begin
 			write_data 		=> rf_wd,
 			read_add1 		=> ir_out(3 downto 0),
 			read_add2 		=> rf_rad2,
-			write_add 		=> rf_wad, 
-			--write_add 		=> ir_out(15 downto 12), 
+			write_add 		=> rf_wad,
+			--write_add 		=> ir_out(15 downto 12),
 			clk 			=> clk,
 			reset 			=> '0',
 			write_enable 	=> RW,

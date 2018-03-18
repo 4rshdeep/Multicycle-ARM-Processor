@@ -2,87 +2,16 @@
 # Vivado v2016.4 (64-bit)
 # SW Build 1756540 on Mon Jan 23 19:11:19 MST 2017
 # IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
-# Start of session at: Wed Mar  7 10:24:46 2018
-# Process ID: 8785
-# Current directory: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado
+# Start of session at: Sun Mar 18 11:18:09 2018
+# Process ID: 6971
+# Current directory: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/project_vivado
 # Command line: vivado
-# Log file: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/vivado.log
-# Journal file: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/vivado.jou
+# Log file: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/project_vivado/vivado.log
+# Journal file: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/project_vivado/vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.xpr
-# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
-set_property source_mgmt_mode None [current_project]
-set_property top shifter [current_fileset]
-# Re-enabling previously disabled source management mode.
-set_property source_mgmt_mode All [current_project]
-generate_target Simulation [get_files /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.srcs/sources_1/bd/BRAM/BRAM.bd]
-export_ip_user_files -of_objects [get_files /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.srcs/sources_1/bd/BRAM/BRAM.bd] -no_script -force -quiet
+open_project /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/project_vivado/lab4_vivado.xpr
 launch_simulation
-source BRAM_wrapper.tcl
-close_sim
-add_files -norecurse /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd
-remove_files  /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd
-update_compile_order -fileset sim_1
-open_bd_design {/media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.srcs/sources_1/bd/BRAM/BRAM.bd}
-remove_files  /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.srcs/sources_1/bd/BRAM/BRAM.bd
-file delete -force /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.ip_user_files/bd/BRAM
-add_files -norecurse /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd
-remove_files  /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd
 remove_files  /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/data_path.vhd
-update_compile_order -fileset sim_1
-remove_files  /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/alu.vhd
-update_compile_order -fileset sim_1
-remove_files  /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/multiplier.vhd
-remove_files  /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/register.vhd
-remove_files  /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/memory.vhd
-update_compile_order -fileset sim_1
-remove_files  /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/processor_memory.vhd
-update_compile_order -fileset sim_1
+add_files -norecurse /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/data_path.vhd
 launch_simulation
-source shifter.tcl
-reset_run synth_1
-launch_runs synth_1 -jobs 4
-wait_on_run synth_1
-close_sim
-launch_simulation
-source shifter.tcl
-add_force {/shifter/op} -radix hex {3 0ns}
-run 10 us
-add_force {/shifter/opcode} -radix hex {2 0ns}
-add_force {/shifter/shamt} -radix hex {2 0ns}
-run 10 us
-run 10 us
-run 10 us
-add_force {/shifter/opcode} -radix hex {0 0ns}
-run 10 us
-run 10 us
-run 10 us
-report_drivers {/shifter/op}
-add_force {/shifter/op} -radix hex {4 0ns}
-run 10 us
-add_force {/shifter/opcode} -radix hex {2 0ns}
-run 10 us
-add_force {/shifter/op} -radix hex {2 0ns}
-run 10 us
-add_force {/shifter/op} -radix hex {3 0ns}
-run 10 us
-reset_run synth_1
-launch_runs synth_1 -jobs 4
-wait_on_run synth_1
-launch_runs impl_1 -jobs 4
-wait_on_run impl_1
-close_sim
-add_files -norecurse /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd
-add_files -norecurse {/media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/alu.vhd /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/data_path.vhd /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/multiplier.vhd /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/register.vhd /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/memory.vhd /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/processor_memory.vhd /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/shifter.vhd}
-# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
-set_property source_mgmt_mode None [current_project]
-set_property top data_path [current_fileset]
-# Re-enabling previously disabled source management mode.
-set_property source_mgmt_mode All [current_project]
-# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
-set_property source_mgmt_mode None [current_project]
-set_property top data_path [get_filesets sim_1]
-set_property top_lib xil_defaultlib [get_filesets sim_1]
-# Re-enabling previously disabled source management mode.
-set_property source_mgmt_mode All [current_project]

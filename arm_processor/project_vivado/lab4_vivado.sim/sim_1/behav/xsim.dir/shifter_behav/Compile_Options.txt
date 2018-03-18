@@ -1,1 +1,0 @@
--wto "02b29d9d0bcd415ab0689b9a8ddee8b0" --debug "typical" --relax --mt "8" -L "xil_defaultlib" -L "secureip" --snapshot "shifter_behav" "xil_defaultlib.shifter" -log "elaborate.log" 
