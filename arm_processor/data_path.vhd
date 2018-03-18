@@ -92,14 +92,14 @@ begin
 		-- Isn't proc_to_mem same as load
 			PORT MAP(
 				pr_data 	=> p2m_in,
---				mem_data 	=> p2m_in,
+				mem_data 	=> p2m_in,
 				proc_to_mem => L, 		--input from controller (load/store)
 				load 		=> L,
 				optype 		=> p2m_opcode,	--input from controller
 				s 			=> sign_opcode, --input from controller
 				load_addr 	=> p2m_offset,	--input from controller
---				byte_offset => p2m_offset,	--input from controller
---				out_to_pr	=> p2m_out,		--define signal
+				byte_offset => p2m_offset,	--input from controller
+				out_to_pr	=> p2m_out,		--define signal
 				out_to_mem	=> p2m_out,
 				memory_enable => p2m_enable
 			);
