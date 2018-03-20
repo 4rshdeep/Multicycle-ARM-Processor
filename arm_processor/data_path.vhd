@@ -184,7 +184,9 @@ begin
 -------------------------------
 --- REGISTER MODULE SIGNALS ---
 -------------------------------
-	rf_rad2 <= ir_out(3 downto 0) when Rsrc='0' else ir_out(15 downto 12);
+	rf_rad2 <= ir_out(3 downto 0) when Rsrc="00"
+			   ir_out(15 downto 12) when Rsrc="01"
+			  "1110" when others ; -- link register
 
 	with Rsrc1 select
 		rf_rad1 <= ir_out(19 downto 16) when '0',
