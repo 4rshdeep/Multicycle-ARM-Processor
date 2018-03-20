@@ -13,7 +13,7 @@ entity data_path is
 	MW 		: in std_logic;
 	IW 		: in std_logic;
 	DW		: in std_logic;
-	Rsrc 	: in std_logic;
+	Rsrc 	: in std_logic_vector(1 downto 0) ;;
 	M2R		: in std_logic_vector(1 downto 0);	--changed
 	RW 		: in std_logic;
 	AW 		: in std_logic;
