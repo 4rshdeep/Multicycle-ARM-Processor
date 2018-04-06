@@ -18,11 +18,11 @@ entity decoder is
   port (
 	instruction : in std_logic_vector(31 downto 0) ;
 	-- "00" for DP, "10" for DT, "11" for branching
-	instruction_type : out std_logic_vector(1 downto 0); 
+	instruction_type : out std_logic_vector(1 downto 0);
 	-- decide whether dp,etc
 	DP_subtype : out DP_type;
 	DT_subtype : out DT_type;
-	op : out opcode
+	op : out opcode;
 	undef : out std_logic;
 	not_implemented : out std_logic
   ) ;
@@ -74,6 +74,7 @@ begin
 				if ( instruction(25) = '0' and instruction(11 downto 7) = = "11110" ) then
 					not_implemented <= '1';
 				elsif (instruction(25 downto 24)="00" and instruction(7 downto 4)="1001") then
+					instruction_type <= "01";
 					if instruction(23) = '0' then
 						-- mul
 						op <= MOV;
@@ -91,7 +92,7 @@ begin
 					if (instruction(23)='0') then
 						op <= SUB; -- U Bit = 0 => Subtract offset
 					else
-						op <= ADD;						
+						op <= ADD;
 					end if;
 				end if ;
 			when "01" =>

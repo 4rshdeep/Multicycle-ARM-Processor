@@ -5,6 +5,16 @@ USE ieee.numeric_std.all;
 library work;
 use work.all;
 
+package pkg is
+	type opcode is (AND, EOR, SUB, RSB, ADD, SBC, RSC, TST, TEQ, SMP, SMN, ORR, MOV, BIC, MVN);
+	type DP_type is (IMM, SHIFT_IMM, SHIFT_REG);
+	type DT_type is (HALF_WORD, WORD);
+end package ;
+
+package body pkg is
+
+end pkg;
+
 entity controller is
   port (
 	-- signals same as datapath but with input changed to output

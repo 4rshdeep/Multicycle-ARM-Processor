@@ -22,14 +22,6 @@ use IEEE.STD_LOGIC_1164.ALL;
 use work.MyTypes.all;
 
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
-
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx primWORD
 entity Control_FSM is
     Port (    instr_class : in  instr_class_type;
 			  DT_subclass : in DT_subclass_type;
@@ -38,7 +30,7 @@ entity Control_FSM is
 			  instr : in std_logic_vector(31 downto 0);
 --			  instr_20 : in std_logic;
 			  rst : in std_logic;
-              control_state_out : out  control_state_type;
+        control_state_out : out  control_state_type;
 			  clock : in std_logic);
 end Control_FSM;
 
