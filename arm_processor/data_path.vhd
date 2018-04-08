@@ -5,12 +5,17 @@ use ieee.numeric_std.all;
 library work;
 use work.all;
 
+
+
+-- TODO MW is not used in datapath
 entity data_path is
   port (
+
+  	-- I think instead of MW we should have mem_enable 4 bits and remove corresponding signal inn the architecture.
+	--MW 		: in std_logic;
 	PW 		: in std_logic;
 	IorD	: in std_logic;
 	MR		: in std_logic;
-	MW 		: in std_logic;
 	IW 		: in std_logic;
 	DW		: in std_logic;
 	Rsrc 	: in std_logic_vector(1 downto 0) ;;
@@ -23,7 +28,6 @@ entity data_path is
 	op		: in std_logic_vector(3 downto 0);
 	Fset	: in std_logic;
 	ReW		: in std_logic;
-
 	--NOT IN SLIDES
 	clk 	: in std_logic;
 	mul_w	: in std_logic;
@@ -35,7 +39,6 @@ entity data_path is
     p2m_offset : in std_logic_vector(1 downto 0);
     shifter_opcode: in std_logic_vector(1 downto 0);
     RWAD 	: in std_logic;
-
 -------------------------------------------------------------
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)

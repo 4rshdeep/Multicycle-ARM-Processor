@@ -5,25 +5,25 @@ USE ieee.numeric_std.all;
 
 entity reg is
   port (
-	write_data : in std_logic_vector(31 downto 0);
-	read_add1 : in std_logic_vector(3 downto 0);
-	read_add2 : in std_logic_vector(3 downto 0);
-	write_add : in std_logic_vector(3 downto 0);
-	clk : in std_logic;
-	reset : in std_logic;
+	write_data   : in std_logic_vector(31 downto 0);
+	read_add1    : in std_logic_vector(3 downto 0);
+	read_add2    : in std_logic_vector(3 downto 0);
+	write_add    : in std_logic_vector(3 downto 0);
+	clk          : in std_logic;
+	reset        : in std_logic;
 	write_enable : in std_logic;
-	data_out1 : out std_logic_vector(31 downto 0);
-	data_out2 : out std_logic_vector(31 downto 0);
-	pc : out std_logic_vector(31 downto 0)
+	data_out1    : out std_logic_vector(31 downto 0);
+	data_out2    : out std_logic_vector(31 downto 0);
+	pc           : out std_logic_vector(31 downto 0)
   ) ;
 end reg ;
 
 architecture behaviour_reg of reg is
 	type register_arr is array (15 downto 0) of std_logic_vector(31 downto 0);
 	signal register_files : register_arr;
-	signal rd_add1 : integer;
-	signal rd_add2 : integer;
-	signal wr_add : integer;
+	signal rd_add1        : integer;
+	signal rd_add2        : integer;
+	signal wr_add         : integer;
 
 begin
 	-- make address to index

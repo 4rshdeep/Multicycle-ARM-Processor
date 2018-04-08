@@ -23,8 +23,8 @@ entity Actions is
 		result_alu : in word;
 		op1_mul: out word;
 		op2_mul: out word;
-        N_mul: in std_logic;
-        Z_mul: in std_logic;
+    N_mul: in std_logic;
+    Z_mul: in std_logic;
 		result_mul: in word;
 		nextFlags : in nibble;
 		Flags : out nibble;
@@ -39,7 +39,7 @@ entity Actions is
 		DIN_MEM : out word;
 		DOUT_MEM : in word;
 		not_implemented : in std_logic;
-        DT_subclass: in DT_subclass_type;
+    DT_subclass: in DT_subclass_type;
 		undefined : in std_logic
    );
 end Actions;
@@ -68,7 +68,6 @@ signal out1_sig :std_logic_vector (31 downto 0):= (others => '0'  );
 signal out2_sig :std_logic_vector (31 downto 0):= (others => '0'  );
 signal instr: std_logic_vector (31 downto 0):= (others => '0'  );
 signal flags_sig: nibble := (others => '0');
-
 signal A: std_logic_vector(31 downto 0) := (others => '0'  );
 signal B: std_logic_vector(31 downto 0):= (others => '0'  );
 signal C: std_logic_vector(31 downto 0):= (others => '0'  );
