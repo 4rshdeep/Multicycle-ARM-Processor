@@ -143,7 +143,7 @@ begin
 		ENTITY WORK.reg (behaviour_reg)
 		  PORT MAP (
 			write_data 		=> rf_wd,
-			read_add1 		=> ir_out(3 downto 0),
+			read_add1 		=> rf_rad1,
 			read_add2 		=> rf_rad2,
 			write_add 		=> rf_wad,
 			--write_add 		=> ir_out(15 downto 12),
