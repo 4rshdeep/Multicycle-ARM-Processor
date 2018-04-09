@@ -45,7 +45,7 @@ entity data_path is
     RWAD 	: in std_logic_vector(1 downto 0);
 -- -------------------------------
 	
-    mem_enable : in std_logic_vector(3 downto 0) ;
+--    mem_enable : in std_logic_vector(3 downto 0) ;
 -------------------------------------------------------------
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
@@ -78,7 +78,7 @@ signal shift_out : std_logic_vector(31 downto 0);
 signal shifter_op : std_logic_vector(1 downto 0);
 signal shift_amount : std_logic_vector(4 downto 0);
 signal shifter_opcode : std_logic_vector(7 downto 0);
-
+signal mem_enable : std_logic_vector(3 downto 0);
 --signal rf_rad2      : std_logic_vector(3 downto 0);
 signal shift_carry   : std_logic;
 signal mem_data		 : std_logic_vector(31 downto 0);
