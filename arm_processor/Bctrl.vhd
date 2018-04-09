@@ -20,7 +20,6 @@ begin
 	main : process( instr, nzvc )
 	begin
 		case( instr ) is
-
 			when "0000" =>	p <= nzvc(2);						--eq
 			when "0001" =>	p <= not(nzvc(2));					--ne
 			when "0010" =>	p <= nzvc(0);						--cs|hs
@@ -33,8 +32,8 @@ begin
 			when "1001" =>	p <= not(nzvc(0) and not(nzvc(2)));	--ls
 			when "1010" =>	p <= nzvc(3) xnor nzvc(1);			--ge
 			when "1011" =>	p <= not(nzvc(3) xnor nzvc(1));		--lt
-			when "1100" =>	p <= not(nzvc(2)) and (nzvc(3) xnor nzvc(1))		--gt
-			when "1101" =>	p <= not(not(nzvc(2)) and (nzvc(3) xnor nzvc(1)))	--le
+			when "1100" =>	p <= not(nzvc(2)) and (nzvc(3) xnor nzvc(1));		--gt
+			when "1101" =>	p <= not(not(nzvc(2)) and (nzvc(3) xnor nzvc(1)));	--le
 			when "1110" =>	p <= '1';											--al
 			when others =>	p <= '0';							-- ow
 		end case ;

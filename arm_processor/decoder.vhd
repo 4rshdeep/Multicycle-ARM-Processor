@@ -4,7 +4,7 @@ use ieee.std_logic_unsigned.all; -- for addition & counting
 USE ieee.numeric_std.all;
 
 package pkg is
-	type opcode is (AND, EOR, SUB, RSB, ADD, SBC, RSC, TST, TEQ, SMP, SMN, ORR, MOV, BIC, MVN);
+	type opcode is (ANDD, EOR, SUB, RSB, ADD, SBC, RSC, TST, TEQ, SMP, SMN, ORR, MOV, BIC, MVN);
 	type DP_type is (IMM, SHIFT_IMM, SHIFT_REG);
 	type DT_type is (HALF_WORD, WORD);
 end package ;
