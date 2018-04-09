@@ -175,6 +175,12 @@ begin
             result  => shift_out
           ) ;
 
+---------------------------
+---- PC UPDATE SIGNALS ----
+---------------------------
+pc_final <= alu_out when PW='1';
+
+
 
 --------------------------
 --- ALU MODULE SIGNALS ---
@@ -192,6 +198,7 @@ begin
                    ((5 downto 0 => ir_out(23) ) & ir_out(23 downto 0) & "00") when "011",   -- s2 ins[23-0]
                    shift_reg_out when others;
 
+    --op <= PLUS else MINUS else ir_out(x downto y);
 
 ------------------------------
 --- SHIFTER MODULE SIGNALS ---
