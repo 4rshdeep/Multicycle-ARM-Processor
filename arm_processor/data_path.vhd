@@ -14,31 +14,36 @@ entity data_path is
   	-- I think instead of MW we should have mem_enable 4 bits and remove corresponding signal inn the architecture.
 	--MW 		: in std_logic;
 	PW 		: in std_logic;
-	IorD	: in std_logic;
+	IorD	: in std_logic_vector(1 downto 0);
 	MR		: in std_logic;
 	IW 		: in std_logic;
 	DW		: in std_logic;
-	Rsrc 	: in std_logic_vector(1 downto 0);
-	M2R		: in std_logic_vector(1 downto 0);	--changed
+	Rsrc 	: in std_logic;
+	M2R		: in std_logic_vector(2 downto 0);	--changed
 	RW 		: in std_logic;
 	AW 		: in std_logic;
 	BW 		: in std_logic;
 	Asrc1	: in std_logic_vector(1 downto 0);	--changed
-	Asrc2	: in std_logic_vector(1 downto 0);
+	Asrc2	: in std_logic_vector(2 downto 0);
 	op		: in std_logic_vector(3 downto 0);
 	Fset	: in std_logic;
 	ReW		: in std_logic;
 	--NOT IN SLIDES
 	clk 	: in std_logic;
 	mul_w	: in std_logic;
+
 	shift_w	: in std_logic;
+	sh_op 	: in std_logic;
+	sh_code : in std_logic;
+	sh_amt 	: in std_logic_vector;
+
 	Rsrc1 	: in std_logic;
 	L       : in std_logic;
 	p2m_opcode: in std_logic_vector(1 downto 0);
     sign_opcode: in std_logic;
     p2m_offset : in std_logic_vector(1 downto 0);
     shifter_opcode: in std_logic_vector(1 downto 0);
-    RWAD 	: in std_logic;
+    RWAD 	: in std_logic_vector(1 downto 0);
 -------------------------------------------------------------
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
@@ -158,9 +163,9 @@ begin
 	Shifter:
 		ENTITY WORK.shifter (behaviour_shifter)
 		  PORT MAP (
-			op 		=> bw_out,
-			opcode 	=> shifter_opcode,	--input from controller
-			shamt 	=> aw_out(4 downto 0),			--shift amt comes from a_out (First read port of register)
+			op 		=> shifter_op,
+			opcode 	=> shifter_opcode,				--input from controller
+			shamt 	=> shift_amount,			
 			carry	=> shift_carry,
 			result	=> shift_out
 		  ) ;
@@ -177,20 +182,32 @@ begin
 
 	with Asrc2 select
 		alu_in2 <= bw_out when "00",
-				   (2 => '1', others => '0') when "01",
-				   (( 19 downto 0 => '0') & ir_out(11 downto 0)) when "10",
-				   ((5 downto 0 => ir_out(23) ) & ir_out(23 downto 0) & "00") when "11",
+				   (2 => '1', others => '0') when "01",		-- constant 4
+				   (( 19 downto 0 => '0') & ir_out(11 downto 0)) when "10",		-- ex  ins[11-0] 
+				   ((5 downto 0 => ir_out(23) ) & ir_out(23 downto 0) & "00") when "11",	-- s2 ins[23-0]
 				   shift_reg_out when others;
+
+
+------------------------------
+--- SHIFTER MODULE SIGNALS ---
+------------------------------
+	shifter_opcode <= bw_out when sh_op='0' else ir_out(7 downto 0);
+
+	shifter_op <= ir_out(6-5) when sh_code='0' else "11";
+
+	with sh_amt select 
+		shift_amount <= aw_out(4 downto 0) when  "00",
+						ir_out(11 downto 7) when "01",
+						ir_out(11 downto 8) & '0' when others;
 
 
 
 -------------------------------
 --- REGISTER MODULE SIGNALS ---
 -------------------------------
-    with Rsrc select 
-	   rf_rad2 <= ir_out(3 downto 0) when "00",
-			     ir_out(15 downto 12) when "01",
-			     "1110" when others ; -- link register
+	with Rsrc select
+	rf_rad2 <= ir_out(3 downto 0) when '0'
+			   ir_out(15 downto 12) when others;
 
 	with Rsrc1 select
 		rf_rad1 <= ir_out(19 downto 16) when '0',
@@ -198,14 +215,16 @@ begin
 
 
 	with M2R select
-		rf_wd <= p2m_out when "01",
-				 res_out when "00",
-				 mul_reg_out when "10",  -- check if mul_reg_out OR mul_out
-				 pc_final when others;
-	--rf_wd <= dr_out when M2R='1' else res_out;
+		rf_wd <= p2m_out when "000",
+				 res_out when "001",
+				 mul_reg_out when "010",  -- check if mul_reg_out OR mul_out
+				 pc_final when "011",
+				 mem_out when others;   
 
-	rf_wad <= "1110" when RWAD='0' else ir_out(15 downto 12);
-
+	with RWAD select 
+		rf_wd <= "1110" when "00",
+				 ir_out(15 downto 12) when "01",
+				 ir_out(19 downto 16) when others;
 
 
 ------------------------------
@@ -234,7 +253,10 @@ begin
 --------------------------
 -- MEMORY MODULE SIGNALS--
 --------------------------
-	mem_ad <= pc_final(9 downto 0) when IorD='0' else res_out(9 downto 0);
+	with IorD select
+		mem_ad <= pc_final(9 downto 0) when "01",
+				  res_out(9 downto 0) when "00",
+				  aw_out(9 downto 0) when others;
 --    WHY PC AND RESULT ??? IT SHOULD BE ADDRESS
 
 	mem_data <= p2m_out when L='0' else (others => '0');
