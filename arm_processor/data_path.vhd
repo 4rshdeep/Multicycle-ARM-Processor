@@ -18,7 +18,7 @@ entity data_path is
 	MR		: in std_logic;
 	IW 		: in std_logic;
 	DW		: in std_logic;
-	Rsrc 	: in std_logic_vector(1 downto 0) ;;
+	Rsrc 	: in std_logic_vector(1 downto 0);
 	M2R		: in std_logic_vector(1 downto 0);	--changed
 	RW 		: in std_logic;
 	AW 		: in std_logic;
@@ -187,9 +187,10 @@ begin
 -------------------------------
 --- REGISTER MODULE SIGNALS ---
 -------------------------------
-	rf_rad2 <= ir_out(3 downto 0) when Rsrc="00"
-			   ir_out(15 downto 12) when Rsrc="01"
-			  "1110" when others ; -- link register
+    with Rsrc select 
+	   rf_rad2 <= ir_out(3 downto 0) when "00",
+			     ir_out(15 downto 12) when "01",
+			     "1110" when others ; -- link register
 
 	with Rsrc1 select
 		rf_rad1 <= ir_out(19 downto 16) when '0',
