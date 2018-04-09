@@ -259,8 +259,8 @@ begin
 -- MEMORY MODULE SIGNALS--
 --------------------------
     with IorD select
-        mem_ad <= pc_final(9 downto 0) when "01",
-                  res_out(9 downto 0) when "00",
+        mem_ad <= pc_final(9 downto 0) when "00",
+                  res_out(9 downto 0) when "01",
                   aw_out(9 downto 0) when others;
 --    WHY PC AND RESULT ??? IT SHOULD BE ADDRESS
 

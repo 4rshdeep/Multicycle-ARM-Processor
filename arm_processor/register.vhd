@@ -20,16 +20,16 @@ end reg ;
 
 architecture behaviour_reg of reg is
 	type register_arr is array (15 downto 0) of std_logic_vector(31 downto 0);
-	signal register_files : register_arr;
-	signal rd_add1        : integer;
-	signal rd_add2        : integer;
-	signal wr_add         : integer;
+	signal register_files : register_arr := ((others=> (others=>'0')));
+	signal rd_add1        : integer := 0;
+	signal rd_add2        : integer := 0;
+	signal wr_add         : integer := 0;
 
 begin
 	-- make address to index
-	rd_add1 <= to_integer(unsigned(read_add1));
-	rd_add2 <= to_integer(unsigned(read_add2));
-	wr_add <= to_integer(unsigned(write_add));
+	rd_add1 <= to_integer(unsigned(read_add1)) when reset='0' else 0;
+	rd_add2 <= to_integer(unsigned(read_add2)) when reset='0' else 0;
+	wr_add  <= to_integer(unsigned(write_add)) when reset='0' else 0;
 
 	-- async read
 	data_out1 <= register_files(rd_add1);

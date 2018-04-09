@@ -36,6 +36,8 @@ begin
 
 state_out <= s0 when reset = '1' else state;
 
+-- in others clause go to s0 is done in case statements
+
 process( clock )
 begin
 	if clock='1' and clock'event then
@@ -49,6 +51,7 @@ begin
 						when s1 => state <= s4;
 						when s4 => state <= s8;
 						when s8 => state <= s19;
+						when others => state <= s0;
 					end case;
 				elsif (DP_subtype = SHIFT_IMM) then
 					case(state) is
@@ -56,6 +59,7 @@ begin
 						when s1 => state <= s5;
 						when s5 => state <= s8;
 						when s8 => state <= s19;
+						when others => state <= s0;
 					end case;
 				elsif (DP_subtype = SHIFT_REG) then
 					case(state) is
@@ -64,6 +68,7 @@ begin
 						when s6 => state <= s1;
 						when s1 => state <= s8;
 						when s8 => state <= s19;
+						when others => state <= s0;
 					end case;
 				end if;
 			elsif instruction_type = "01" then --mul mla
@@ -72,6 +77,7 @@ begin
 						when s0 => state <= s2;
 						when s2 => state <= s7;
 						when s7 => state <= s21;
+						when others => state <= s0;
 					end case;
 				else --mla
 					case(state) is
@@ -80,6 +86,7 @@ begin
 						when s7 => state <= s3;
 						when s3 => state <= s11;
 						when s11 => state <= s22;
+						when others => state <= s0;
 					end case;
 				end if ;
 			elsif (instruction_type = "10") then --dt
@@ -91,6 +98,7 @@ begin
 							when s12 => state <= s15;
 							when s15 => state <= s23;
 							when s23 => state <= s22;
+							when others => state <= s0;
 						end case;
 					else
 						case(state) is
@@ -98,6 +106,7 @@ begin
 							when s1 => state <= s13;
 							when s13 => state <= s24;
 							when s24 => state <= s22;
+							when others => state <= s0;
 						end case;
 					end if;
 				else --reg offset
@@ -108,6 +117,7 @@ begin
 							when s5 => state <= s8;
 							when s8 => state <= s17;
 							when s17 => state <= s23;	
+							when others => state <= s0;
 						end case;
 					else
 						case(state) is
@@ -116,6 +126,7 @@ begin
 							when s5 => state <= s14;
 							when s14 => state <= s24;
 							when s24 => state <= s22;
+							when others => state <= s0;
 						end case;
 					end if;
 				end if;
@@ -124,12 +135,14 @@ begin
 					case(state) is
 						when s0 => state <= s9;
 						when s9 => state <= s10;
+						when others => state <= s0;
 					end case;
 				else --bl
 					case(state) is
 						when s0 => state <= s20;
 						when s2 => state <= s9;
 						when s9 => state <= s10;
+						when others => state <= s0;
 					end case;
 				end if;
 			end if ;

@@ -75,7 +75,7 @@ begin
 					when "1101" => op <= MOV;
 					when "1110" => op <= BIC;
 					when "1111" => op <= MVN;
-
+                    when others => op <= ANDD;
 				end case ;
 
 				if ( instruction(25) = '0' and instruction(11 downto 7) = "11110" ) then

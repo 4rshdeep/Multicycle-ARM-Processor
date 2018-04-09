@@ -22,26 +22,26 @@ signal MW_sig               : std_logic;
 signal IW_sig               : std_logic;
 signal DW_sig               : std_logic;
 signal Rsrc_sig             : std_logic;
-signal M2R_sig              : std_logic_vector(1 downto 0) ;
+signal M2R_sig              : std_logic_vector(2 downto 0) ;
 signal RW_sig               : std_logic;
 signal AW_sig               : std_logic;
 signal BW_sig               : std_logic;
 signal Asrc1_sig            : std_logic_vector(1 downto 0) ;
-signal Asrc2_sig            : std_logic_vector(1 downto 0) ;
+signal Asrc2_sig            : std_logic_vector(2 downto 0) ;
 signal Fset_sig             : std_logic;
 signal ReW_sig              : std_logic;
 
 -- do we still need this ?
-signal mem_enable_sig       : std_logic_vector(3 downto 0) ;;
+signal mem_enable_sig       : std_logic_vector(3 downto 0) ;
 
 signal mul_w_sig            : std_logic;
 signal shift_w_sig          : std_logic;
 signal Rsrc1_sig            : std_logic;
 signal L_sig                : std_logic;
-signal p2m_opcode_sig       : std_logic_vector(1 downto 0) ;;
+signal p2m_opcode_sig       : std_logic_vector(1 downto 0) ;
 signal sign_opcode_sig      : std_logic;
-signal p2m_offset           : std_logic_vector(1 downto 0) ;;
-signal RWAD_sig             : std_logic_vector(1 downto 0) ;;
+signal p2m_offset           : std_logic_vector(1 downto 0) ;
+signal RWAD_sig             : std_logic_vector(1 downto 0) ;
 signal state_sig            : state_type;
 
 signal sh_code_sig          : std_logic;
@@ -64,9 +64,9 @@ signal not_implemented_sig  : std_logic;
 
 
 begin
-
     -- controller has 30 signals while datapath has 29 
-    entity work.controller(arch)
+    CONTROLLER:
+    entity work.controller (arch)
     port map (
         PW          => PW_sig,
         IorD        => IorD_sig,
@@ -101,6 +101,7 @@ begin
     );
 
 
+    DATAPATH:
     entity work.data_path(arch)
     port map(
         PW          => PW_sig,
@@ -117,7 +118,7 @@ begin
         Asrc2       => Asrc2_sig,
         Fset        => Fset_sig,
         ReW         => ReW_sig,
-        clk         => clk,
+        clk         => clock,
         mul_w       => mul_w_sig,
         shift_w     => shift_w_sig,
         sh_op       => sh_op_sig,
@@ -134,19 +135,22 @@ begin
         op          => op_sig -- this would come from ACtrl
         );
 
-    entity work.Actrl(arch) is
+    ACTRL:
+    entity work.Actrl(arch) 
     port map (
         IR          => IR_sig,
         op          => op_sig
     ) ;
     
-    entity work.Bctrl(arch) is
+    BCTRL:
+    entity work.Bctrl(arch) 
     port map (
         IR          => IR_sig,
         nzvc        => Flags_sig,
         p           => predicate_sig
     ) ;
 
+    FSM:
     entity work.controller_states(arch)
     port map (
         instruction_type => instruction_type_sig,
@@ -158,6 +162,7 @@ begin
         state_out        => state_sig
     );
 
+    DECODER:
     entity work.decoder(arch) 
     port map (
         instruction      => IR_sig,

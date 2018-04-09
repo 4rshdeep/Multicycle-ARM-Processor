@@ -40,12 +40,12 @@ entity controller is
     MR      : out std_logic;
     IW      : out std_logic;
     Rsrc    : out std_logic;
-    M2R     : out std_logic_vector(1 downto 0); --changed
+    M2R     : out std_logic_vector(2 downto 0); --changed
     RW      : out std_logic;
     AW      : out std_logic;
     BW      : out std_logic;
     Asrc1   : out std_logic_vector(1 downto 0); --changed
-    Asrc2   : out std_logic_vector(1 downto 0);
+    Asrc2   : out std_logic_vector(2 downto 0);
     Fset    : out std_logic;
     ReW     : out std_logic;
     mem_enable : out std_logic_vector(3 downto 0) ;
