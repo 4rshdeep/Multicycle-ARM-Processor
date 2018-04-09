@@ -135,7 +135,7 @@ begin
             b       => alu_in2,
             result  => alu_out,
             nzvc    => flag_out,
-            carry   => '0',
+            carry   => '0',  -- should it be Flag(0) ??
             opcode  => op
             );
 
@@ -185,7 +185,6 @@ pc_final <= alu_out when PW='1';
 --------------------------
 --- ALU MODULE SIGNALS ---
 --------------------------
-    --alu_in1 <= pc_final when Asrc1='1' else aw_out;
     with Asrc1 select
         alu_in1 <= pc_final when "00",
                    aw_out when "01",
