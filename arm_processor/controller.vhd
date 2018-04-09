@@ -132,6 +132,10 @@ begin
 
                     -- Fetch PC = PC + 4
                     PW  <= '1';
+                    -- PC + 4
+                    Asrc1 <= "00";
+                    Asrc2 <= "001";
+                    ReW   <= '1';
 
                 when s1  =>  
                     AW          <= '1';
