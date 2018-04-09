@@ -6,16 +6,16 @@ library work;
 use work.all;
 entity processor_memory is
   port (
-	pr_data : in std_logic_vector(31 downto 0) ; --input from processor
-	mem_data : in std_logic_vector(31 downto 0) ; -- input from memory
-	proc_to_mem : in std_logic; -- whether it is processor to memory or vice-versa. '1' for proc to mem
-	load : in std_logic ; -- '1' for load instruction '0' for store
-	optype : in std_logic_vector(1 downto 0) ; -- "11" -> word  |   "01"/"10" -> half word   |   "00" -> byte transfer
-	s : in std_logic; -- ldrsh/ldrsb sign extended or not?
-	load_addr : in std_logic_vector(1 downto 0) ;  -- 0th bit decides in half word whether lower(15-0) word is loaded or higher word    (memory to processor)(decides which half or quarter of the word goes to the register after extension)
-	byte_offset : in std_logic_vector(1 downto 0) ;  -- address where to write in case half word see only 0th bit.	
-	out_to_pr : out std_logic_vector(31 downto 0) ; -- data out to processor
-	out_to_mem : out std_logic_vector(31 downto 0);  -- data out to memory
+	pr_data       : in std_logic_vector(31 downto 0) ; --input from processor
+	mem_data      : in std_logic_vector(31 downto 0) ; -- input from memory
+	proc_to_mem   : in std_logic; -- whether it is processor to memory or vice-versa. '1' for proc to mem
+	load          : in std_logic ; -- '1' for load instruction '0' for store
+	optype        : in std_logic_vector(1 downto 0) ; -- "11" -> word  |   "01"/"10" -> half word   |   "00" -> byte transfer
+	s             : in std_logic; -- ldrsh/ldrsb sign extended or not?
+	load_addr     : in std_logic_vector(1 downto 0) ;  -- 0th bit decides in half word whether lower(15-0) word is loaded or higher word    (memory to processor)(decides which half or quarter of the word goes to the register after extension)
+	byte_offset   : in std_logic_vector(1 downto 0) ;  -- address where to write in case half word see only 0th bit.	
+	out_to_pr     : out std_logic_vector(31 downto 0) ; -- data out to processor
+	out_to_mem    : out std_logic_vector(31 downto 0);  -- data out to memory
 	memory_enable : out std_logic_vector(3 downto 0) -- memory enable signals to be given while storing
   ) ;
 end processor_memory ;
@@ -29,7 +29,7 @@ architecture arch of processor_memory is
 begin
 
 	main : process( pr_data,load_addr, mem_data, proc_to_mem, load, optype, s, byte_offset)
-    	variable to_mem  : std_logic_vector(31 downto 0); -- variables used and assigned later
+    	variable to_mem   : std_logic_vector(31 downto 0); -- variables used and assigned later
         variable to_proc  : std_logic_vector(31 downto 0);
 	begin
 		if load = '1' then --load instruction -- memory -> processor
@@ -93,7 +93,7 @@ begin
 
 			elsif ((optype="10") or (optype="01")) then
 				to_mem(31 downto 16) := pr_data(15 downto 0);
-				to_mem(15 downto 0) := pr_data(15 downto 0);
+				to_mem(15 downto 0)  := pr_data(15 downto 0);
 
 				if byte_offset(0) = '0' then -- document this that need to look at lower byte.
 					memory_enable <= "0011";
@@ -103,8 +103,8 @@ begin
 			else
 				to_mem(31 downto 24) := pr_data(7 downto 0);
 				to_mem(23 downto 16) := pr_data(7 downto 0);
-				to_mem(15 downto 8) := pr_data(7 downto 0);
-				to_mem(7 downto 0) := pr_data(7 downto 0);
+				to_mem(15 downto 8)  := pr_data(7 downto 0);
+				to_mem(7 downto 0)  := pr_data(7 downto 0);
 				if byte_offset = "00" then
 					memory_enable <= "0001";
 				elsif byte_offset = "01" then

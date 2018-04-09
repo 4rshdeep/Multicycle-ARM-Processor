@@ -4,18 +4,19 @@ use ieee.std_logic_unsigned.all; -- for addition & counting
 USE ieee.numeric_std.all;
 library work;
 use work.all;
+use work.pkg.all;
 
-package pkg is
-	type opcode is (ANDD, EOR, SUB, RSB, ADD, SBC, RSC, TST, TEQ, SMP, SMN, ORR, MOV, BIC, MVN);
-	type DP_type is (IMM, SHIFT_IMM, SHIFT_REG);
-	type DT_type is (HALF_WORD, WORD);
-	type state_type is (s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25);
+--package pkg is
+--	type opcode is (ANDD, EOR, SUB, RSB, ADD, SBC, RSC, TST, TEQ, SMP, SMN, ORR, MOV, BIC, MVN);
+--	type DP_type is (IMM, SHIFT_IMM, SHIFT_REG);
+--	type DT_type is (HALF_WORD, WORD);
+--	type state_type is (s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25);
 
-end package ;
+--end package ;
 
-package body pkg is
+--package body pkg is
 
-end pkg;
+--end pkg;
 
 entity controller_states is
   port (
@@ -66,7 +67,7 @@ begin
 					end case;
 				end if;
 			elsif instruction_type = "01" then --mul mla
-				if insruction(21) = '0' then --mul
+				if instruction(21) = '0' then --mul
 					case(state) is
 						when s0 => state <= s2;
 						when s2 => state <= s7;
@@ -85,11 +86,11 @@ begin
 				if (instruction(25) = '0') then -- imm offset
 					if (instruction(20)='1') then -- load
 						case(state) is
-							when s0 => s1;
-							when s1 => s12;
-							when s12 => s15;
-							when s15 => s23;
-							when s23 => s22;
+							when s0 => state <= s1;
+							when s1 => state <= s12;
+							when s12 => state <= s15;
+							when s15 => state <= s23;
+							when s23 => state <= s22;
 						end case;
 					else
 						case(state) is

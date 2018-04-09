@@ -35,7 +35,7 @@ entity data_path is
 	shift_w	: in std_logic;
 	sh_op 	: in std_logic;
 	sh_code : in std_logic;
-	sh_amt 	: in std_logic_vector;
+	sh_amt 	: in std_logic_vector(1 downto 0);
 
 	Rsrc1 	: in std_logic;
 	L       : in std_logic;
@@ -43,6 +43,9 @@ entity data_path is
     sign_opcode: in std_logic;
     p2m_offset : in std_logic_vector(1 downto 0);
     RWAD 	: in std_logic_vector(1 downto 0);
+-- -------------------------------
+	
+    mem_enable : in std_logic_vector(3 downto 0) ;
 -------------------------------------------------------------
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
@@ -79,7 +82,6 @@ signal shifter_opcode : std_logic_vector(7 downto 0);
 --signal rf_rad2      : std_logic_vector(3 downto 0);
 signal shift_carry   : std_logic;
 signal mem_data		 : std_logic_vector(31 downto 0);
-signal mem_enable	 : std_logic_vector(3 downto 0);
 
 signal rf_wad		: std_logic_vector(3 downto 0);
 

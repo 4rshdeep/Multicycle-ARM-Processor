@@ -1,26 +1,34 @@
+--library ieee;
+--use ieee.std_logic_1164.all;
+--use ieee.std_logic_unsigned.all; -- for addition & counting
+--USE ieee.numeric_std.all;
+--library work;
+--use work.all;
+
+--package pkg is
+--    type opcode is (ANDD, EOR, SUB, RSB, ADD, SBC, RSC, TST, TEQ, SMP, SMN, ORR, MOV, BIC, MVN);
+--    type DP_type is (IMM, SHIFT_IMM, SHIFT_REG);
+--    type DT_type is (HALF_WORD, WORD);
+--    type state_type is (s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25);
+--end package ;
+
+--package body pkg is
+
+--end pkg;
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all; -- for addition & counting
 USE ieee.numeric_std.all;
 library work;
 use work.all;
-
-package pkg is
-    type opcode is (ANDD, EOR, SUB, RSB, ADD, SBC, RSC, TST, TEQ, SMP, SMN, ORR, MOV, BIC, MVN);
-    type DP_type is (IMM, SHIFT_IMM, SHIFT_REG);
-    type DT_type is (HALF_WORD, WORD);
-    type state_type is (s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25);
-end package ;
-
-package body pkg is
-
-end pkg;
-
+use work.pkg.all;
+    
 entity controller is
   port (
     -- signals same as datapath but with input changed to output
     PW      : out std_logic;
-    IorD    : out std_logic;
+    IorD    : out std_logic_vector(1 downto 0);
     MR      : out std_logic;
     MW      : out std_logic;
     IW      : out std_logic;
@@ -36,26 +44,26 @@ entity controller is
     ReW     : out std_logic;
     mem_enable : out std_logic_vector(3 downto 0) ;
     --NOT in SLIDES
-    --clk           : out std_logic;
-    mul_w           : out std_logic;
-    shift_w         : out std_logic;
-    Rsrc1           : out std_logic;
-    L               : out std_logic;
-    p2m_opcode      : out std_logic_vector(1 downto 0);
-    sign_opcode     : out std_logic;
-    p2m_offset      : out std_logic_vector(1 downto 0);
-    RWAD            : out std_logic;
+    --clk       : out std_logic;
+    mul_w       : out std_logic;
+    shift_w     : out std_logic;
+    Rsrc1       : out std_logic;
+    L           : out std_logic;
+    p2m_opcode  : out std_logic_vector(1 downto 0);
+    sign_opcode : out std_logic;
+    p2m_offset  : out std_logic_vector(1 downto 0);
+    RWAD        : out std_logic_vector(1 downto 0);
 ------------------------------------
-    state           : in state_type
+    state           : in state_type;
     --instruction   : out std_logic_vector(31 downto 0) ;
     --IR        : in std_logic_vector(31 downto 0)
     --op                : in opcode;
     reset           : in std_logic;
 
 -- newly added shifter
-    sh_code         : out std_logic;
-    sh_op           : out std_logic;
-    sh_amt          : out std_logic;
+    sh_code     : out std_logic;
+    sh_op       : out std_logic;
+    sh_amt      : out std_logic_vector(1 downto 0);
 
 -- predicate
     predicate       : in std_logic
@@ -63,54 +71,52 @@ entity controller is
   ) ;
 end controller ;
 
+architecture arch of controller is
 signal MW_signal   : std_logic;
 signal Fset_signal : std_logic;
-signal RW          : std_logic;
+signal RW_signal   : std_logic;
+begin
+----------------------------------------
 
-architecture arch of controller is
-
+    
     MW   <= predicate and MW_signal;
     Fset <= predicate and Fset_signal;
     RW   <= predicate and RW_signal;
-
-begin
-
-----------------------------------------
 
 --Take care of these signals
 -- PW, DW, L ,RW
 
 -- DW not assigned in any state
 
-    process(state, reset, p)
+    process(state, reset, predicate)
     begin
         if (reset = '1') then
-            PW          <= (others => '0');
+            PW          <= '0';
             IorD        <= (others => '0');
-            MR          <= (others => '0');
-            MW_signal   <= (others => '0');
-            IW          <= (others => '0');
-            DW          <= (others => '0');
-            Rsrc        <= (others => '0');
+            MR          <= '0';
+            MW_signal   <= '0';
+            IW          <= '0';
+            DW          <= '0';
+            Rsrc        <= '0';
             M2R         <= (others => '0');
-            RW_signal   <= (others => '0');
-            AW          <= (others => '0');
-            BW          <= (others => '0');
+            RW_signal   <= '0';
+            AW          <= '0';
+            BW          <= '0';
             Asrc1       <= (others => '0');
             Asrc2       <= (others => '0');
-            Fset_signal <= (others => '0');
-            ReW         <= (others => '0');
+            Fset_signal <= '0';
+            ReW         <= '0';
             mem_enable  <= (others => '0');
-            mul_w       <= (others => '0');
-            shift_w     <= (others => '0');
-            Rsrc1       <= (others => '0');
-            L           <= (others => '0');
+            mul_w       <= '0';
+            shift_w     <= '0';
+            Rsrc1       <= '0';
+            L           <= '0';
             p2m_opcode  <= (others => '0');
-            sign_opcode <= (others => '0');
+            sign_opcode <= '0';
             p2m_offset  <= (others => '0');
             RWAD        <= (others => '0');
-            sh_code     <= (others => '0');
-            sh_op       <= (others => '0');
+            sh_code     <= '0';
+            sh_op       <= '0';
             sh_amt      <= (others => '0');
         else
             case(state) is

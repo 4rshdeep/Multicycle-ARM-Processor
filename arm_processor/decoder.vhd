@@ -3,16 +3,23 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all; -- for addition & counting
 USE ieee.numeric_std.all;
 
-package pkg is
-	type opcode is (ANDD, EOR, SUB, RSB, ADD, SBC, RSC, TST, TEQ, SMP, SMN, ORR, MOV, BIC, MVN);
-	type DP_type is (IMM, SHIFT_IMM, SHIFT_REG);
-	type DT_type is (HALF_WORD, WORD);
-end package ;
+--package pkg is
+--	type opcode is (ANDD, EOR, SUB, RSB, ADD, ADC, SBC, CMP, CMN, RSC, TST, TEQ, SMP, SMN, ORR, MOV, BIC, MVN);
+--	type DP_type is (IMM, SHIFT_IMM, SHIFT_REG);
+--	type DT_type is (HALF_WORD, WORD);
+--end package ;
 
-package body pkg is
+--package body pkg is
 
-end pkg;
+--end pkg;
 
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all; -- for addition & counting
+USE ieee.numeric_std.all;
+library work;
+use work.all;
+use work.pkg.all;
 
 entity decoder is
   port (
@@ -52,7 +59,7 @@ begin
 
 				case( instruction(24 downto 21) ) is
 
-					when "0000" => op <= AND;
+					when "0000" => op <= ANDD;
 					when "0001" => op <= EOR;
 					when "0010" => op <= SUB;
 					when "0011" => op <= RSB;
@@ -71,7 +78,7 @@ begin
 
 				end case ;
 
-				if ( instruction(25) = '0' and instruction(11 downto 7) = = "11110" ) then
+				if ( instruction(25) = '0' and instruction(11 downto 7) = "11110" ) then
 					not_implemented <= '1';
 				elsif (instruction(25 downto 24)="00" and instruction(7 downto 4)="1001") then
 					instruction_type <= "01";
@@ -82,9 +89,9 @@ begin
 						--mla
 						op <= ADD;
 					end if ;
-				elsif ( instruction(25 downto 23)="001" and instruction(7 downto 4)) then
+				elsif ( instruction(25 downto 23)="001" and instruction(7 downto 4)= "1001") then
 					not_implemented <= '1';
-				elsif( instruction(25 downto 24) ="01" and instruction(7 downto 4) = "1001")
+				elsif( instruction(25 downto 24) ="01" and instruction(7 downto 4) = "1001") then
 					not_implemented <= '1';
 				elsif(instruction(25) = '0' and instruction(7) = '1' and instruction(4)='1' and instruction(6 downto 4)/="00") then
 					instruction_type <= "10"; -- dt
