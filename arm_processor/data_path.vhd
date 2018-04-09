@@ -14,31 +14,36 @@ entity data_path is
   	-- I think instead of MW we should have mem_enable 4 bits and remove corresponding signal inn the architecture.
 	--MW 		: in std_logic;
 	PW 		: in std_logic;
-	IorD	: in std_logic;
+	IorD	: in std_logic_vector(1 downto 0);
 	MR		: in std_logic;
 	IW 		: in std_logic;
 	DW		: in std_logic;
-	Rsrc 	: in std_logic_vector(1 downto 0) ;;
-	M2R		: in std_logic_vector(1 downto 0);	--changed
+	Rsrc 	: in std_logic;
+	M2R		: in std_logic_vector(2 downto 0);	--changed
 	RW 		: in std_logic;
 	AW 		: in std_logic;
 	BW 		: in std_logic;
 	Asrc1	: in std_logic_vector(1 downto 0);	--changed
-	Asrc2	: in std_logic_vector(1 downto 0);
+	Asrc2	: in std_logic_vector(2 downto 0);
 	op		: in std_logic_vector(3 downto 0);
 	Fset	: in std_logic;
 	ReW		: in std_logic;
 	--NOT IN SLIDES
 	clk 	: in std_logic;
 	mul_w	: in std_logic;
+
 	shift_w	: in std_logic;
+	sh_op 	: in std_logic;
+	sh_code : in std_logic;
+	sh_amt 	: in std_logic_vector;
+
 	Rsrc1 	: in std_logic;
 	L       : in std_logic;
 	p2m_opcode: in std_logic_vector(1 downto 0);
     sign_opcode: in std_logic;
     p2m_offset : in std_logic_vector(1 downto 0);
     shifter_opcode: in std_logic_vector(1 downto 0);
-    RWAD 	: in std_logic;
+    RWAD 	: in std_logic_vector(1 downto 0);
 -------------------------------------------------------------
 	Flags	: out std_logic_vector(3 downto 0);
 	IR 		: out std_logic_vector(31 downto 0)
