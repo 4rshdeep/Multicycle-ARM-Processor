@@ -42,7 +42,6 @@ entity data_path is
 	p2m_opcode: in std_logic_vector(1 downto 0);
     sign_opcode: in std_logic;
     p2m_offset : in std_logic_vector(1 downto 0);
-    shifter_opcode: in std_logic_vector(1 downto 0);
     RWAD 	: in std_logic_vector(1 downto 0);
 -------------------------------------------------------------
 	Flags	: out std_logic_vector(3 downto 0);
@@ -73,6 +72,10 @@ signal mul_out : std_logic_vector(31 downto 0);
 signal mul_reg_out   : std_logic_vector(31 downto 0);
 signal shift_reg_out : std_logic_vector(31 downto 0);
 signal shift_out : std_logic_vector(31 downto 0);
+signal shifter_op : std_logic_vector(1 downto 0);
+signal shift_amount : std_logic_vector(4 downto 0);
+signal shifter_opcode : std_logic_vector(7 downto 0);
+
 --signal rf_rad2      : std_logic_vector(3 downto 0);
 signal shift_carry   : std_logic;
 signal mem_data		 : std_logic_vector(31 downto 0);
@@ -193,7 +196,7 @@ begin
 ------------------------------
 	shifter_opcode <= bw_out when sh_op='0' else ir_out(7 downto 0);
 
-	shifter_op <= ir_out(6-5) when sh_code='0' else "11";
+	shifter_op <= ir_out(6 downto 5) when sh_code='0' else "11";
 
 	with sh_amt select 
 		shift_amount <= aw_out(4 downto 0) when  "00",
@@ -205,8 +208,8 @@ begin
 -------------------------------
 --- REGISTER MODULE SIGNALS ---
 -------------------------------
-	rf_rad2 <= ir_out(3 downto 0) when Rsrc='0'
-			   ir_out(15 downto 12) when others;
+	rf_rad2 <= ir_out(3 downto 0) when Rsrc='0' else
+			   ir_out(15 downto 12) ;
 			  --"1110" when others ; -- link register
 
 	with Rsrc1 select
