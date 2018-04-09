@@ -78,7 +78,9 @@ begin
 ----------------------------------------
 
 --Take care of these signals
--- PW, MW, DW, L ,RW
+-- PW, DW, L ,RW
+
+-- DW not assigned in any state
 
     process(state, reset, p)
     begin
@@ -113,57 +115,57 @@ begin
         else
             case(state) is
                 when s0  =>  
-                    IorD    <= "00";
-                    IW      <= '1';
-                    MR      <= '1';
+                    IorD        <= "00";
+                    IW          <= '1';
+                    MR          <= '1';
 
                     -- Fetch PC = PC + 4
                     PW  <= '1';
 
                 when s1  =>  
-                    AW <= '1';
-                    BW <= '1';
-                    Rsrc1 <= '0';
-                    Rsrc <= '0';
+                    AW          <= '1';
+                    BW          <= '1';
+                    Rsrc1       <= '0';
+                    Rsrc        <= '0';
                 
                 when s2  =>  
-                    AW <= '1';
-                    BW <= '1';
-                    Rsrc <= '0';
-                    Rsrc1 <= '1';
+                    AW          <= '1';
+                    BW          <= '1';
+                    Rsrc        <= '0';
+                    Rsrc1       <= '1';
                 
                 when s3  =>  
-                    AW <= '0';
-                    BW <= '1';
-                    Rsrc <= '1';
+                    AW          <= '0';
+                    BW          <= '1';
+                    Rsrc        <= '1';
                     -- Rsrc1 not assigned rdB
                 
                 when s4  =>  
-                    shift_w <= '1';
-                    sh_op <= '1';
-                    sh_code <= '1';
-                    sh_amt <= "10";
+                    shift_w     <= '1';
+                    sh_op       <= '1';
+                    sh_code     <= '1';
+                    sh_amt      <= "10";
 
                 when s5  =>  
-                    shift_w <= '1';
-                    sh_amt <= "01";
-                    sh_op <= '0';
-                    sh_code <= '0';
+                    shift_w     <= '1';
+                    sh_amt      <= "01";
+                    sh_op       <= '0';
+                    sh_code     <= '0';
                 
                 when s6  =>  
-                    shift_w <= '1';
-                    sh_op <= '0';
-                    sh_code <= '0';
-                    sh_amt <= "00";
+                    shift_w     <= '1';
+                    sh_op       <= '0';
+                    sh_code     <= '0';
+                    sh_amt      <= "00";
 
                 when s7  =>  
                     mul_w <= '1';
                 
                 when s8  =>  
-                    Asrc1 <= "01";
-                    Asrc2 <= "100";
+                    Asrc1       <= "01";
+                    Asrc2       <= "100";
                     Fset_signal <= predicate;
-                    ReW <= '1';
+                    ReW         <= '1';
 
                 when s9  =>  
                     Asrc1 <= "00";
@@ -174,97 +176,97 @@ begin
                     PW <= '1';
 
                 when s10 =>  
-                    Asrc1 <= "00";
-                    Asrc2 <= "011";
+                    Asrc1       <= "00";
+                    Asrc2       <= "011";
                     Fset_signal <= predicate;
-                    ReW <= '1';
+                    ReW         <= '1';
                     -- write PC + offset
                     PW <= '1';
 
                 when s11 =>  
-                    Asrc1 <= "10";
-                    Asrc2 <= "011";
+                    Asrc1       <= "10";
+                    Asrc2       <= "011";
                     Fset_signal <= predicate;
-                    ReW <= '1';
+                    ReW         <= '1';
 
                 when s12 =>  
-                    Asrc1 <= "01";
-                    Asrc2 <= "010";
+                    Asrc1       <= "01";
+                    Asrc2       <= "010";
                     Fset_signal <= '1';
-                    ReW <= '1';
+                    ReW         <= '1';
 
                 when s13 =>  
-                    Asrc1 <= "01";
-                    Asrc2 <= "010";
+                    Asrc1       <= "01";
+                    Asrc2       <= "010";
                     Fset_signal <= predicate;
-                    ReW <= '1';
-                    BW <= '1';
-                    Rsrc <= '1';
+                    ReW         <= '1';
+                    BW          <= '1';
+                    Rsrc        <= '1';
 
                 when s14 =>  
-                    Asrc1 <= "01";
-                    Asrc2 <= "100";
+                    Asrc1       <= "01";
+                    Asrc2       <= "100";
                     Fset_signal <= predicate;
-                    ReW <= '1';
-                    BW <= '1';
-                    Rsrc <= '1';
+                    ReW         <= '1';
+                    BW          <= '1';
+                    Rsrc        <= '1';
 
                 when s15 =>  
-                    MR <= '1';
-                    IorD <= "01";
-                    IW <= '0';
+                    MR          <= '1';
+                    IorD        <= "01";
+                    IW          <= '0';
 
                 when s16 =>  
-                    MR <= '1';
-                    IorD <= "10";
-                    IW <= '0';
+                    MR          <= '1';
+                    IorD        <= "10";
+                    IW          <= '0';
 
                 when s17 =>  
-                    MR <= '1';
-                    IorD <= "01";
-                    RWAD <= "10";
-                    M2R <= "001";
-                    RW_signal <= '1';
+                    MR          <= '1';
+                    IorD        <= "01";
+                    RWAD        <= "10";
+                    M2R         <= "001";
+                    RW_signal   <= '1';
 
                 when s18 =>  
-                    MR <= '1';
-                    IorD <= "10";
-                    RWAD <= "10";
-                    M2R <= "001";
-                    RW_signal <= '1';
+                    MR          <= '1';
+                    IorD        <= "10";
+                    RWAD        <= "10";
+                    M2R         <= "001";
+                    RW_signal   <= '1';
                 
                 when s19 =>  
-                    RWAD <= "01";
-                    M2R <= "001";
-                    RW_signal <= '1';
+                    RWAD        <= "01";
+                    M2R         <= "001";
+                    RW_signal   <= '1';
                 
                 when s20 =>  
-                    RWAD <= "00";
-                    M2R <= "011";
-                    RW_signal <= '1';
+                    RWAD        <= "00";
+                    M2R         <= "011";
+                    RW_signal   <= '1';
                 
                 when s21 =>  
-                    RWAD <= "10";
-                    M2R <= "010";
-                    RW_signal <= '1';
+                    RWAD        <= "10";
+                    M2R         <= "010";
+                    RW_signal   <= '1';
                 
                 when s22 =>  
-                    RWAD <= "10";
-                    M2R <= "001";
-                    RW_signal <= '1';
+                    RWAD        <= "10";
+                    M2R         <= "001";
+                    RW_signal   <= '1';
                 
                 when s23 =>
-                    RWAD <= "01";
-                    M2R <= "100";
-                    RW_signal <= '1';
+                    RWAD        <= "01";
+                    M2R         <= "100";
+                    RW_signal   <= '1';
 
                 when s24 =>  
-                    IorD <= "01";
-                    mem_enable <= "1111";
+                    IorD        <= "01";
+                    mem_enable  <= "1111";
 
                 when s25 =>
-                    IorD <= "10";
-                    mem_enable <= "1111"; 
+                    IorD        <= "10";
+                    mem_enable  <= "1111";
             end case;
         end if;
 
