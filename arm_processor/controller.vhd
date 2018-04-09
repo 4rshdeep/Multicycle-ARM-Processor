@@ -60,14 +60,14 @@ entity controller is
     p2m_offset  : out std_logic_vector(1 downto 0);
     RWAD        : out std_logic_vector(1 downto 0);
 ------------------------------------
-    state           : in state_type;
-    --instruction   : out std_logic_vector(31 downto 0) ;
-    --IR        : in std_logic_vector(31 downto 0)
-    --op                : in opcode;
-    reset           : in std_logic;
+    --instruction : out std_logic_vector(31 downto 0) ;
+    --IR          : in std_logic_vector(31 downto 0)
+    --op          : in opcode;
+    -- newly added shifter
 
--- newly added shifter
     sh_code     : out std_logic;
+    state         : in state_type;
+    reset         : in std_logic;
     sh_op       : out std_logic;
     sh_amt      : out std_logic_vector(1 downto 0);
 

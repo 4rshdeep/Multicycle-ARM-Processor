@@ -23,15 +23,15 @@ use work.pkg.all;
 
 entity decoder is
   port (
-	instruction : in std_logic_vector(31 downto 0) ;
 	-- "00" for DP, "10" for DT, "11" for branching
-	instruction_type : out std_logic_vector(1 downto 0);
+	instruction      : in std_logic_vector(31 downto 0) ;
 	-- decide whether dp,etc
-	DP_subtype : out DP_type;
-	DT_subtype : out DT_type;
-	op : out opcode;
-	undef : out std_logic;
-	not_implemented : out std_logic
+	instruction_type : out std_logic_vector(1 downto 0);
+	DP_subtype       : out DP_type;
+	DT_subtype       : out DT_type;
+	op               : out opcode;
+	undef            : out std_logic;
+	not_implemented  : out std_logic
   ) ;
 end decoder ;
 
