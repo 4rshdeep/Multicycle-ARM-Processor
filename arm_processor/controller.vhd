@@ -27,12 +27,18 @@ use work.pkg.all;
 entity controller is
   port (
     -- signals same as datapath but with input changed to output
+     -- MW removing due to no assignment
+     -- No assignment 
+     -- MW, DW
+    MW      : out std_logic;
+    DW      : out std_logic;
+    
+-- DW not assigned in any state
+--------------------------------------------
     PW      : out std_logic;
     IorD    : out std_logic_vector(1 downto 0);
     MR      : out std_logic;
-    MW      : out std_logic;
     IW      : out std_logic;
-    DW      : out std_logic;
     Rsrc    : out std_logic;
     M2R     : out std_logic_vector(1 downto 0); --changed
     RW      : out std_logic;
@@ -86,7 +92,6 @@ begin
 --Take care of these signals
 -- PW, DW, L ,RW
 
--- DW not assigned in any state
 
     process(state, reset, predicate)
     begin
