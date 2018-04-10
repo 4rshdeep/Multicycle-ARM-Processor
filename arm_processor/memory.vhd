@@ -24,6 +24,7 @@ type mem is array (1023 downto 0) of std_logic_vector(31 downto 0) ;
 signal memory : mem;
 
 begin
+
   process( clk, address, data_in, rd_enable, byte_offset )
 	begin
 		if clk='1' and clk'event then

@@ -2,8 +2,8 @@
 # Webtalk v2016.4 (64-bit)
 # SW Build 1756540 on Mon Jan 23 19:11:19 MST 2017
 # IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
-# Start of session at: Mon Apr  9 23:43:33 2018
-# Process ID: 25048
+# Start of session at: Tue Apr 10 16:01:54 2018
+# Process ID: 13005
 # Current directory: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/project_vivado/lab4_vivado.sim/sim_1/behav
 # Command line: wbtcv -mode batch -source /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/project_vivado/lab4_vivado.sim/sim_1/behav/xsim.dir/processor_behav/webtalk/xsim_webtalk.tcl -notrace
 # Log file: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/project_vivado/lab4_vivado.sim/sim_1/behav/webtalk.log

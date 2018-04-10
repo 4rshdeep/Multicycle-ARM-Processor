@@ -1,17 +1,16 @@
 # compile vhdl design source files
-vhdl xil_defaultlib  "../../../../shifter.vhd"
 vhdl xil_defaultlib  "../../../../register.vhd"
-vhdl xil_defaultlib  "../../../../processor_memory.vhd"
 vhdl xil_defaultlib  "../../../../package.vhdl"
 vhdl xil_defaultlib  "../../../../multiplier.vhd"
 vhdl xil_defaultlib  "../../../../memory.vhd"
 vhdl xil_defaultlib  "../../../../alu.vhd"
+vhdl xil_defaultlib  "../../../../shifter.vhd"
 vhdl xil_defaultlib  "../../../../decoder.vhd"
 vhdl xil_defaultlib  "../../../../data_path.vhd"
-vhdl xil_defaultlib  "../../../../controller_states.vhd"
 vhdl xil_defaultlib  "../../../../controller.vhd"
 vhdl xil_defaultlib  "../../../../Bctrl.vhd"
 vhdl xil_defaultlib  "../../../../Actrl.vhd"
+vhdl xil_defaultlib  "../../../../controller_states.vhd"
 vhdl xil_defaultlib  "../../../../processor.vhd"
 
 # Do not sort compile order

@@ -25,7 +25,8 @@ entity data_path is
     BW      : in std_logic;
     Asrc1   : in std_logic_vector(1 downto 0);  --changed
     Asrc2   : in std_logic_vector(2 downto 0);
-    op      : in std_logic_vector(3 downto 0);
+    ALU_op_sel : in std_logic;
+    op      : in std_logic_vector(3 downto 0); -- from actrl
     Fset    : in std_logic;
     ReW     : in std_logic;
     --NOT IN SLIDES
@@ -38,10 +39,11 @@ entity data_path is
     sh_amt  : in std_logic_vector(1 downto 0);
 
     Rsrc1   : in std_logic;
+    reset   : in std_logic;
     L       : in std_logic;
-    p2m_opcode: in std_logic_vector(1 downto 0);
-    sign_opcode: in std_logic;
-    p2m_offset : in std_logic_vector(1 downto 0);
+    --p2m_opcode: in std_logic_vector(1 downto 0);
+    --sign_opcode: in std_logic;
+    --p2m_offset : in std_logic_vector(1 downto 0);
     RWAD    : in std_logic_vector(1 downto 0);
 -- -------------------------------
     
@@ -60,7 +62,7 @@ signal alu_out : std_logic_vector(31 downto 0);
 signal flag_out: std_logic_vector(3 downto 0);
 signal mem_out : std_logic_vector(31 downto 0);
 signal ir_out  : std_logic_vector(31 downto 0);
-signal pc_final: std_logic_vector(31 downto 0); --check size
+signal pc_final: std_logic_vector(31 downto 0) := (others => '0'); --check size
 signal dr_out  : std_logic_vector(31 downto 0);
 signal rf_rad1 : std_logic_vector(3 downto 0);
 signal rf_rad2 : std_logic_vector(3 downto 0);
@@ -90,6 +92,7 @@ signal p2m_out      : std_logic_vector(31 downto 0);
 signal p2m_enable   : std_logic_vector(3 downto 0);
 
 signal rf_pc    : std_logic_vector(31 downto 0);
+signal ALU_op : std_logic_vector(3 downto 0) ;
 
 begin
 
@@ -98,24 +101,24 @@ begin
         --inputs are mem_ad (signal) and res_out
         --output is mem_out
 
-    P2M:
-        ENTITY WORK.processor_memory (arch)
-        -- change pr_data and mem_data to data_in only
-        -- change byte_offset and load_addr to single offset only
-        -- Isn't proc_to_mem same as load
-            PORT MAP(
-                pr_data     => p2m_in,
-                mem_data    => p2m_in,
-                proc_to_mem => L,       --input from controller (load/store)
-                load        => L,
-                optype      => p2m_opcode,  --input from controller
-                s           => sign_opcode, --input from controller
-                load_addr   => p2m_offset,  --input from controller
-                byte_offset => p2m_offset,  --input from controller
-                out_to_pr   => p2m_out,     --define signal
-                out_to_mem  => p2m_out,
-                memory_enable => p2m_enable
-            );
+    --P2M:
+    --    ENTITY WORK.processor_memory (arch)
+    --    -- change pr_data and mem_data to data_in only
+    --    -- change byte_offset and load_addr to single offset only
+    --    -- Isn't proc_to_mem same as load
+    --        PORT MAP(
+    --            pr_data     => p2m_in,
+    --            mem_data    => p2m_in,
+    --            proc_to_mem => L,       --input from controller (load/store)
+    --            load        => L,
+    --            optype      => p2m_opcode,  --input from controller
+    --            s           => sign_opcode, --input from controller
+    --            load_addr   => p2m_offset,  --input from controller
+    --            byte_offset => p2m_offset,  --input from controller
+    --            out_to_pr   => p2m_out,     --define signal
+    --            out_to_mem  => p2m_out,
+    --            memory_enable => p2m_enable
+    --        );
 
     MEMORY:
         ENTITY WORK.memory (arch)
@@ -135,8 +138,9 @@ begin
             b       => alu_in2,
             result  => alu_out,
             nzvc    => flag_out,
-            carry   => '0',  -- should it be Flag(0) ??
-            opcode  => op
+            carry   => flag_out(0),  -- should it be Flags(0) ??
+            --opcode  => op
+            opcode  => ALU_op
             );
 
     RF:
@@ -148,7 +152,7 @@ begin
             write_add       => rf_wad,
             --write_add         => ir_out(15 downto 12),
             clk             => clk,
-            reset           => '0',
+            reset           => reset,
             write_enable    => RW,
             data_out1       => rf_out1,
             data_out2       => rf_out2,
@@ -172,13 +176,14 @@ begin
             opcode  => shifter_opcode,              --input from controller
             shamt   => shift_amount,            
             carry   => shift_carry,
+            reset => reset,
             result  => shift_out
           ) ;
 
 ---------------------------
 ---- PC UPDATE SIGNALS ----
 ---------------------------
-pc_final <= alu_out when PW='1';
+pc_final <= res_out when PW='1'else pc_final;
 
 
 
@@ -197,7 +202,8 @@ pc_final <= alu_out when PW='1';
                    ((5 downto 0 => ir_out(23) ) & ir_out(23 downto 0) & "00") when "011",   -- s2 ins[23-0]
                    shift_reg_out when others;
 
-    --op <= PLUS else MINUS else ir_out(x downto y);
+    ALU_op <= op when ALU_op_sel='0' else "0100";
+        
 
 ------------------------------
 --- SHIFTER MODULE SIGNALS ---
@@ -272,7 +278,8 @@ pc_final <= alu_out when PW='1';
 
     mem_data <= p2m_out when L='0' else (others => '0');
 
-    mem_enable <= p2m_enable when L='0' else (others => '0');
+    --mem_enable <= p2m_enable when L='0' else (others => '0');
+    mem_enable <= "1111" when L='0' else (others => '0');
 
 --------------------------
 -------- OUTPUT ----------
@@ -283,3 +290,26 @@ pc_final <= alu_out when PW='1';
     IR <= ir_out;  -- check this
 
 end architecture ;
+
+
+
+
+
+--add_force {/processor/reset} -radix hex {1 0ns}
+--run 10 us
+--add_force {/processor/clock} -radix hex {1 0ns} {0 50000ps} -repeat_every 100000ps
+--run 10 us
+--add_force {/processor/reset} -radix hex {0 0ns}
+--run 10 us
+--add_wave {{/processor/DATAPATH/mem_out}} 
+--add_wave {{/processor/DATAPATH/pc_final}} 
+--add_force {/processor/DATAPATH/mem_out} -radix hex {E3A01003 0ns}
+--add_wave {{/processor/DATAPATH/IW}} 
+--run 100 ns
+--run 100 ns
+--run 100 ns
+--run 100 ns
+--run 100 ns
+--run 100 ns
+--add_wave {{/processor/DATAPATH/res_out}} 
+--add_wave {{/processor/DATAPATH/alu_out}} 

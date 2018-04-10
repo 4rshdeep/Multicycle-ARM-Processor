@@ -43,11 +43,15 @@ begin
 	if clock='1' and clock'event then
 		if reset = '1' then
 			state <= s0;
+		--elsif (state = s0) then
+		--	state <= s100;
 		else
 			if (instruction_type = "00") then --dp
+				 
 				if (DP_subtype = IMM) then
 					case(state) is
-						when s0 => state <= s1;
+						when s0 => state <= s100;
+						when s100 => state <= s1;
 						when s1 => state <= s4;
 						when s4 => state <= s8;
 						when s8 => state <= s19;
@@ -55,7 +59,8 @@ begin
 					end case;
 				elsif (DP_subtype = SHIFT_IMM) then
 					case(state) is
-						when s0 => state <= s1;
+ 						when s0 => state <= s100;
+						when s100 => state <= s1;
 						when s1 => state <= s5;
 						when s5 => state <= s8;
 						when s8 => state <= s19;
@@ -63,7 +68,8 @@ begin
 					end case;
 				elsif (DP_subtype = SHIFT_REG) then
 					case(state) is
-						when s0 => state <= s2;
+ 						when s0 => state <= s100;
+						when s100 => state <= s2;
 						when s2 => state <= s6;
 						when s6 => state <= s1;
 						when s1 => state <= s8;
@@ -72,16 +78,19 @@ begin
 					end case;
 				end if;
 			elsif instruction_type = "01" then --mul mla
+				
 				if instruction(21) = '0' then --mul
 					case(state) is
-						when s0 => state <= s2;
+ 						when s0 => state <= s100;
+						when s100 => state <= s2;
 						when s2 => state <= s7;
 						when s7 => state <= s21;
 						when others => state <= s0;
 					end case;
 				else --mla
 					case(state) is
-						when s0 => state <= s2;
+ 						when s0 => state <= s100;
+						when s100 => state <= s2;
 						when s2 => state <= s7;
 						when s7 => state <= s3;
 						when s3 => state <= s11;
@@ -90,10 +99,12 @@ begin
 					end case;
 				end if ;
 			elsif (instruction_type = "10") then --dt
+				
 				if (instruction(25) = '0') then -- imm offset
 					if (instruction(20)='1') then -- load
 						case(state) is
-							when s0 => state <= s1;
+							when s0 => state <= s100;
+							when s100 => state <= s1;
 							when s1 => state <= s12;
 							when s12 => state <= s15;
 							when s15 => state <= s23;
@@ -102,7 +113,8 @@ begin
 						end case;
 					else
 						case(state) is
-							when s0 => state <= s1;
+							when s0 => state <= s100;
+							when s100 => state <= s1;
 							when s1 => state <= s13;
 							when s13 => state <= s24;
 							when s24 => state <= s22;
@@ -112,7 +124,8 @@ begin
 				else --reg offset
 					if (instruction(20)='1') then -- load
 						case(state) is
-							when s0 => state <= s1;
+							when s0 => state <= s100;
+							when s100 => state <= s1;
 							when s1 => state <= s5;
 							when s5 => state <= s8;
 							when s8 => state <= s17;
@@ -121,7 +134,8 @@ begin
 						end case;
 					else
 						case(state) is
-							when s0 => state <= s1;
+							when s0 => state <= s100;
+							when s100 => state <= s1;
 							when s1 => state <= s5;
 							when s5 => state <= s14;
 							when s14 => state <= s24;
@@ -131,15 +145,18 @@ begin
 					end if;
 				end if;
 			elsif (instruction_type = "11") then -- b and bl
+				
 				if (instruction(24)='0') then --b
 					case(state) is
-						when s0 => state <= s9;
+						when s0 => state <= s100;
+						when s100 => state <= s9;
 						when s9 => state <= s10;
 						when others => state <= s0;
 					end case;
 				else --bl
 					case(state) is
-						when s0 => state <= s20;
+						when s0 => state <= s100;
+						when s100 => state <= s20;
 						when s2 => state <= s9;
 						when s9 => state <= s10;
 						when others => state <= s0;
@@ -148,5 +165,6 @@ begin
 			end if ;
 		end if ;
 	end if ;
+--
 end process ; --
 end architecture ; -- arch

@@ -30,7 +30,7 @@ entity controller is
      -- MW removing due to no assignment
      -- No assignment 
      -- MW, DW
-    MW      : out std_logic;
+    --MW      : out std_logic;
     DW      : out std_logic;
     
 -- DW not assigned in any state
@@ -48,23 +48,24 @@ entity controller is
     Asrc2   : out std_logic_vector(2 downto 0);
     Fset    : out std_logic;
     ReW     : out std_logic;
-    mem_enable : out std_logic_vector(3 downto 0) ;
+    --mem_enable : out std_logic_vector(3 downto 0) ;
     --NOT in SLIDES
     --clk       : out std_logic;
     mul_w       : out std_logic;
     shift_w     : out std_logic;
     Rsrc1       : out std_logic;
     L           : out std_logic;
-    p2m_opcode  : out std_logic_vector(1 downto 0);
-    sign_opcode : out std_logic;
-    p2m_offset  : out std_logic_vector(1 downto 0);
+
+    --p2m_opcode  : out std_logic_vector(1 downto 0);
+    --sign_opcode : out std_logic;
+    --p2m_offset  : out std_logic_vector(1 downto 0);
     RWAD        : out std_logic_vector(1 downto 0);
 ------------------------------------
     --instruction : out std_logic_vector(31 downto 0) ;
     --IR          : in std_logic_vector(31 downto 0)
     --op          : in opcode;
     -- newly added shifter
-
+    ALU_op_sel  : out std_logic;
     sh_code     : out std_logic;
     state         : in state_type;
     reset         : in std_logic;
@@ -78,14 +79,14 @@ entity controller is
 end controller ;
 
 architecture arch of controller is
-signal MW_signal   : std_logic;
+--signal MW_signal   : std_logic;
 signal Fset_signal : std_logic;
 signal RW_signal   : std_logic;
 begin
 ----------------------------------------
 
     
-    MW   <= predicate and MW_signal;
+    --MW   <= predicate and MW_signal;
     Fset <= predicate and Fset_signal;
     RW   <= predicate and RW_signal;
 
@@ -99,7 +100,7 @@ begin
             PW          <= '0';
             IorD        <= (others => '0');
             MR          <= '0';
-            MW_signal   <= '0';
+            --MW_signal   <= '0';
             IW          <= '0';
             DW          <= '0';
             Rsrc        <= '0';
@@ -111,31 +112,59 @@ begin
             Asrc2       <= (others => '0');
             Fset_signal <= '0';
             ReW         <= '0';
-            mem_enable  <= (others => '0');
+            --mem_enable  <= (others => '0');
             mul_w       <= '0';
             shift_w     <= '0';
             Rsrc1       <= '0';
             L           <= '0';
-            p2m_opcode  <= (others => '0');
-            sign_opcode <= '0';
-            p2m_offset  <= (others => '0');
+            --p2m_opcode  <= (others => '0');
+            --sign_opcode <= '0';
+            --p2m_offset  <= (others => '0');
             RWAD        <= (others => '0');
             sh_code     <= '0';
             sh_op       <= '0';
             sh_amt      <= (others => '0');
+            ALU_op_sel <= '0';
+
         else
+        	PW          <= '0';
+            IorD        <= (others => '0');
+            MR          <= '0';
+            --MW_signal   <= '0';
+            IW          <= '0';
+            DW          <= '0';
+            Rsrc        <= '0';
+            M2R         <= (others => '0');
+            RW_signal   <= '0';
+            AW          <= '0';
+            BW          <= '0';
+            Asrc1       <= "10";
+            Asrc2       <= (others => '0');
+            Fset_signal <= '0';
+            ReW         <= '0';
+            mul_w       <= '0';
+            shift_w     <= '0';
+            Rsrc1       <= '0';
+            L           <= '0';
+            RWAD        <= (others => '0');
+            sh_code     <= '0';
+            sh_op       <= '0';
+            sh_amt      <= (others => '0');
+            ALU_op_sel <= '0';
             case(state) is
                 when s0  =>  
                     IorD        <= "00";
                     IW          <= '1';
                     MR          <= '1';
 
-                    -- Fetch PC = PC + 4
-                    PW  <= '1';
                     -- PC + 4
                     Asrc1 <= "00";
                     Asrc2 <= "001";
                     ReW   <= '1';
+                    ALU_op_sel <= '1';
+
+                when s100 =>					                    -- Fetch PC = PC + 4
+                    PW  <= '1';
 
                 when s1  =>  
                     AW          <= '1';
@@ -277,11 +306,13 @@ begin
 
                 when s24 =>  
                     IorD        <= "01";
-                    mem_enable  <= "1111";
+                    L 			<= '1';
+                    --mem_enable  <= "1111";
 
                 when s25 =>
                     IorD        <= "10";
-                    mem_enable  <= "1111";
+                    L 			<= '1';
+                    --mem_enable  <= "1111";
             end case;
         end if;
 

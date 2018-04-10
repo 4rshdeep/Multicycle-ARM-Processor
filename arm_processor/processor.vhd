@@ -18,7 +18,7 @@ architecture arch of processor is
 signal PW_sig               : std_logic; 
 signal IorD_sig             : std_logic_vector(1 downto 0) ;
 signal MR_sig               : std_logic;
-signal MW_sig               : std_logic;
+--signal MW_sig               : std_logic;
 signal IW_sig               : std_logic;
 signal DW_sig               : std_logic;
 signal Rsrc_sig             : std_logic;
@@ -38,9 +38,9 @@ signal mul_w_sig            : std_logic;
 signal shift_w_sig          : std_logic;
 signal Rsrc1_sig            : std_logic;
 signal L_sig                : std_logic;
-signal p2m_opcode_sig       : std_logic_vector(1 downto 0) ;
-signal sign_opcode_sig      : std_logic;
-signal p2m_offset           : std_logic_vector(1 downto 0) ;
+--signal p2m_opcode_sig       : std_logic_vector(1 downto 0) ;
+--signal sign_opcode_sig      : std_logic;
+--signal p2m_offset           : std_logic_vector(1 downto 0) ;
 signal RWAD_sig             : std_logic_vector(1 downto 0) ;
 signal state_sig            : state_type;
 
@@ -61,6 +61,7 @@ signal DT_subtype_sig       : DT_type;
 signal op_sig_decoder       : opcode;
 signal undef_sig            : std_logic;
 signal not_implemented_sig  : std_logic;
+signal ALU_op_sel_sig : std_logic;
 
 
 begin
@@ -71,7 +72,7 @@ begin
         PW          => PW_sig,
         IorD        => IorD_sig,
         MR          => MR_sig,
-        MW          => MW_sig,
+        --MW          => MW_sig,
         IW          => IW_sig,
         DW          => DW_sig,
         Rsrc        => Rsrc_sig,
@@ -83,21 +84,22 @@ begin
         Asrc2       => Asrc2_sig,
         Fset        => Fset_sig,
         ReW         => ReW_sig,
-        mem_enable  => mem_enable_sig,
+        --mem_enable  => mem_enable_sig,
         mul_w       => mul_w_sig,
         shift_w     => shift_w_sig,
         Rsrc1       => Rsrc1_sig,
         L           => L_sig,
-        p2m_opcode  => p2m_opcode_sig,
-        sign_opcode => sign_opcode_sig,
-        p2m_offset  => p2m_offset,
+        --p2m_opcode  => p2m_opcode_sig,
+        --sign_opcode => sign_opcode_sig,
+        --p2m_offset  => p2m_offset,
         RWAD        => RWAD_sig,
         state       => state_sig,
         reset       => reset,
         sh_code     => sh_code_sig,
         sh_op       => sh_op_sig,
         sh_amt      => sh_amt_sig,
-        predicate   => predicate_sig
+        predicate   => predicate_sig,
+        ALU_op_sel => ALU_op_sel_sig
     );
 
 
@@ -126,13 +128,16 @@ begin
         sh_amt      => sh_amt_sig,
         Rsrc1       => Rsrc1_sig,
         L           => L_sig,
-        p2m_opcode  => p2m_opcode_sig,
-        sign_opcode => sign_opcode_sig,
-        p2m_offset  => p2m_opcode_sig,
+        --p2m_opcode  => p2m_opcode_sig,
+        --sign_opcode => sign_opcode_sig,
+        --p2m_offset  => p2m_opcode_sig,
         RWAD        => RWAD_sig,
         Flags       => Flags_sig,
         IR          => IR_sig,
-        op          => op_sig -- this would come from ACtrl
+        reset       => reset,
+        op          => op_sig, -- this would come from ACtrl
+        ALU_op_sel => ALU_op_sel_sig
+
         );
 
     ACTRL:
