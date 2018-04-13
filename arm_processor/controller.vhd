@@ -208,7 +208,7 @@ begin
                 when s8  =>  
                     Asrc1       <= "01";
                     Asrc2       <= "100";
-                    Fset_signal <= predicate;
+                    Fset_signal <= instruction(20);
                     ReW         <= '1';
 
                 when s9  =>  
@@ -230,7 +230,7 @@ begin
                 when s11 =>  
                     Asrc1       <= "10";
                     Asrc2       <= "011";
-                    Fset_signal <= predicate;
+                    Fset_signal <= instruction(20);
                     ReW         <= '1';
 
                 when s12 =>  
