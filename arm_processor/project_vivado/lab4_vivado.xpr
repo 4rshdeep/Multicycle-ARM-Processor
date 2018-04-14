@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="17" Path="/media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/project_vivado/lab4_vivado.xpr">
+<Project Version="7" Minor="17" Path="/home/ad/assignments/col216/assignments/arm_processor/project_vivado/lab4_vivado.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="02b29d9d0bcd415ab0689b9a8ddee8b0"/>
@@ -58,12 +58,6 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../package.vhdl">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
       <File Path="$PPRDIR/../multiplier.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -83,6 +77,12 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../shifter.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../package.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
