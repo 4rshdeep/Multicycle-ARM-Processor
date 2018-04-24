@@ -8,9 +8,11 @@ use work.pkg.all;
 
 entity processor is
     port (
-        clock : in std_logic;
-        reset : in std_logic;
-        ok : out std_logic
+        clock   : in std_logic;
+        reset   : in std_logic;
+        switch  : in std_logic_vector(15 downto 0) ;
+        cathode : out std_logic_vector(6 downto 0);
+        anode   : out std_logic_vector(3 downto 0)
     );
 end processor;
 
@@ -65,6 +67,10 @@ signal ALU_op_sel_sig : std_logic;
 
 signal mem_W_sig    : std_logic;
 
+signal bcd_integer : std_logic_vector(15 downto 0) ;
+signal out_reg_in  : std_logic_vector(15 downto 0) ;
+signal out_reg     : std_logic_vector(31 downto 0) ;
+
 
 begin
     -- controller has 30 signals while datapath has 29 
@@ -86,18 +92,11 @@ begin
         Asrc2       => Asrc2_sig,
         Fset        => Fset_sig,
         ReW         => ReW_sig,
-        --mem_enable  => mem_enable_sig,
         mul_w       => mul_w_sig,
         shift_w     => shift_w_sig,
         Rsrc1       => Rsrc1_sig,
         L           => L_sig,
-        --p2m_opcode  => p2m_opcode_sig,
-        --sign_opcode => sign_opcode_sig,
-        --p2m_offset  => p2m_offset,
-        instruction => IR_sig,
-        
-        mem_W => mem_W_sig,
-        
+        mem_W       => mem_W_sig,
         RWAD        => RWAD_sig,
         state       => state_sig,
         reset       => reset,
@@ -108,10 +107,20 @@ begin
         ALU_op_sel => ALU_op_sel_sig
     );
 
+    SEVEN_SEG:
+    entity work.seven_segment_display(ssd)
+    port map(
+     clk         => clock,
+     bcd_integer => switch,
+     anode       => anode,
+     cathode     => cathode
+    );
 
     DATAPATH:
     entity work.data_path(arch)
     port map(
+        out_reg_in  => out_reg_in,
+        out_reg     => out_reg,
         PW          => PW_sig,
         IorD        => IorD_sig,
         MR          => MR_sig,
@@ -134,9 +143,6 @@ begin
         sh_amt      => sh_amt_sig,
         Rsrc1       => Rsrc1_sig,
         L           => L_sig,
-        --p2m_opcode  => p2m_opcode_sig,
-        --sign_opcode => sign_opcode_sig,
-        --p2m_offset  => p2m_opcode_sig,
         RWAD        => RWAD_sig,
         
         instruction_type => instruction_type_sig,

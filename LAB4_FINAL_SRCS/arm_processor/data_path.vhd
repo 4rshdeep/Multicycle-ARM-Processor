@@ -52,7 +52,9 @@ entity data_path is
 --    mem_enable : in std_logic_vector(3 downto 0) ;
 -------------------------------------------------------------
     Flags   : out std_logic_vector(3 downto 0);
-    IR      : out std_logic_vector(31 downto 0)
+    IR      : out std_logic_vector(31 downto 0);
+    out_reg_in : in std_logic_vector(15 downto 0) ;
+    out_reg : out std_logic_vector(31 downto 0)
   ) ;
 end entity ;
 architecture arch of data_path is
@@ -162,6 +164,8 @@ begin
     RF:
         ENTITY WORK.reg (behaviour_reg)
           PORT MAP (
+            out_reg_in      => out_reg_in,
+            out_reg         => out_reg,
             write_data      => rf_wd,
             read_add1       => rf_rad1,
             read_add2       => rf_rad2,

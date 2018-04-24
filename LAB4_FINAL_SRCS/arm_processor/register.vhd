@@ -5,6 +5,8 @@ USE ieee.numeric_std.all;
 
 entity reg is
   port (
+  	out_reg_in   : in std_logic_vector(15 downto 0) ;
+  	out_reg 	 : out std_logic_vector(31 downto 0) ;
 	write_data   : in std_logic_vector(31 downto 0);
 	read_add1    : in std_logic_vector(3 downto 0);
 	read_add2    : in std_logic_vector(3 downto 0);
@@ -46,13 +48,32 @@ begin
 	end process ; -- reset_pc
 
 	-- sync write
-	clocked_process : process( clk, write_data, write_add, reset, write_enable )
+	clocked_process : process( out_reg_in, clk, write_data, write_add, reset, write_enable )
 	begin
 		if clk='1' and clk'event then
 			if write_enable = '1' then
 				register_files(wr_add) <= write_data;
 			end if ;
 		end if ;
+
+		case(out_reg_in) is
+			when out_reg_in(15)='1' => out_reg <= register_files(15);
+			when out_reg_in(14)='1' => out_reg <= register_files(14);
+			when out_reg_in(13)='1' => out_reg <= register_files(13);
+			when out_reg_in(12)='1' => out_reg <= register_files(12);
+			when out_reg_in(11)='1' => out_reg <= register_files(11);
+			when out_reg_in(10)='1' => out_reg <= register_files(10);
+			when out_reg_in(9)='1' => out_reg <= register_files(9);
+			when out_reg_in(8)='1' => out_reg <= register_files(8);
+			when out_reg_in(7)='1' => out_reg <= register_files(7);
+			when out_reg_in(6)='1' => out_reg <= register_files(6);
+			when out_reg_in(5)='1' => out_reg <= register_files(5);
+			when out_reg_in(4)='1' => out_reg <= register_files(4);
+			when out_reg_in(3)='1' => out_reg <= register_files(3);
+			when out_reg_in(2)='1' => out_reg <= register_files(2);
+			when out_reg_in(1)='1' => out_reg <= register_files(1);
+			when out_reg_in(0)='1' => out_reg <= register_files(0);
+		end case;
 	end process ; -- clocked_process
 
 end architecture ; -- behaviour_register
