@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../final.ip_user_files/bd/BRAM/sim/BRAM.vhd" \
+"../../../../final.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd" \
+
+# Do not sort compile order
+nosort

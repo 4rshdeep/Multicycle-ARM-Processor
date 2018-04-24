@@ -1,0 +1,248 @@
+#-----------------------------------------------------------
+# Vivado v2016.4 (64-bit)
+# SW Build 1756540 on Mon Jan 23 19:11:19 MST 2017
+# IP Build 1755317 on Mon Jan 23 20:30:07 MST 2017
+# Start of session at: Wed Mar  7 11:01:23 2018
+# Process ID: 10888
+# Current directory: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.runs/synth_1
+# Command line: vivado -log shifter.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source shifter.tcl
+# Log file: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.runs/synth_1/shifter.vds
+# Journal file: /media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source shifter.tcl -notrace
+Command: synth_design -top shifter -part xc7a35tcpg236-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 10899 
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1060.082 ; gain = 127.098 ; free physical = 128 ; free virtual = 9861
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'shifter' [/media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/shifter.vhd:16]
+INFO: [Synth 8-226] default block is never used [/media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/shifter.vhd:28]
+WARNING: [Synth 8-614] signal 'shift_int' is read in the process but is not in the sensitivity list [/media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/shifter.vhd:22]
+INFO: [Synth 8-256] done synthesizing module 'shifter' (1#1) [/media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/shifter.vhd:16]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 1100.551 ; gain = 167.566 ; free physical = 126 ; free virtual = 9856
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1100.551 ; gain = 167.566 ; free physical = 125 ; free virtual = 9855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a35tcpg236-1
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1108.555 ; gain = 175.570 ; free physical = 125 ; free virtual = 9855
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-327] inferring latch for variable 'carry_reg' [/media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/shifter.vhd:33]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1116.562 ; gain = 183.578 ; free physical = 131 ; free virtual = 9859
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 2     
+	   2 Input      5 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   4 Input     32 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module shifter 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 2     
+	   2 Input      5 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 1     
+	   4 Input     32 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 90 (col length:60)
+BRAMs: 100 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 123 ; free virtual = 9787
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 123 ; free virtual = 9787
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:11 ; elapsed = 00:00:14 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 122 ; free virtual = 9787
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 122 ; free virtual = 9787
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 122 ; free virtual = 9787
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 122 ; free virtual = 9787
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 122 ; free virtual = 9787
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 122 ; free virtual = 9787
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 122 ; free virtual = 9787
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |CARRY4 |     1|
+|2     |LUT2   |     1|
+|3     |LUT3   |    23|
+|4     |LUT4   |    20|
+|5     |LUT5   |    51|
+|6     |LUT6   |   218|
+|7     |MUXF7  |    30|
+|8     |LD     |     1|
+|9     |IBUF   |    39|
+|10    |OBUF   |    33|
++------+-------+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       |   417|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1239.672 ; gain = 306.688 ; free physical = 122 ; free virtual = 9787
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1239.672 ; gain = 224.586 ; free physical = 122 ; free virtual = 9787
+Synthesis Optimization Complete : Time (s): cpu = 00:00:12 ; elapsed = 00:00:15 . Memory (MB): peak = 1239.680 ; gain = 306.695 ; free physical = 122 ; free virtual = 9787
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 41 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  LD => LDCE: 1 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+13 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:12 ; elapsed = 00:00:16 . Memory (MB): peak = 1318.684 ; gain = 316.184 ; free physical = 127 ; free virtual = 9770
+INFO: [Common 17-1381] The checkpoint '/media/ad/Area51/workspace/assignments/col216/assignments/arm_processor/lab4_vivado/lab4_vivado.runs/synth_1/shifter.dcp' has been generated.
+report_utilization: Time (s): cpu = 00:00:00.18 ; elapsed = 00:00:00.33 . Memory (MB): peak = 1342.695 ; gain = 0.000 ; free physical = 146 ; free virtual = 9773
+INFO: [Common 17-206] Exiting Vivado at Wed Mar  7 11:01:49 2018...

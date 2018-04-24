@@ -1,0 +1,18 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../../Actrl.vhd" \
+"../../../../../Bctrl.vhd" \
+"../../../../../alu.vhd" \
+"../../../../../package.vhd" \
+"../../../../../controller.vhd" \
+"../../../../../controller_states.vhd" \
+"../../../../../memory.vhd" \
+"../../../../../register.vhd" \
+"../../../../../multiplier.vhd" \
+"../../../../../shifter.vhd" \
+"../../../../../data_path.vhd" \
+"../../../../../decoder.vhd" \
+"../../../../../processor.vhd" \
+
+# Do not sort compile order
+nosort
