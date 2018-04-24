@@ -13,6 +13,7 @@ vhdl xil_defaultlib  \
 "../../../../../../../../../Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/shifter.vhd" \
 "../../../../../../../../../Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd" \
 "../../../../../../../../../Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/decoder.vhd" \
+"../../../../../../../../../Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/seven_seg.vhd" \
 "../../../../../../../../../Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/processor.vhd" \
 
 # Do not sort compile order

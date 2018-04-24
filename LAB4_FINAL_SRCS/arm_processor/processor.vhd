@@ -96,6 +96,9 @@ begin
         shift_w     => shift_w_sig,
         Rsrc1       => Rsrc1_sig,
         L           => L_sig,
+        
+        instruction => IR_sig,
+        
         mem_W       => mem_W_sig,
         RWAD        => RWAD_sig,
         state       => state_sig,
@@ -111,7 +114,7 @@ begin
     entity work.seven_segment_display(ssd)
     port map(
      clk         => clock,
-     bcd_integer => switch,
+     bcd_integer => out_reg(15 downto 0),
      anode       => anode,
      cathode     => cathode
     );
@@ -119,7 +122,7 @@ begin
     DATAPATH:
     entity work.data_path(arch)
     port map(
-        out_reg_in  => out_reg_in,
+        out_reg_in  => switch,
         out_reg     => out_reg,
         PW          => PW_sig,
         IorD        => IorD_sig,

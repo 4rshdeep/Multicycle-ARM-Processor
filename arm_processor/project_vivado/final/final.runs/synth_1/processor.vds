@@ -2,8 +2,8 @@
 # Vivado v2017.4 (64-bit)
 # SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
 # IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
-# Start of session at: Mon Apr 23 17:58:57 2018
-# Process ID: 12724
+# Start of session at: Tue Apr 24 14:00:39 2018
+# Process ID: 5968
 # Current directory: E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1
 # Command line: vivado.exe -log processor.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source processor.tcl
 # Log file: E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/processor.vds
@@ -18,45 +18,47 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 10248 
+INFO: Helper process launched with PID 656 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 355.430 ; gain = 99.660
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 355.965 ; gain = 99.898
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'processor' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/processor.vhd:17]
+INFO: [Synth 8-638] synthesizing module 'processor' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/processor.vhd:19]
 INFO: [Synth 8-638] synthesizing module 'controller' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/controller.vhd:85]
 WARNING: [Synth 8-614] signal 'instruction' is read in the process but is not in the sensitivity list [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/controller.vhd:101]
 INFO: [Synth 8-256] done synthesizing module 'controller' (1#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/controller.vhd:85]
-INFO: [Synth 8-638] synthesizing module 'data_path' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:58]
+INFO: [Synth 8-638] synthesizing module 'seven_segment_display' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/seven_seg.vhd:20]
+INFO: [Synth 8-256] done synthesizing module 'seven_segment_display' (2#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/seven_seg.vhd:20]
+INFO: [Synth 8-638] synthesizing module 'data_path' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:60]
 INFO: [Synth 8-638] synthesizing module 'BRAM_wrapper' [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd:26]
 INFO: [Synth 8-3491] module 'BRAM' declared at 'E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/bd/BRAM/synth/BRAM.vhd:14' bound to instance 'BRAM_i' of component 'BRAM' [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd:39]
 INFO: [Synth 8-638] synthesizing module 'BRAM' [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/bd/BRAM/synth/BRAM.vhd:30]
-INFO: [Synth 8-3491] module 'BRAM_blk_mem_gen_0_0' declared at 'E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/.Xil/Vivado-12724-DESKTOP-3R9NHRQ/realtime/BRAM_blk_mem_gen_0_0_stub.vhdl:5' bound to instance 'blk_mem_gen_0' of component 'BRAM_blk_mem_gen_0_0' [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/bd/BRAM/synth/BRAM.vhd:69]
-INFO: [Synth 8-638] synthesizing module 'BRAM_blk_mem_gen_0_0' [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/.Xil/Vivado-12724-DESKTOP-3R9NHRQ/realtime/BRAM_blk_mem_gen_0_0_stub.vhdl:19]
-INFO: [Synth 8-256] done synthesizing module 'BRAM' (2#1) [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/bd/BRAM/synth/BRAM.vhd:30]
-INFO: [Synth 8-256] done synthesizing module 'BRAM_wrapper' (3#1) [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd:26]
+INFO: [Synth 8-3491] module 'BRAM_blk_mem_gen_0_0' declared at 'E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/.Xil/Vivado-5968-DESKTOP-3R9NHRQ/realtime/BRAM_blk_mem_gen_0_0_stub.vhdl:5' bound to instance 'blk_mem_gen_0' of component 'BRAM_blk_mem_gen_0_0' [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/bd/BRAM/synth/BRAM.vhd:69]
+INFO: [Synth 8-638] synthesizing module 'BRAM_blk_mem_gen_0_0' [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/.Xil/Vivado-5968-DESKTOP-3R9NHRQ/realtime/BRAM_blk_mem_gen_0_0_stub.vhdl:19]
+INFO: [Synth 8-256] done synthesizing module 'BRAM' (3#1) [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/bd/BRAM/synth/BRAM.vhd:30]
+INFO: [Synth 8-256] done synthesizing module 'BRAM_wrapper' (4#1) [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/imports/hdl/BRAM_wrapper.vhd:26]
 INFO: [Synth 8-638] synthesizing module 'ALU' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/alu.vhd:16]
 INFO: [Synth 8-226] default block is never used [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/alu.vhd:26]
-INFO: [Synth 8-256] done synthesizing module 'ALU' (4#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/alu.vhd:16]
-INFO: [Synth 8-638] synthesizing module '\reg ' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/register.vhd:21]
-WARNING: [Synth 8-614] signal 'register_files' is read in the process but is not in the sensitivity list [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/register.vhd:39]
-INFO: [Synth 8-256] done synthesizing module '\reg ' (5#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/register.vhd:21]
+INFO: [Synth 8-256] done synthesizing module 'ALU' (5#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/alu.vhd:16]
+INFO: [Synth 8-638] synthesizing module '\reg ' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/register.vhd:23]
+WARNING: [Synth 8-614] signal 'register_files' is read in the process but is not in the sensitivity list [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/register.vhd:41]
+WARNING: [Synth 8-614] signal 'register_files' is read in the process but is not in the sensitivity list [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/register.vhd:51]
+INFO: [Synth 8-256] done synthesizing module '\reg ' (6#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/register.vhd:23]
 INFO: [Synth 8-638] synthesizing module 'multiplier' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/multiplier.vhd:16]
-INFO: [Synth 8-256] done synthesizing module 'multiplier' (6#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/multiplier.vhd:16]
+INFO: [Synth 8-256] done synthesizing module 'multiplier' (7#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/multiplier.vhd:16]
 INFO: [Synth 8-638] synthesizing module 'shifter' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/shifter.vhd:25]
-INFO: [Synth 8-256] done synthesizing module 'shifter' (7#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/shifter.vhd:25]
-WARNING: [Synth 8-3848] Net p2m_out in module/entity data_path does not have driver. [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:93]
-INFO: [Synth 8-256] done synthesizing module 'data_path' (8#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:58]
+INFO: [Synth 8-256] done synthesizing module 'shifter' (8#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/shifter.vhd:25]
+WARNING: [Synth 8-3848] Net p2m_out in module/entity data_path does not have driver. [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:95]
+INFO: [Synth 8-256] done synthesizing module 'data_path' (9#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:60]
 INFO: [Synth 8-638] synthesizing module 'Actrl' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/Actrl.vhd:15]
-INFO: [Synth 8-256] done synthesizing module 'Actrl' (9#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/Actrl.vhd:15]
+INFO: [Synth 8-256] done synthesizing module 'Actrl' (10#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/Actrl.vhd:15]
 INFO: [Synth 8-638] synthesizing module 'Bctrl' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/Bctrl.vhd:16]
-INFO: [Synth 8-256] done synthesizing module 'Bctrl' (10#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/Bctrl.vhd:16]
+INFO: [Synth 8-256] done synthesizing module 'Bctrl' (11#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/Bctrl.vhd:16]
 INFO: [Synth 8-638] synthesizing module 'controller_states' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/controller_states.vhd:33]
-INFO: [Synth 8-256] done synthesizing module 'controller_states' (11#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/controller_states.vhd:33]
+INFO: [Synth 8-256] done synthesizing module 'controller_states' (12#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/controller_states.vhd:33]
 INFO: [Synth 8-638] synthesizing module 'decoder' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/decoder.vhd:38]
 INFO: [Synth 8-226] default block is never used [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/decoder.vhd:60]
-INFO: [Synth 8-256] done synthesizing module 'decoder' (12#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/decoder.vhd:38]
-WARNING: [Synth 8-3848] Net ok in module/entity processor does not have driver. [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/processor.vhd:13]
-INFO: [Synth 8-256] done synthesizing module 'processor' (13#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/processor.vhd:17]
+INFO: [Synth 8-256] done synthesizing module 'decoder' (13#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/decoder.vhd:38]
+INFO: [Synth 8-256] done synthesizing module 'processor' (14#1) [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/processor.vhd:19]
 WARNING: [Synth 8-3331] design decoder has unconnected port instruction[31]
 WARNING: [Synth 8-3331] design decoder has unconnected port instruction[30]
 WARNING: [Synth 8-3331] design decoder has unconnected port instruction[29]
@@ -159,7 +161,7 @@ WARNING: [Synth 8-3331] design data_path has unconnected port instruction_type[1
 WARNING: [Synth 8-3331] design data_path has unconnected port instruction_type[0]
 INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 408.734 ; gain = 152.965
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 408.949 ; gain = 152.883
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -169,15 +171,20 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:06 . Memory (MB): peak = 408.734 ; gain = 152.965
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 408.949 ; gain = 152.883
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/.Xil/Vivado-12724-DESKTOP-3R9NHRQ/dcp1/BRAM_blk_mem_gen_0_0_in_context.xdc] for cell 'DATAPATH/BRAM/BRAM_i/blk_mem_gen_0'
-Finished Parsing XDC File [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/.Xil/Vivado-12724-DESKTOP-3R9NHRQ/dcp1/BRAM_blk_mem_gen_0_0_in_context.xdc] for cell 'DATAPATH/BRAM/BRAM_i/blk_mem_gen_0'
+Parsing XDC File [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/.Xil/Vivado-5968-DESKTOP-3R9NHRQ/dcp1/BRAM_blk_mem_gen_0_0_in_context.xdc] for cell 'DATAPATH/BRAM/BRAM_i/blk_mem_gen_0'
+Finished Parsing XDC File [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/.Xil/Vivado-5968-DESKTOP-3R9NHRQ/dcp1/BRAM_blk_mem_gen_0_0_in_context.xdc] for cell 'DATAPATH/BRAM/BRAM_i/blk_mem_gen_0'
+Parsing XDC File [C:/Users/ansh/Downloads/Processor.xdc]
+CRITICAL WARNING: [Designutils 20-1307] Command 'Bank' is not supported in the xdc constraint file. [C:/Users/ansh/Downloads/Processor.xdc:7]
+Finished Parsing XDC File [C:/Users/ansh/Downloads/Processor.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/ansh/Downloads/Processor.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/processor_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/processor_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Parsing XDC File [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/dont_touch.xdc]
 Finished Parsing XDC File [E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
@@ -185,16 +192,17 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 736.473 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 749.941 ; gain = 0.000
+WARNING: [Timing 38-316] Clock period '20.000' specified during out-of-context synthesis of instance 'DATAPATH/BRAM/BRAM_i/blk_mem_gen_0' at clock pin 'clka' is different from the actual clock period '10.000', this can lead to different synthesis results.
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 736.473 ; gain = 480.703
+Finished Constraint Validation : Time (s): cpu = 00:00:18 ; elapsed = 00:00:21 . Memory (MB): peak = 751.508 ; gain = 495.441
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 736.473 ; gain = 480.703
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:18 ; elapsed = 00:00:21 . Memory (MB): peak = 751.508 ; gain = 495.441
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -202,8 +210,9 @@ Start Applying 'set_property' XDC Constraints
 Applied set_property DONT_TOUCH = true for DATAPATH/BRAM/BRAM_i. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for DATAPATH/BRAM/BRAM_i/blk_mem_gen_0. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:17 ; elapsed = 00:00:18 . Memory (MB): peak = 736.473 ; gain = 480.703
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:21 . Memory (MB): peak = 751.508 ; gain = 495.441
 ---------------------------------------------------------------------------------
+WARNING: [Synth 8-6014] Unused sequential element counter_reg was removed.  [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/seven_seg.vhd:103]
 INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/alu.vhd:26]
 INFO: [Synth 8-5545] ROM "register_files_reg[15]" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
 INFO: [Synth 8-5545] ROM "register_files_reg[14]" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
@@ -244,20 +253,20 @@ INFO: [Synth 8-5546] ROM "state" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5587] ROM size for "state" is below threshold of ROM address width. It will be mapped to LUTs
 INFO: [Synth 8-5546] ROM "state" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "state" won't be mapped to RAM because it is too sparse
-WARNING: [Synth 8-327] inferring latch for variable 'Flags_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:306]
-WARNING: [Synth 8-327] inferring latch for variable 'ir_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:279]
-WARNING: [Synth 8-327] inferring latch for variable 'aw_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:276]
-WARNING: [Synth 8-327] inferring latch for variable 'pc_final_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:204]
-WARNING: [Synth 8-327] inferring latch for variable 'mul_reg_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:283]
-WARNING: [Synth 8-327] inferring latch for variable 'shift_reg_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:285]
-WARNING: [Synth 8-327] inferring latch for variable 'bw_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:277]
-WARNING: [Synth 8-327] inferring latch for variable 'res_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:274]
+WARNING: [Synth 8-327] inferring latch for variable 'Flags_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:310]
+WARNING: [Synth 8-327] inferring latch for variable 'ir_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:283]
+WARNING: [Synth 8-327] inferring latch for variable 'pc_final_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:208]
+WARNING: [Synth 8-327] inferring latch for variable 'mul_reg_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:287]
+WARNING: [Synth 8-327] inferring latch for variable 'res_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:278]
+WARNING: [Synth 8-327] inferring latch for variable 'aw_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:280]
+WARNING: [Synth 8-327] inferring latch for variable 'shift_reg_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:289]
+WARNING: [Synth 8-327] inferring latch for variable 'bw_out_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/data_path.vhd:281]
 WARNING: [Synth 8-327] inferring latch for variable 'instruction_type_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/decoder.vhd:49]
 WARNING: [Synth 8-327] inferring latch for variable 'DP_subtype_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/decoder.vhd:51]
 WARNING: [Synth 8-327] inferring latch for variable 'DT_subtype_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/decoder.vhd:98]
 WARNING: [Synth 8-327] inferring latch for variable 'op_reg' [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/decoder.vhd:62]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 736.473 ; gain = 480.703
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:19 ; elapsed = 00:00:22 . Memory (MB): peak = 751.508 ; gain = 495.441
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -272,13 +281,18 @@ Detailed RTL Component Info :
 +---Adders : 
 	   2 Input     32 Bit       Adders := 2     
 	   3 Input     32 Bit       Adders := 3     
+	   2 Input      3 Bit       Adders := 1     
 +---XORs : 
 	   2 Input     32 Bit         XORs := 1     
 	   2 Input      1 Bit         XORs := 7     
 	   3 Input      1 Bit         XORs := 2     
 +---Registers : 
 	               32 Bit    Registers := 17    
+	                7 Bit    Registers := 1     
 	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
 +---Multipliers : 
 	                32x32  Multipliers := 1     
 +---Muxes : 
@@ -287,15 +301,18 @@ Detailed RTL Component Info :
 	   8 Input     32 Bit        Muxes := 1     
 	   2 Input     32 Bit        Muxes := 11    
 	   2 Input     10 Bit        Muxes := 2     
+	   5 Input      7 Bit        Muxes := 1     
 	   2 Input      5 Bit        Muxes := 17    
 	   7 Input      5 Bit        Muxes := 3     
 	   8 Input      5 Bit        Muxes := 3     
 	   6 Input      5 Bit        Muxes := 4     
 	   4 Input      5 Bit        Muxes := 1     
+	   5 Input      4 Bit        Muxes := 1     
 	   2 Input      4 Bit        Muxes := 11    
 	   3 Input      4 Bit        Muxes := 1     
 	   4 Input      4 Bit        Muxes := 1     
 	  30 Input      3 Bit        Muxes := 2     
+	   5 Input      3 Bit        Muxes := 1     
 	  16 Input      3 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 2     
 	  30 Input      2 Bit        Muxes := 4     
@@ -304,6 +321,7 @@ Detailed RTL Component Info :
 	   9 Input      2 Bit        Muxes := 1     
 	   3 Input      2 Bit        Muxes := 1     
 	  29 Input      1 Bit        Muxes := 13    
+	   5 Input      1 Bit        Muxes := 1     
 	   4 Input      1 Bit        Muxes := 7     
 	   2 Input      1 Bit        Muxes := 24    
 	   9 Input      1 Bit        Muxes := 1     
@@ -321,6 +339,20 @@ Detailed RTL Component Info :
 	  30 Input      3 Bit        Muxes := 2     
 	  30 Input      2 Bit        Muxes := 4     
 	  29 Input      1 Bit        Muxes := 13    
+Module seven_segment_display 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	                7 Bit    Registers := 1     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	   5 Input      7 Bit        Muxes := 1     
+	   5 Input      4 Bit        Muxes := 1     
+	   5 Input      3 Bit        Muxes := 1     
+	   5 Input      1 Bit        Muxes := 1     
 Module ALU 
 Detailed RTL Component Info : 
 +---Adders : 
@@ -362,8 +394,8 @@ Detailed RTL Component Info :
 Module data_path 
 Detailed RTL Component Info : 
 +---Muxes : 
-	   2 Input     32 Bit        Muxes := 6     
 	   4 Input     32 Bit        Muxes := 2     
+	   2 Input     32 Bit        Muxes := 6     
 	   2 Input     10 Bit        Muxes := 2     
 	   2 Input      5 Bit        Muxes := 2     
 	   2 Input      4 Bit        Muxes := 5     
@@ -450,6 +482,7 @@ DSP Report: operator Multiplier/temp_mul is absorbed into DSP Multiplier/temp_mu
 DSP Report: Generating DSP Multiplier/temp_mul, operation Mode is: (PCIN>>17)+A*B.
 DSP Report: operator Multiplier/temp_mul is absorbed into DSP Multiplier/temp_mul.
 DSP Report: operator Multiplier/temp_mul is absorbed into DSP Multiplier/temp_mul.
+WARNING: [Synth 8-6014] Unused sequential element SEVEN_SEG/counter_reg was removed.  [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/seven_seg.vhd:103]
 WARNING: [Synth 8-3332] Sequential element (DECODER/DT_subtype_reg) is unused and will be removed from module processor.
 WARNING: [Synth 8-3332] Sequential element (DECODER/op_reg[4]) is unused and will be removed from module processor.
 WARNING: [Synth 8-3332] Sequential element (DECODER/op_reg[3]) is unused and will be removed from module processor.
@@ -457,7 +490,7 @@ WARNING: [Synth 8-3332] Sequential element (DECODER/op_reg[2]) is unused and wil
 WARNING: [Synth 8-3332] Sequential element (DECODER/op_reg[1]) is unused and will be removed from module processor.
 WARNING: [Synth 8-3332] Sequential element (DECODER/op_reg[0]) is unused and will be removed from module processor.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 736.473 ; gain = 480.703
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:31 ; elapsed = 00:00:35 . Memory (MB): peak = 764.914 ; gain = 508.848
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -496,13 +529,65 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:40 ; elapsed = 00:00:41 . Memory (MB): peak = 809.723 ; gain = 553.953
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:45 ; elapsed = 00:00:49 . Memory (MB): peak = 813.816 ; gain = 557.750
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
+Found timing loop:
+     0: DATAPATH/i_0/\ALU/rslt__230 /Z (MUX1)
+     1: DATAPATH/i_0/\ALU/rslt__230 /B (MUX1)
+     2: DATAPATH/i_0/\ALU/rslt__231 /Z (MUX1)
+     3: DATAPATH/i_0/\ALU/rslt__231 /A (MUX1)
+     4: DATAPATH/i_0/\ALU/rslt__233 /Z (MUX1)
+     5: DATAPATH/i_0/\ALU/rslt__233 /A (MUX1)
+     6: DATAPATH/i_0/\ALU/p_3_out_carry__6 /O[3] (CARRY4)
+     7: DATAPATH/i_0/\ALU/p_3_out_carry__6 /CI (CARRY4)
+     8: DATAPATH/i_0/\ALU/p_3_out_carry__5 /CO[3] (CARRY4)
+     9: DATAPATH/i_0/\ALU/p_3_out_carry__5 /CI (CARRY4)
+    10: DATAPATH/i_0/\ALU/p_3_out_carry__4 /CO[3] (CARRY4)
+    11: DATAPATH/i_0/\ALU/p_3_out_carry__4 /CI (CARRY4)
+    12: DATAPATH/i_0/\ALU/p_3_out_carry__3 /CO[3] (CARRY4)
+    13: DATAPATH/i_0/\ALU/p_3_out_carry__3 /CI (CARRY4)
+    14: DATAPATH/i_0/\ALU/p_3_out_carry__2 /CO[3] (CARRY4)
+    15: DATAPATH/i_0/\ALU/p_3_out_carry__2 /CI (CARRY4)
+    16: DATAPATH/i_0/\ALU/p_3_out_carry__1 /CO[3] (CARRY4)
+    17: DATAPATH/i_0/\ALU/p_3_out_carry__1 /CI (CARRY4)
+    18: DATAPATH/i_0/\ALU/p_3_out_carry__0 /CO[3] (CARRY4)
+    19: DATAPATH/i_0/\ALU/p_3_out_carry__0 /CI (CARRY4)
+    20: DATAPATH/i_0/\ALU/p_3_out_carry /CO[3] (CARRY4)
+    21: DATAPATH/i_0/\ALU/p_3_out_carry /CYINIT (CARRY4)
+    22: DATAPATH/i_0/i_119/Z (MUX1)
+    23: DATAPATH/i_0/i_119/B (MUX1)
+    24: DATAPATH/i_0/\ALU/c32 /Z (MUX1)
+    25: DATAPATH/i_0/\ALU/c32 /A (MUX1)
+    26: DATAPATH/i_0/\ALU/c32__12 /O (GATE_2_8_AND)
+    27: DATAPATH/i_0/\ALU/c32__12 /I1 (GATE_2_8_AND)
+    28: DATAPATH/i_0/\ALU/c32__7 /Z (MUX1)
+    29: DATAPATH/i_0/\ALU/c32__7 /A (MUX1)
+    30: DATAPATH/i_0/\ALU/c32013_out__0 /O (GATE_2_14_OR)
+    31: DATAPATH/i_0/\ALU/c32013_out__0 /I0 (GATE_2_14_OR)
+    32: DATAPATH/i_0/\ALU/c322_inferred__1/i_ /O (GATE_2_8_AND)
+    33: DATAPATH/i_0/\ALU/c322_inferred__1/i_ /I1 (GATE_2_8_AND)
+    34: DATAPATH/i_0/\ALU/c31__3 /O (GATE_2_8_AND)
+    35: DATAPATH/i_0/\ALU/c31__3 /I1 (GATE_2_8_AND)
+    36: DATAPATH/i_0/\ALU/c31__2 /Z (MUX1)
+    37: DATAPATH/i_0/\ALU/c31__2 /A (MUX1)
+    38: DATAPATH/i_0/\ALU/c31__1 /Z (MUX1)
+    39: DATAPATH/i_0/\ALU/c31__1 /A (MUX1)
+    40: DATAPATH/i_0/\ALU/c310_inferred__0/i___0 /O (GATE_2_14_OR)
+    41: DATAPATH/i_0/\ALU/c310_inferred__0/i___0 /I1 (GATE_2_14_OR)
+    42: DATAPATH/i_0/\ALU/c310_inferred__0/i_ /O (GATE_2_6_XOR)
+    43: DATAPATH/i_0/\ALU/c310_inferred__0/i_ /I1 (GATE_2_6_XOR)
+    44: DATAPATH/i_0/\ALU/rslt__230 /Z (MUX1)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/alu.vhd:5]
+Inferred a: "set_disable_timing -from B -to Z DATAPATH/i_0/\ALU/rslt__230 "
+Found timing loop:
+     0: DATAPATH/i_0/\ALU/rslt__230 /Z (MUX1)
+     1: DATAPATH/i_0/\ALU/rslt__230 /Z (MUX1)
+CRITICAL WARNING: [Synth 8-295] found timing loop. [E:/Me/IIT/Sem 4/COL216/Lab/LAB4_FINAL_SRCS/arm_processor/alu.vhd:5]
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:41 ; elapsed = 00:00:41 . Memory (MB): peak = 810.145 ; gain = 554.375
+Finished Timing Optimization : Time (s): cpu = 00:00:58 ; elapsed = 00:01:01 . Memory (MB): peak = 1005.816 ; gain = 749.750
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -514,7 +599,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:41 ; elapsed = 00:00:42 . Memory (MB): peak = 886.793 ; gain = 631.023
+Finished Technology Mapping : Time (s): cpu = 00:00:59 ; elapsed = 00:01:02 . Memory (MB): peak = 1005.816 ; gain = 749.750
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -538,7 +623,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 886.793 ; gain = 631.023
+Finished IO Insertion : Time (s): cpu = 00:01:00 ; elapsed = 00:01:03 . Memory (MB): peak = 1005.816 ; gain = 749.750
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -551,7 +636,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 886.793 ; gain = 631.023
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:00 ; elapsed = 00:01:03 . Memory (MB): peak = 1005.816 ; gain = 749.750
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -563,25 +648,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 886.793 ; gain = 631.023
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:00 ; elapsed = 00:01:04 . Memory (MB): peak = 1005.816 ; gain = 749.750
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 886.793 ; gain = 631.023
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:00 ; elapsed = 00:01:04 . Memory (MB): peak = 1005.816 ; gain = 749.750
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 886.793 ; gain = 631.023
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:00 ; elapsed = 00:01:04 . Memory (MB): peak = 1005.816 ; gain = 749.750
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 886.793 ; gain = 631.023
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:00 ; elapsed = 00:01:04 . Memory (MB): peak = 1005.816 ; gain = 749.750
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -600,44 +685,46 @@ Report Cell Usage:
 +------+----------------------------+------+
 |1     |BRAM_blk_mem_gen_0_0_bbox_0 |     1|
 |2     |BUFG                        |     8|
-|3     |CARRY4                      |    47|
+|3     |CARRY4                      |    52|
 |4     |DSP48E1                     |     3|
-|5     |LUT1                        |     6|
-|6     |LUT2                        |    47|
-|7     |LUT3                        |   152|
-|8     |LUT4                        |    55|
-|9     |LUT5                        |   239|
-|10    |LUT6                        |   822|
-|11    |MUXF7                       |   162|
-|12    |MUXF8                       |    64|
-|13    |FDRE                        |   549|
-|14    |LD                          |   232|
-|15    |IBUF                        |     2|
-|16    |OBUFT                       |     1|
+|5     |LUT1                        |     5|
+|6     |LUT2                        |    67|
+|7     |LUT3                        |   146|
+|8     |LUT4                        |    54|
+|9     |LUT5                        |   286|
+|10    |LUT6                        |   931|
+|11    |MUXF7                       |   182|
+|12    |MUXF8                       |    66|
+|13    |FDRE                        |   580|
+|14    |FDSE                        |     4|
+|15    |LD                          |   232|
+|16    |IBUF                        |    18|
+|17    |OBUF                        |    11|
 +------+----------------------------+------+
 
 Report Instance Areas: 
-+------+---------------+------------------+------+
-|      |Instance       |Module            |Cells |
-+------+---------------+------------------+------+
-|1     |top            |                  |  2422|
-|2     |  DATAPATH     |data_path         |  2191|
-|3     |    ALU        |ALU               |   304|
-|4     |    BRAM       |BRAM_wrapper      |    62|
-|5     |      BRAM_i   |BRAM              |    33|
-|6     |    Multiplier |multiplier        |    22|
-|7     |    RF         |\reg              |   985|
-|8     |  DECODER      |decoder           |     7|
-|9     |  FSM          |controller_states |   213|
-+------+---------------+------------------+------+
++------+---------------+----------------------+------+
+|      |Instance       |Module                |Cells |
++------+---------------+----------------------+------+
+|1     |top            |                      |  2678|
+|2     |  DATAPATH     |data_path             |  2231|
+|3     |    ALU        |ALU                   |   117|
+|4     |    BRAM       |BRAM_wrapper          |    43|
+|5     |      BRAM_i   |BRAM                  |    33|
+|6     |    Multiplier |multiplier            |    22|
+|7     |    RF         |\reg                  |  1125|
+|8     |  DECODER      |decoder               |     8|
+|9     |  FSM          |controller_states     |   345|
+|10    |  SEVEN_SEG    |seven_segment_display |    57|
++------+---------------+----------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:42 ; elapsed = 00:00:43 . Memory (MB): peak = 886.793 ; gain = 631.023
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:00 ; elapsed = 00:01:04 . Memory (MB): peak = 1005.816 ; gain = 749.750
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 24 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:31 ; elapsed = 00:00:38 . Memory (MB): peak = 886.793 ; gain = 303.285
-Synthesis Optimization Complete : Time (s): cpu = 00:00:43 ; elapsed = 00:00:44 . Memory (MB): peak = 886.793 ; gain = 631.023
+Synthesis finished with 0 errors, 2 critical warnings and 25 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:48 ; elapsed = 00:00:57 . Memory (MB): peak = 1005.816 ; gain = 407.191
+Synthesis Optimization Complete : Time (s): cpu = 00:01:00 ; elapsed = 00:01:04 . Memory (MB): peak = 1005.816 ; gain = 749.750
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 510 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 553 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
@@ -646,10 +733,10 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   LD => LDCE: 232 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-103 Infos, 122 Warnings, 0 Critical Warnings and 0 Errors encountered.
+106 Infos, 125 Warnings, 3 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:44 ; elapsed = 00:00:48 . Memory (MB): peak = 886.793 ; gain = 642.492
+synth_design: Time (s): cpu = 00:01:03 ; elapsed = 00:01:09 . Memory (MB): peak = 1005.816 ; gain = 761.219
 INFO: [Common 17-1381] The checkpoint 'E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/processor.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file processor_utilization_synth.rpt -pb processor_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.042 . Memory (MB): peak = 886.793 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Mon Apr 23 17:59:50 2018...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.044 . Memory (MB): peak = 1005.816 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Tue Apr 24 14:01:53 2018...

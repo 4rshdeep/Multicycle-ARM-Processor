@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
-| Date         : Mon Apr 23 18:00:47 2018
+| Date         : Tue Apr 24 14:02:42 2018
 | Host         : DESKTOP-3R9NHRQ running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file processor_control_sets_placed.rpt
 | Design       : processor
@@ -22,8 +22,8 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Number of unique control sets                            |     0 |
-| Unused register locations in slices containing registers |     0 |
+| Number of unique control sets                            |    36 |
+| Unused register locations in slices containing registers |    61 |
 +----------------------------------------------------------+-------+
 
 
@@ -33,10 +33,10 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               0 |            0 |
+| No           | No                    | No                     |             239 |          167 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |               0 |            0 |
-| Yes          | No                    | No                     |               0 |            0 |
+| No           | Yes                   | No                     |              56 |           18 |
+| Yes          | No                    | No                     |             524 |          213 |
 | Yes          | No                    | Yes                    |               0 |            0 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
@@ -45,13 +45,58 @@ Table of Contents
 3. Detailed Control Set Information
 -----------------------------------
 
-+--------------+---------------+------------------+------------------+----------------+
-| Clock Signal | Enable Signal | Set/Reset Signal | Slice Load Count | Bel Load Count |
-+--------------+---------------+------------------+------------------+----------------+
++------------------------------------+----------------------------------+----------------------------+------------------+----------------+
+|            Clock Signal            |           Enable Signal          |      Set/Reset Signal      | Slice Load Count | Bel Load Count |
++------------------------------------+----------------------------------+----------------------------+------------------+----------------+
+|  SEVEN_SEG/clock_reg_n_0           |                                  | SEVEN_SEG/anode[0]_i_1_n_0 |                1 |              1 |
+|  SEVEN_SEG/clock_reg_n_0           |                                  | SEVEN_SEG/anode[3]_i_1_n_0 |                1 |              1 |
+|  SEVEN_SEG/clock_reg_n_0           |                                  | SEVEN_SEG/anode[2]_i_1_n_0 |                1 |              1 |
+|  SEVEN_SEG/clock_reg_n_0           |                                  | SEVEN_SEG/Q[2]             |                1 |              1 |
+|  DATAPATH/state_reg[0][0]          |                                  |                            |                1 |              2 |
+|  DATAPATH/E[0]                     |                                  |                            |                2 |              2 |
+|  SEVEN_SEG/clock_reg_n_0           |                                  |                            |                1 |              3 |
+|  FSM/register_files_reg[0][0]_4[0] |                                  |                            |                3 |              4 |
+|  clock_IBUF_BUFG                   |                                  |                            |                4 |              5 |
+|  clock_IBUF_BUFG                   | DECODER/E[0]                     |                            |                5 |              5 |
+|  SEVEN_SEG/clock_reg_n_0           | SEVEN_SEG/cath[6]_i_1_n_0        |                            |                6 |              7 |
+|  clock_IBUF_BUFG                   |                                  | SEVEN_SEG/clear            |                5 |             20 |
+|  BW_sig_BUFG                       |                                  |                            |               32 |             32 |
+|  AW_sig_BUFG                       |                                  |                            |               32 |             32 |
+|  PW_sig_BUFG                       |                                  |                            |               20 |             32 |
+|  mul_w_sig_BUFG                    |                                  |                            |               10 |             32 |
+|  g0_b0_n_0_BUFG                    |                                  |                            |               20 |             32 |
+|  clock_IBUF_BUFG                   |                                  | FSM/CO[0]                  |                9 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[0][0][0]  |                            |               15 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[15][0][0] |                            |                8 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[2][0][0]  |                            |               16 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[10][0][0] |                            |               15 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[11][0][0] |                            |               12 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[7][0][0]  |                            |               12 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[9][0][0]  |                            |               16 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[14][0][0] |                            |               13 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[13][0][0] |                            |               10 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[1][0][0]  |                            |               10 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[12][0][0] |                            |                8 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[3][0][0]  |                            |               14 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[4][0][0]  |                            |               12 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[5][0][0]  |                            |               13 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[6][0][0]  |                            |               13 |             32 |
+|  clock_IBUF_BUFG                   | FSM/register_files_reg[8][0][0]  |                            |               15 |             32 |
+|  ALU_op_sel_sig_BUFG               |                                  |                            |               19 |             32 |
+|  shift_w_sig_BUFG                  |                                  |                            |               24 |             32 |
++------------------------------------+----------------------------------+----------------------------+------------------+----------------+
 
 
 +--------+-----------------------+
 | Fanout | Number of ControlSets |
++--------+-----------------------+
+| 1      |                     4 |
+| 2      |                     2 |
+| 3      |                     1 |
+| 4      |                     1 |
+| 5      |                     2 |
+| 7      |                     1 |
+| 16+    |                    25 |
 +--------+-----------------------+
 
 

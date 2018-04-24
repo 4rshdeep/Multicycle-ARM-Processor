@@ -61,12 +61,104 @@ proc step_failed { step } {
 }
 
 
+start_step init_design
+set ACTIVE_STEP init_design
+set rc [catch {
+  create_msg_db init_design.pb
+  set_param xicom.use_bs_reader 1
+  create_project -in_memory -part xc7a35tcpg236-1
+  set_property design_mode GateLvl [current_fileset]
+  set_param project.singleFileAddWarning.threshold 0
+  set_property webtalk.parent_dir E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.cache/wt [current_project]
+  set_property parent.project_path E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.xpr [current_project]
+  set_property ip_output_repo E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.cache/ip [current_project]
+  set_property ip_cache_permissions {read write} [current_project]
+  set_property XPM_LIBRARIES XPM_MEMORY [current_project]
+  add_files -quiet E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.runs/synth_1/processor.dcp
+  set_msg_config -source 4 -id {BD 41-1661} -limit 0
+  set_param project.isImplRun true
+  add_files E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.srcs/sources_1/bd/BRAM/BRAM.bd
+  set_param project.isImplRun false
+  read_xdc C:/Users/ansh/Downloads/Processor.xdc
+  set_param project.isImplRun true
+  link_design -top processor -part xc7a35tcpg236-1
+  set_param project.isImplRun false
+  write_hwdef -force -file processor.hwdef
+  close_msg_db -file init_design.pb
+} RESULT]
+if {$rc} {
+  step_failed init_design
+  return -code error $RESULT
+} else {
+  end_step init_design
+  unset ACTIVE_STEP 
+}
+
+start_step opt_design
+set ACTIVE_STEP opt_design
+set rc [catch {
+  create_msg_db opt_design.pb
+  opt_design 
+  write_checkpoint -force processor_opt.dcp
+  create_report "impl_1_opt_report_drc_0" "report_drc -file processor_drc_opted.rpt -pb processor_drc_opted.pb -rpx processor_drc_opted.rpx"
+  close_msg_db -file opt_design.pb
+} RESULT]
+if {$rc} {
+  step_failed opt_design
+  return -code error $RESULT
+} else {
+  end_step opt_design
+  unset ACTIVE_STEP 
+}
+
+start_step place_design
+set ACTIVE_STEP place_design
+set rc [catch {
+  create_msg_db place_design.pb
+  implement_debug_core 
+  place_design 
+  write_checkpoint -force processor_placed.dcp
+  create_report "impl_1_place_report_io_0" "report_io -file processor_io_placed.rpt"
+  create_report "impl_1_place_report_utilization_0" "report_utilization -file processor_utilization_placed.rpt -pb processor_utilization_placed.pb"
+  create_report "impl_1_place_report_control_sets_0" "report_control_sets -verbose -file processor_control_sets_placed.rpt"
+  close_msg_db -file place_design.pb
+} RESULT]
+if {$rc} {
+  step_failed place_design
+  return -code error $RESULT
+} else {
+  end_step place_design
+  unset ACTIVE_STEP 
+}
+
+start_step route_design
+set ACTIVE_STEP route_design
+set rc [catch {
+  create_msg_db route_design.pb
+  route_design 
+  write_checkpoint -force processor_routed.dcp
+  create_report "impl_1_route_report_drc_0" "report_drc -file processor_drc_routed.rpt -pb processor_drc_routed.pb -rpx processor_drc_routed.rpx"
+  create_report "impl_1_route_report_methodology_0" "report_methodology -file processor_methodology_drc_routed.rpt -pb processor_methodology_drc_routed.pb -rpx processor_methodology_drc_routed.rpx"
+  create_report "impl_1_route_report_power_0" "report_power -file processor_power_routed.rpt -pb processor_power_summary_routed.pb -rpx processor_power_routed.rpx"
+  create_report "impl_1_route_report_route_status_0" "report_route_status -file processor_route_status.rpt -pb processor_route_status.pb"
+  create_report "impl_1_route_report_timing_summary_0" "report_timing_summary -max_paths 10 -file processor_timing_summary_routed.rpt -rpx processor_timing_summary_routed.rpx -warn_on_violation "
+  create_report "impl_1_route_report_incremental_reuse_0" "report_incremental_reuse -file processor_incremental_reuse_routed.rpt"
+  create_report "impl_1_route_report_clock_utilization_0" "report_clock_utilization -file processor_clock_utilization_routed.rpt"
+  close_msg_db -file route_design.pb
+} RESULT]
+if {$rc} {
+  write_checkpoint -force processor_routed_error.dcp
+  step_failed route_design
+  return -code error $RESULT
+} else {
+  end_step route_design
+  unset ACTIVE_STEP 
+}
+
 start_step write_bitstream
 set ACTIVE_STEP write_bitstream
 set rc [catch {
   create_msg_db write_bitstream.pb
-  open_checkpoint processor_routed.dcp
-  set_property webtalk.parent_dir E:/GIT/COL216-Coursework/arm_processor/project_vivado/final/final.cache/wt [current_project]
   set_property XPM_LIBRARIES XPM_MEMORY [current_project]
   catch { write_mem_info -force processor.mmi }
   write_bitstream -force processor.bit 
