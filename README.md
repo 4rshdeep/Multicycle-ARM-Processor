@@ -1,1 +1,3 @@
-# COL216-Coursework
+# Multicycle ARM Processor
+
+Implementation of multicycle ARM Processor in VHDL. 
